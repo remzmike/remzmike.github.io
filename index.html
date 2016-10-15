@@ -44,6 +44,7 @@
         }
         #content {
             padding:4em;
+            visibility:hidden;
         }
         h1, h2 {
             line-height: 1.2;
@@ -58,7 +59,6 @@
         }
         .smallcaps span {
             font-variant-caps:small-caps;
-            /*font-variant:small-caps;*/
         }
     </style>
 </head>
@@ -149,5 +149,11 @@
     </div>
 
 </div>
+<script>
+    window.onload = function() {
+        var style = document.getElementById('content').style;
+        style.visibility = 'visible';
+    };
+</script>
 </body>
 </html>
