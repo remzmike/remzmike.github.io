@@ -6,7 +6,10 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="minimal.css">
-    <script>function rzmk(s) { for (i=s.length-1;i>=0;i--) { document.write(s.charAt(i)); } }</script>
+    <script>
+        function rzmk(s) { var a = []; for (i=s.length-1;i>=0;i--) { a.push(s.charAt(i)); } return a.join('');}
+        function rzmk_out(s) {document.write(rzmk(s));}
+    </script>
     <script>
         function create(tag_name) {
             return document.createElement(tag_name);
@@ -39,7 +42,7 @@
 <body>
 <div id=content>
 
-    <h1><script>rzmk('lseK ekiM');</script></h1>
+    <h1><script>rzmk_out('lseK ekiM');</script></h1>
 
     <noscript>
         <div style="color:darkred">NOTICE: This page requires Javascript.</div>
@@ -67,9 +70,13 @@
                 {href:'https://remzmike.blogspot.com', text:'programming pseudo-blog'},
                 {href:'https://github.com/remzmike', text:'fifty repos from my desktop'}
             ],
+            'links-more' : [
+                {href:rzmk('moc.liamg@ekimzmer:otliam')+'?subject=job+opportunity', text:rzmk('moc.liamg@ekimzmer')},
+                {href:'https://remzmike.github.io/2016-10-16-job-search-story.html', text:'the story of my 2016 job search'}
+            ],
             'thumbs' : [
-                {src:'https://..nope..png'},
-            ]
+                {src:'https://..nope..png'}
+            ],
         }
     </script>
 
@@ -115,18 +122,17 @@
         do_links('code', 'links-programmer');
     </script>
 
-    <h2>email</h2>
-    <div>
-        <script>rzmk('>a/<moc.liamg@ekimzmer>"moc.liamg@ekimzmer:otliam"=ferh a<');</script>
-    </div>
+    <script>do_links('more', 'links-more');</script>
 
 </div>
+
 <script>
     window.onload = function() {
         var style = document.getElementById('content').style;
         style.visibility = 'visible';
     };
 </script>
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -137,5 +143,6 @@
   ga('send', 'pageview');
 
 </script>
+
 </body>
 </html>
