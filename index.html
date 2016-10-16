@@ -71,7 +71,7 @@
                 {href:'https://github.com/remzmike', text:'fifty repos from my desktop'}
             ],
             'links-more' : [
-                {href:rzmk('moc.liamg@ekimzmer:otliam')+'?subject=job+opportunity', text:rzmk('moc.liamg@ekimzmer')},
+                {href:rzmk('moc.liamg@ekimzmer:otliam')+'?subject=job+opportunity', text:rzmk('moc.liamg@ekimzmer'), target:'_blank'},
                 {href:'https://remzmike.github.io/2016-10-16-job-search-story.html', text:'the story of my 2016 job search'}
             ],
             'thumbs' : [
@@ -109,7 +109,11 @@
             for(var i=0; i<links.length; i++) {
                 var resource = links[i];
                 var item = create('div');
-                item.innerHTML += format('<a href="', resource.href,'">', resource.text, '</a>');
+                var target = '';
+                if (resource.target) {
+                    target = format(' target="', resource.target,'"');
+                }
+                item.innerHTML += format('<a href="', resource.href,'"', target,'>', resource.text, '</a>');
                 if (resource.desc) {
                     item.innerHTML += ', ' + resource.desc;
                 }
