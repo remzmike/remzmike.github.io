@@ -72,6 +72,7 @@
     </noscript>
 
     <p class='smallcaps'>I write software in <span id=lang_a></span>, <span id=lang_b></span>, and <span id=lang_c></span>.</p>
+
     <script>
         var languages = ['javascript', 'c#', 'python'];
         shuffle(languages);
@@ -81,10 +82,7 @@
             var span = document.getElementById(id);
             span.textContent = languages[i];
         }
-    </script>
 
-    <script>
-        var content = document.getElementById('content'); //document.body;
         var _data = {
             'links-recruiter' : [
                 {href:'https://remzmike.github.io/profile.html', text:'professional profile'},
@@ -92,15 +90,15 @@
             ],
             'links-programmer' : [
                 {href:'https://remzmike.blogspot.com', text:'programming pseudo-blog'},
-                {href:'https://github.com/remzmike', text:'personal github account'}
+                {href:'https://github.com/remzmike', text:'fifty repos from my desktop'}
             ],
             'thumbs' : [
-                {src:'https://....png'},
+                {src:'https://..nope..png'},
             ]
         }
     </script>
 
-    <script>
+    <!--<script>
         // mlerb.
         function do_images() {
             var div = create('div');
@@ -114,7 +112,7 @@
             content.appendChild(div);
         }
         //do_images();
-    </script>
+    </script>-->
 
     <script>
         function do_links(header, content_key) {
@@ -143,7 +141,6 @@
     </script>
 
     <h2>email</h2>
-
     <div>
         <script>rzmk('>a/<moc.liamg@ekimzmer>"moc.liamg@ekimzmer:otliam"=ferh a<');</script>
     </div>
