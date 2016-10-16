@@ -7,7 +7,7 @@ The story of my 2016 job search.
 
 2016: Doing remote contract work for a prior employer. Looking for full-time work.
 
-Today is October 15, 2016. I am still looking for a job.
+Today is October 15, 2016. I am still looking for a full-time position.
 
 I have been to probably 8 in-person interviews this year. I have completed maybe a dozen programming assessments. I score 80-100% on all of them, across multiple languages. I (re)launch my programming exercises blog in hopes of avoiding being filtered out by bureaucracy. I move my code to github since people don't know bitbucket. I spend a weekend putting 50 projects from my machine on github.
 
@@ -73,9 +73,7 @@ Eventually they tell me to look at a line that "hurts [their] brain".
    
 Wow. Really guys? That's your challenge?
 
-Now they tell me there is no problem with the code, and they actually just wanted me to reformat the html.
- 
-They seem rather disappointed in me. I feel the same way, about them. Of course I can format html. I can even write code to do it for me. WooOOooOOooOOooW! Maaaaagic!
+Now they tell me there is no problem with the code, and they actually just wanted me to reformat the html. They seem rather disappointed in me. I feel the same way, about them. Of course I can format html. I can even write code to do it for me. WooOOooOOooOOooW! Maaaaagic!
 
 Anyway, I format the html manually. Done!
 
