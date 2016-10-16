@@ -1,0 +1,14 @@
+code {
+    margin:0;
+    padding:4px 32px;
+    background: rgb(211, 218, 234);
+    border:1px solid rgb(160, 170, 191);
+    display:block;
+}
+blockquote {
+    margin:0;
+    padding:4px 32px;
+    padding-right:0;
+    font-style:italic;
+    border-left:3px solid rgb(160, 170, 191);
+}

@@ -1,0 +1,97 @@
+The story of my 2016 job search.
+================================
+
+2014: Laid off after 5 years working in C#/Javascript/SQL in Windows for web-based tax software.
+
+2015: One year contract doing Python/SqlAlchemy/MySQL/Pyramid in Linux for REST api server upgrades.
+
+2016: Doing remote contract work for a prior employer. Looking for full-time work.
+
+Today is October 15, 2016. I am still looking for a job.
+
+I have been to probably 8 in-person interviews this year. I have completed maybe a dozen programming assessments. I score 80-100% on all of them, across multiple languages. I (re)launch my programming exercises blog in hopes of avoiding being filtered out by bureaucracy. I move my code to github since people don't know bitbucket. I spend a weekend putting 50 projects from my machine on github.
+
+I get some in-person interviews, but never progress further.
+
+The many reasons I am given, or led to believe:
+
+1. Overzealous resume stack filtering
+
+2. Underqualified...
+
+3. Overqualified!
+
+4. You said you don't like web development.  
+(I said I don't do it in my spare time ANYMORE)  
+(I have since started going it in my spare time AGAIN to avoid this problem)  
+(Even though I would rather use my spare time on other things)
+
+5. We think you will get bored.  
+(And accidentally invent something they could use?)
+
+6. You don't have a strong enough QA background.  
+(For an Automation Engineering position)
+
+7. Not good enough with OLAP style SQL queries.  
+(But the job will be in OLTP web development using an ORM)
+
+8. It seems you cannot comfortably write code.  
+(On paper, while carrying on a 6 way conversation)  
+(Even though my blog and github disagree, but they didn't look)
+
+9. Too old, too boring, too weird, too casual, too jaded.  
+(Mostly true, minus the five too's, the benefit of variety)
+
+10. Not enthusiastic enough about technology #472.  
+(Well, I do have other things to invest in emotionally)
+
+11. Unwillingness to study trick questions and memorize trivia  
+(Things I won't be doing in a job, since I do my job well)
+
+12. You use Windows? Sorry we use Mac|Linux and we don't believe you have ever used Mac|Linux.
+
+13. You don't like laptop ergonomics? You don't use the same carpal tunnel inducing keyboard layout we do? Disqualified.
+
+Specific example: DC
+--------------------
+
+I 100% ace their python hackerrank challenges. I'm pumped. It was hectic, no error messages, no knowledge of the test cases used, and timed.
+
+They seem especially excited about me at this point. I am skeptical of their enthusiasm. I don't understand how it can be genuine, but I go with it. After all, I did score perfectly on one of the harder timed challenges I have taken.
+
+Some days later I have a remote technical interview over video. We use a shared web-based "coding environment". This environment cannot run or interpret the code in any way, it just happens to be a syntax hilighting collaborative online text editor.
+
+They show me some code.
+
+> "Clean up this code"
+
+Ok, it's an html page. It's horribly formatted like most other html I encounter. I ignore the formatting. Why would I change it right now while I am in the middle of an interview trying to fix some REAL problem with this code. And how do I know it wasn't written that way deliberately?
+
+Eventually they tell me to look at a line that "hurts [their] brain".
+
+    <head><meta charset="utf-8">
+   
+Wow. Really guys? That's your challenge?
+
+Now they tell me there is no problem with the code, and they actually just wanted me to reformat the html.
+ 
+They seem rather disappointed in me. I feel the same way, about them. Of course I can format html. I can even write code to do it for me. WooOOooOOooOOooW! Maaaaagic!
+
+Anyway, I format the html manually. Done!
+
+> "Ok, I think that's all we had, the hiring manager will contact you with next steps."
+
+The next day around lunchtime I receive an email:
+
+> "Congratulations on joining DC"
+    
+Oh... wait, that's just a system mail telling me someone created a user account for me in their system. Weird. Half an hour later another mail arrives to tell me I was not selected for further consideration. No problem... or so I say.
+
+Big Problem
+-----------
+
+Most of my potential opportunities end in roughly the same way.
+
+I want a job in software. I am pretty much ready for slavery.
+
+What can I do?
