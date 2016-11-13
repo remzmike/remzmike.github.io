@@ -5,7 +5,6 @@
     <title>mk - software professional</title>
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="minimal.css">
     <script>
         // walking a highwire //
         function rzmk(s) { var a = []; for (i=s.length-1;i>=0;i--) { a.push(s.charAt(i)); } return a.join('');}
@@ -37,6 +36,35 @@
             }
         }
     </script>
+    <style>
+        body {
+            margin:auto;
+            max-width:650px;
+            line-height:1.4em;
+            font-size:18px;
+            color:#444;
+        }
+        #content {
+            padding:4em;
+            visibility:hidden;
+        }
+        h1, h2 {
+            line-height: 1.2;
+        }
+        h2 {
+            text-transform: lowercase;
+            font-variant-caps:small-caps;
+        }
+        hr {
+            height:2px;
+            border:none;
+            background-color:#E7E9EE;
+        }
+        .smallcaps span {
+            font-size:20px;
+            font-variant-caps:small-caps;
+        }
+    </style>
 </head>
 <body>
 <div id=content>
@@ -66,7 +94,7 @@
 
         var _data = {
             'links-recruiter' : [
-                {href:'https://remzmike.github.io/profile.html', text:'professional profile'},
+                //{href:'https://remzmike.github.io/profile.html', text:'professional profile'},
                 {href:'https://remzmike.github.io/mk-resume.doc', text:'download resume'}
             ],
             'links-programmer' : [
