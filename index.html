@@ -112,8 +112,8 @@
 
     <script>
         function do_links(header, content_key, item_container, item_separator) {
-            item_container = item_container ? item_container : 'div'
-            item_separator = item_separator ? item_separator : '';
+            item_container = item_container || 'div'
+            item_separator = item_separator || '';
 
             var h2 = create('h2');
             h2.textContent = header;
