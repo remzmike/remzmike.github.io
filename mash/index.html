@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="pure.css" />
+    <link rel="stylesheet" href="modernscale.css" />
+    <link rel="stylesheet" href="pygments.css" />
+    <script src="jquery-3.0.0.js"></script>
+    <script src="vue.js"></script>
+    <script src="_blog_posts.js"></script>
+    <script>
+        function lorem(x) {
+            var s = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.';
+            x = x || s.length;
+            return s.substring(0,x);
+        }
+    </script>
+    <style>
+        body {
+            background-color:white;
+            font-family:verdana, sans-serif;
+            font-size:16px;
+            margin:0;
+            padding:0;
+        }
+        pre, code {
+            line-height:1.2em;
+            overflow:hidden;
+        }
+        img {overflow:hidden}        
+        th, td {
+            line-height:1.4em;
+            padding:0 1ch;
+        }
+        div.content, p {
+            margin:2em 0;
+        }
+
+        #app {
+            font-size:80%;
+        }
+        .card {            
+            margin:0;
+            min-height:10ex;
+            overflow:hidden;
+            
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;            
+        }        
+        .card > .title, .card > .content {
+            padding-left:20px;
+            padding-right:1ch;
+        }        
+        .card > .title {
+            margin:0;
+            padding-top:0.5ch;
+            padding-bottom:0.5ch;
+            _border-left:1ch solid black;
+            background:#555;
+            color:white;
+        }
+        .card > .content {
+            
+        }
+
+        .flex-container {
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            
+            -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            
+            -webkit-justify-content: flex-start;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+               
+            -webkit-align-items: flex-start;
+            -ms-flex-align: start;
+            align-items: flex-start;
+
+            -webkit-align-items: stretch;
+            -ms-flex-align: stretch;
+            align-items: stretch;
+
+            -webkit-align-content: flex-start;
+            -ms-flex-line-pack: start;
+            align-content: flex-start;    
+        }
+
+        /*.flex-item:nth-child(5) {*/
+        .flex-item {
+            /*-webkit-order: 0;
+            -ms-flex-order: 0;
+            order: 0;*/
+            
+            /* grow:0, shrink:1, basis:auto */
+            -webkit-flex: 0 1 auto;
+            -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+            
+            /*-webkit-align-self: auto;
+            -ms-flex-item-align: auto;
+            align-self: auto;*/
+
+            min-height:200px;
+        }
+
+        /* narrow */
+        @media (max-width: 720px) {
+            .flex-item {
+                _background:#eee;
+                width:100%;
+            }
+            .flex-container {
+                padding-left:0vw;
+                padding-right:0vw;
+            }
+            .card {
+                padding-bottom:4ch;
+            }
+        }
+
+        /* wide */
+        @media (min-width: 721px) {
+            .flex-item {
+                width:50%;
+                width:50%;
+            }
+            .flex-container {
+                padding-left:5vw;
+                padding-right:5vw;
+            }
+            .card {
+                border:1ch solid white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class='flex-container' id=app>
+        <div class='card flex-item' v-for="(post, index) in posts">
+            <h2 class=title><!--{{index}}--> {{post.title}} <!--{{post.published}}--></h2>
+            <div class=content v-html="post.content"></div>            
+        </div>
+    </div>
+    <script>
+        var posts = _blog_posts;
+        var app = new Vue({
+            el: '#app',
+            data: {
+                seen: true,
+                posts: posts
+            }
+        });
+    </script>
+</body>
+</html>

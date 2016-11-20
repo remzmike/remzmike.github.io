@@ -1,0 +1,3 @@
+\s*<script><!--\s*
+\s*StarbarInsert\((?P<movieid>.*?),\d,(?P<rating1>.*?),(?P<rating2>.*?),\d,\d,\d,\d,\d,\d,\d\);\s*
+\s*// --></script>\s*

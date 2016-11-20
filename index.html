@@ -97,10 +97,15 @@
         }
 
         var _data = {
-            'links-programmer' : [
+            'links-basic' : [
                 {href:'https://github.com/remzmike', text:'github'},
                 {href:rzmk('cod.emuser-km/oi.buhtig.ekimzmer//:sptth'), text:'resume'},
-                {href:rzmk('moc.liamg@ekimzmer:otliam'), text:'email', target:'_blank'}
+                {href:rzmk('moc.liamg@ekimzmer:otliam'), text:'email', target:'_blank'},
+                {href:'http://calendly.com/remzmike/15min', text:'phone', target:'_blank'}
+            ],
+            'links-other' : [
+                {href:'profile', text:'professional profile'},
+                {href:'mash', text:'side projects'}
             ]
         }
     </script>
@@ -140,7 +145,8 @@
             }
             content.appendChild(list);
         }
-        do_links('links', 'links-programmer', 'span', ', ');
+        do_links('links', 'links-basic', 'span', ', ');
+        do_links('sites', 'links-other', 'span', ', ');
     </script>
 
     <h2>Bullets</h2>

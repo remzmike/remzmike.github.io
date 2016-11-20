@@ -1,0 +1,203 @@
+<!doctype html>
+<!--
+1/17/2012 7:01:46 PM : start from scratch
+1/17/2012 8:09:39 PM : all working except . and C
+1/17/2012 8:16:52 PM : all working except . 
+1/17/2012 8:26:17 PM : fixed parseInt vs parseFloat, oops, all working except .00
+1/17/2012 8:29:40 PM : fixed .00, all done i think
+-->
+<html>
+<head>
+    <title>js calculator</title>
+    <script src="jquery-1.7.1.js"></script>
+    <style>
+    table
+    {
+        font-size:24pt;
+    }
+    table td
+    {
+        padding:8px;
+        border:2px solid gray;
+    }
+    #lcd {
+        font-size:24pt;
+        font-weight:bold;  
+    }
+    </style>
+    <script>
+    function go(ch)
+    {
+        // r1 - first operand
+        // r2 - second operand
+        // op - operator
+        // eq - equals
+        switch (state)
+        {
+            case 'r1':
+                if (isinput(ch))
+                {
+                    if (r1+''=='0') r1 = '';
+                    if (isdupedot(ch, r1)) break;
+                    r1 = r1 + '' + ch;
+                    display(r1);                    
+                }
+                else if (isop(ch))
+                {
+                    state = 'op';
+                    go(ch);
+                }
+                break;
+            case 'op':
+                if (isinput(ch))                
+                {
+                    state = 'r2';
+                    go(ch);                    
+                }
+                else if (isop(ch))
+                {
+                    opch = ch;
+                }
+                break;
+            case 'r2':
+                if (isinput(ch))
+                {
+                    if (r2+''=='0') r2 = '';
+                    if (isdupedot(ch, r2)) break;
+                    r2 = r2 + '' + ch;
+                    display(r2);
+                }
+                else if (isop(ch))
+                {
+                    r1 = calc();
+                    r2 = 0;
+                    display(r1);
+                    state = 'op';
+                    go(ch);
+                }
+                else if (iseq(ch))
+                {
+                    state = 'eq';
+                    go(ch);
+                }
+                break;
+            case 'eq':
+                if (isinput(ch))
+                {
+                    r1 = 0;
+                    state = 'r1';
+                    go(ch);
+                }
+                else if (isop(ch))
+                {
+                    state = 'op';
+                    go(ch)
+                }
+                else if (iseq(ch))
+                {
+                    r1 = calc();                    
+                    r2 = 0;
+                    display(r1);                    
+                }
+                break;
+        }
+    }
+    function isinput(ch)
+    {
+        return "1234567890.".indexOf(ch) > -1;
+    }
+    function isop(ch)
+    {
+        return "+-/*".indexOf(ch) > -1;
+    }
+    function iseq(ch)
+    {
+        return "=" == ch;
+    }
+    function isdupedot(ch, r)
+    {
+        return ch=='.' && r.indexOf('.') >= 0;
+    }
+    function display(value)
+    {
+        $('#lcd').text(value);
+    }
+    function calc()
+    {
+        if (r1=='.') r1 = '0';
+        if (r2=='.') r2 = '0';
+        r1 = parseFloat(r1);
+        r2 = parseFloat(r2);
+        var result;
+        switch(opch)
+        {
+            case '+':
+                result = r1 + r2;
+                break;
+            case '-':
+                result = r1 - r2;
+                break;
+            case '*':
+                result = r1 * r2;
+                break;
+            case '/':
+                result = r1 / r2;
+                break;
+        }
+        return result;
+    }
+    function init()
+    {
+        state = 'r1';
+        r1 = '';
+        r2 = '';
+        opch = '';
+        go(0);
+    }
+    $(document).ready(function() {
+        init();
+    });    
+    var state;
+    var r1;
+    var r2;
+    var opch;
+    </script>
+</head>
+<body>
+
+    <table border=1>
+        <tr>
+            <td onclick="go(7);">7</td>
+            <td onclick="go(8);">8</td>
+            <td onclick="go(9);">9</td>
+            <td onclick="go('/');">/</td>
+            <td onclick="init();">C</td>
+        </tr>
+        <tr>
+            <td onclick="go(4);">4</td>
+            <td onclick="go(5);">5</td>
+            <td onclick="go(6);">6</td>
+            <td onclick="go('*');">*</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td onclick="go(1);">1</td>
+            <td onclick="go(2);">2</td>
+            <td onclick="go(3);">3</td>
+            <td onclick="go('-');">-</td>
+            <td onclick="go('=');"rowspan=2>=</td>
+        </tr>
+        <tr>
+            <td onclick="go(0);" colspan=2>0</td>
+            <td onclick="go('.');">.</td>
+            <td onclick="go('+');">+</td>
+        </tr>
+        <tr>
+            <td colspan=5 align=right>
+                <span id=lcd>0</span>
+            </td>
+        </tr>
+    </table>
+    
+</body>  
+</html>
