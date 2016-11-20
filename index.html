@@ -81,7 +81,7 @@
         <div style="color:darkred">NOTICE: This page requires Javascript, because I said so.</div>
     </noscript>
 
-    <p class='smallcaps'>I write software using <span id=lang_a></span>, <span id=lang_b></span>, <span id=lang_c></span> and <span>lua</span>.</p>
+    <p class='smallcaps'>I write software using<br><span id=lang_a></span>, <span id=lang_b></span>, <span id=lang_c></span><br> and <span>lua</span>.</p>
 
     <script>
         function start_language_shuffle() {
@@ -118,7 +118,7 @@
             var h2 = create('h2');
             h2.textContent = header;
             var content = document.getElementById('content');
-            content.appendChild(h2);
+            //content.appendChild(h2); hue.
 
             var list = create('div');
             var links = _data[content_key];
