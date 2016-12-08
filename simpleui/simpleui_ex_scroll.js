@@ -45,7 +45,7 @@
     // todo: messy, latest feature
     function do_scroll_item_begin(scroll_uiid, i) {
         var layout_parent = ui.layout_peek();
-        console.log(layout_parent);
+        //console.log(layout_parent);
         var layout = ui.layout_push('vertical');
         var scroll = ui.get_cache(scroll_uiid);
         scroll.translate_y = i * scroll.row_height;
