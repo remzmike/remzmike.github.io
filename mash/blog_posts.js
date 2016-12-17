@@ -3,8 +3,12 @@ var _blog_posts = [];
 var _blog_posts_by_title = {};
 _blog_post = {
     'content' : `
-<p>Ported simpleui to plain javascript and made a driver for the html5 canvas.</p>
- <a href="simpleui-js-alpha-20161013b-crop.png"><img border="0" src="simpleui-js-alpha-20161013b-crop.png"></a>`,
+<p>
+    Ported simpleui to plain javascript and made a driver for the html5 canvas.
+    (<a href='../simpleui'>live demo</a>)
+</p>
+ <a href="simpleui-js-alpha-20161013b-crop.png"><img border="0" src="simpleui-js-alpha-20161013b-crop.png"></a>
+ `,
     'title' : "simpleui.js",
     'published' : "2016-10-08T11:45:00.002-04:00"
     };
@@ -28,7 +32,7 @@ _blog_posts.push(_blog_post);
 _blog_posts_by_title['sendinput'] = _blog_post;
 _blog_post = {
     'content' : `
-<div id="content">        
+<div id="content">
 <p>Wrote code to make unique user glyphs, after staring at gravatar identicons.</p>
 <p><img height="16" src="source.png" width="16" /><a href="https://github.com/remzmike/python-userglyph/blob/master/userglyph.py">userglyph.py</a></p>
 <p>My current glyphset yields 4,373,111,808 unique images.</p>
@@ -41,12 +45,12 @@ _blog_post = {
 <p>Example outputs:</p>
 
 <p>
-<img height="64" src="userglyph-0_23_20_1.png" width="64" /> 
-<img height="64" src="userglyph-107_28_132_3.png" width="64" /> 
-<img height="64" src="userglyph-21_29_87_1a.png" width="64" /> 
-<img height="64" src="userglyph-23_11_41_1.png" width="64" /> 
-<img height="64" src="userglyph-26_29_45_2.png" width="64" /> 
-<img height="64" src="userglyph-28_52_70_1.png" width="64" /> 
+<img height="64" src="userglyph-0_23_20_1.png" width="64" />
+<img height="64" src="userglyph-107_28_132_3.png" width="64" />
+<img height="64" src="userglyph-21_29_87_1a.png" width="64" />
+<img height="64" src="userglyph-23_11_41_1.png" width="64" />
+<img height="64" src="userglyph-26_29_45_2.png" width="64" />
+<img height="64" src="userglyph-28_52_70_1.png" width="64" />
 <img height="64" src="userglyph-47_24_110_3.z.png" width="64" />
 <img height="64" src="userglyph-82_63_85_2.png" width="64" />
 <img height="64" src="userglyph-83_30_94_2.png" width="64" />
