@@ -2,10 +2,9 @@
 <html>
 <head>
     <title>mk - software professional</title>
-    <meta charset="utf-8">    
+    <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- // github pages is acting funny -->
     <script>
         // walking a highwire //
         function rzmk(s) { var a = []; for (i=s.length-1;i>=0;i--) { a.push(s.charAt(i)); } return a.join('');}
@@ -82,7 +81,13 @@
         <div style="color:darkred">NOTICE: This page requires Javascript, because I said so.</div>
     </noscript>
 
-    <p class='smallcaps'>I write software using<br><span id=lang_a></span>, <span id=lang_b></span>, <span id=lang_c></span><br> and <span>lua</span>. (mostly)</p>
+    <p>I have made web applications for e-commerce, real-estate, online education, tax filing, credit card processing, background screening, network security scanning, image processing, and more.</p>
+
+    <p>I have professional experience in many languages. The language barely matters. I can use whatever technologies I need and I am likely to do interesting work the first time I use a new tool.</p>
+
+    <p>I understand traditional software engineering fundamentals, data structures, algorithms, performance, and security.</p>
+
+    <p>But you don't have to believe me. See the following links instead:</p>
 
     <script>
         function start_language_shuffle() {
@@ -99,14 +104,14 @@
 
         var _data = {
             'links-basic' : [
-                {href:'https://github.com/remzmike', text:'github'},
+                {href:'profile', text:'professional profile'},
+                {href:'mash', text:'side projects'},
+                {href:'https://github.com/remzmike', text:'github'}
+            ],
+            'links-other' : [
                 {href:rzmk('cod.emuser-km/oi.buhtig.ekimzmer//:sptth'), text:'resume'},
                 {href:rzmk('moc.liamg@ekimzmer:otliam'), text:'email', target:'_blank'},
                 {href:'http://calendly.com/remzmike/15min', text:'phone', target:'_blank'}
-            ],
-            'links-other' : [
-                {href:'profile', text:'professional profile'},
-                {href:'mash', text:'side projects'}
             ]
         }
     </script>
@@ -159,13 +164,13 @@
         <li>Desktop GUI developer since 1997</li>
         <li>SQL database developer since 1999</li>
         <li>Javascript developer since 1999</li>
-        <li>Java developer until 2000</li>
         <li>Windows user since 2000</li>
         <li>Python developer since 2000</li>
         <li>Microsoft stack web developer since 2001</li>
         <li>C# developer since 2001</li>
         <li>Python stack web developer since 2004</li>
         <li>Delphi developer until 2005</li>
+        <li>Java developer through 2008</li>
         <li>And a few other things</li>
     </ul>
 
@@ -176,9 +181,9 @@
         <li>I can write words. I can read paragraphs. I can do math.</li>
         <li>I can define/design/optimize and fix systems, like software.</li>
         <li>I've been following the trends of web development for 20 years.</li>
-        <li>I can usually write low-level code wherever I might need to.</li>
-        <li>I can write complicated ugly-baby sql and design schemas like a master builder.</li>
-        <li>And yes, I can use, and create, APIs as well as most anyone else.</li>
+        <li>I can write low-level code wherever I need to.</li>
+        <li>I can write complicated sql and design schemas.</li>
+        <li>I also design libraries and APIs.</li>
     </ul>
 
 </div>
@@ -195,7 +200,7 @@
         ga('send', 'pageview');
     }
     window.onload = function() {
-        start_language_shuffle();
+        //start_language_shuffle();
         var style = document.getElementById('content').style;
         style.visibility = 'visible';
         do_google_analytics();
