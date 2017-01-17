@@ -106,7 +106,8 @@
             'links-basic' : [
                 {href:'profile', text:'professional profile'},
                 {href:'mash', text:'side projects'},
-                {href:'https://github.com/remzmike', text:'github'}
+                {href:'self', text:'self employment'},
+                {href:'https://github.com/remzmike', text:'personal github'}
             ],
             'links-other' : [
                 {href:rzmk('cod.emuser-km/oi.buhtig.ekimzmer//:sptth'), text:'resume'},
@@ -150,9 +151,11 @@
             }
             content.appendChild(list);
         }
-        do_links('links', 'links-basic', 'span', ', ');
-        do_links('sites', 'links-other', 'span', ', ');
     </script>
+
+    <script>do_links('links', 'links-basic', 'div', '');</script>
+    <br>
+    <script>do_links('sites', 'links-other', 'span', ' / ');</script>
 
     <h2>Bullets</h2>
 

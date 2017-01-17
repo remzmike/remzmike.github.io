@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<!--
+v01 - 20170117 - Yay, version 1.
+-->
+<h2>Self Employment</h2>
+<p>My name is Mike and I am sometimes self-employed.</p>
+<p>In fact, I have many years of experience working as a self-employed software developer.</p>
+<p>There are two parts to my self-employment:</p>
+<ol>
+<li>Product development and licensing, as <strong>Efflare Systems</strong>.</li>
+<li>Custom software contracting and consulting, as <strong>myself</strong>.</li>
+</ol>
+<p>In 2015 I separated these two parts, mostly ending my association with Efflare Systems. </p>
+<h2>Critical Response</h2>
+<p><img src="lawyer.gif" alt="now!" /></p>
+<blockquote>
+<p><em><strong>&quot;But wait, how can that be true!?&quot;</strong></em><br>
+<em><strong>&quot;I DEMAND TO SEE YOUR CLIENT LIST SIR!&quot;</strong></em><br></p>
+</blockquote>
+<p>I have done contract work for dozens of clients.
+I have also licensed my software to hundreds of customers.</p>
+<p>I will attempt to satisfy your skepticism by providing some additional details.</p>
+<p>Some details will be left out for legal and professional reasons.</p>
+<p>I have split this information into three parts.</p>
+<ol>
+<li>Contracts</li>
+<li>Testimonials</li>
+<li>Licensees</li>
+</ol>
+<p>This is the first time much of this information has been released.</p>
+<p>Please contact me if you would like to be removed from this document.</p>
+<h2>Contracts</h2>
+<ul>
+<li>
+<p>Edouard J, Microscript, Belgium<br>
+PDF API wrapper using official Adobe API</p>
+</li>
+<li>
+<p>Amy R, President/CEO, Wedding Window<br>
+Server-side Flash rasterization</p>
+</li>
+<li>
+<p>Robert D, Web Agency, Inc.<br>
+24-bit Javascript color picker</p>
+</li>
+<li>
+<p>Ed O, Webmaster, PING<br>
+Lossless encoding of 32-bit image data into SWF</p>
+</li>
+<li>
+<p>Lance M, ProSites, Inc.<br>
+Embedded Lua engine in .NET</p>
+</li>
+<li>
+<p>Alexandre B, EuroTV<br>
+Auto Cropping solution</p>
+</li>
+<li>
+<p>Jeff M, optonline<br>
+Batch processing AJAX solution</p>
+</li>
+<li>
+<p>Chad G, Senior Developer, Carey Color Inc.<br>
+ICC Color Profile processing</p>
+</li>
+<li>
+<p>Bethany S, Project Manager, World Wide Internet Publishing Ltd.<br>
+Back-end image generation</p>
+</li>
+<li>
+<p>Josen R, Director of Internet Development, Motorsport Marketing, Inc.<br>
+Multiple image processing solutions</p>
+</li>
+<li>
+<p>Ruben C, President, Sandtex International Corp.<br>
+Python Tcl/Tk UPS desktop tool<br></p>
+</li>
+</ul>
+<h2>Testimonials</h2>
+<h3>Carey Color Inc.</h3>
+<p>Chad Gray, Senior Developer, <a href="www.careyweb.com">http://www.careyweb.com/</a></p>
+<blockquote>
+<p>As a long time customer of Efflare's I can vouch for their expertise and customer service. We first purchased ImageCR and gFont back in 2001.</p>
+<p>Carey Color Inc. is a prepress house.  We organize and distribute millions of digital images for our clients.  We have written many custom digital asset management web applications for our clients and ImageCR, gFont and ImageFlare are at the heart of nearly each one.</p>
+<p>I remember the first time I tried ImageCR back in the Cold Fusion 4.5 days. I could not believe Efflare was recommending running the CFX tag without the &lt;cflock&gt; tag.  This was a sign of a well programmed tool.</p>
+<p>ImageCR, gFont and ImageFlare have proven their worth over an over again with their robust architecture.  They have not missed a beat and I don't have to worry about them, which leaves me more time to program better applications.</p>
+<p>Efflare as a company has been there every step of the way. Their customer support is top notch and they listen to their customers needs.  I highly recommend Efflare.</p>
+</blockquote>
+<h3>Motorsport Marketing, Inc.</h3>
+<p>Josen Ruiseco, Director of Internet Development, <a href="http://www.GoMotorBids.com">http://www.GoMotorBids.com</a></p>
+<blockquote>
+<p>GoMotorBids.com is the 4th largest auction website on the Internet,
+specializing in all types of Automotive Memorabilia. We post over 1000
+new custom images to our website every day. Before we found Efflare, we
+had to make multiple sizes of each image, then sort them into different
+directories. It was a complete nightmare! </p>
+<p>With the help of Efflare's ImageCR3 and ImageFlare products we now
+upload one image and we're done. Efflare does all the rest. Their
+components are efficient, easy to use, and very fast. Thanks Efflare.
+I'm a customer for life!'</p>
+</blockquote>
+<h3>World Wide Internet Publishing Ltd.</h3>
+<p>Bethany Smith, Project Manager, <a href="www.WWIP.com">http://www.WWIP.com/</a></p>
+<blockquote>
+<p>We have relied on Efflare custom tags for years to resize and watermark images.
+These tags have dramatically streamlined our web applications.</p>
+<p>On several occasions we've needed custom development and Efflare has always impressed with their ability to turn out work quickly and deliver exactly what we needed.</p>
+<p>Without Efflare, we could not provide our customers the solutions we do,
+particularly in dynamic image manipulation.</p>
+<p>We sincerely recommend Efflare!</p>
+</blockquote>
+<h3>Ball Enterprises</h3>
+<p>Anthony Webb, Web Developer</p>
+<blockquote>
+<p>I have been using Coldfusion for several years now and have 
+tried nearly every image tag out there. One day I came across the
+ImageCR tag and decided to try it out. I was absolutely 
+blown away at the foresight and thought put into this tag.
+I am by no means a wealthy man and don't usually buy custom  tags at all,
+but I must say this tag is without a doubt worth every penny! </p>
+<p>The staff at Efflare are unbelievably helpful and responsive.
+I have never seen such a great team dedicated to making sure you
+fully understand the tag and use it to its full potential.
+The service and support I got alone justified the purchase of the tag. </p>
+<p>Furthermore, ImageCR is being updated and enhanced daily, as Efflare
+implements many of the suggestions customers send. Other
+tags simply aren't as user friendly, and don't produce near the same
+quality in images while still providing the smallest file size possible.
+I am an extremely satisfied customer and would strongly recommend ImageCR
+to anyone looking for a solution to their imaging needs.&rdquo;</p>
+</blockquote>
+<h3>Sandtex International Corp.</h3>
+<p>Ruben C, President, <a href="http://www.sandtextusa.com/">http://www.sandtextusa.com/</a></p>
+<blockquote>
+<p>Mike has excellent communication skills, he will work to figure out exactly what you want. He will then provide it before the agreed upon time. Excellent.</p>
+</blockquote>
+<h2>Licensees</h2>
+<p>In addition to custom contracting, I also developed and licensed a niche back-end image processing solution.</p>
+<p>Here are some notable clients I picked from my user records.</p>
+<ul>
+<li>NASA, USPS, AIG, Bushnell, Ping Golf, Fleer, Crayola, Woodward</li>
+</ul>
+<p>You can additionally read an article detailing NASA's use of my software. </p>
+<ul>
+<li><a href="https://gcn.com/articles/2005/11/29/nasa-develops-style-sheets-tools-for-web-sites.aspx">NASA develops style sheets, tools for Web sites</a></li>
+</ul>
+<p>Finally, here is a graph of licensees by geoip resolution.</p>
+<p><img src="geo-sales.png" alt="licensees" /></p>
+<h2>Closing</h2>
+<p>Let me know if you have questions.</p>
+<p>See also:</p>
+<ul>
+<li><a href="http://remzmike.github.io">http://remzmike.github.io</a></li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
