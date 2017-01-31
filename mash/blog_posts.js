@@ -17,7 +17,7 @@ _blog_posts_by_title['simpleui.js'] = _blog_post;
 _blog_post = {
     'content' : `
 <p>
-    Wrote a python module for creating stock charts in SVG.
+    Wrote a python module for creating these svg stock charts.
 </p>
  <a href="chartk1-screenshot.png"><img border="0" src="chartk1-screenshot.png"></a>
  `,
@@ -208,14 +208,14 @@ _blog_post = {
     };
 _blog_posts.push(_blog_post);
 _blog_posts_by_title['memorize data'] = _blog_post;
-_blog_post = {
+/*_blog_post = {
     'content' : `
 <div id="content">         <p>Wrote mclip. Automatically converts all copied text to plain text, from the task tray.</p><img src="mclip.png" width="128" height="160"><p>Win32 api:</p><div class="source"><pre><code>static extern int SetClipboardViewer(int hWndNewViewer);<br />static extern bool ChangeClipboardChain(IntPtr hWndRemove, IntPtr hWndNewNext);<br />static extern int SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);<br />static extern IntPtr GetClipboardOwner();<br />static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr ProcessId);<br /></code></pre></div>         </div>`,
     'title' : "mclip",
     'published' : "2012-03-05T12:02:00.000-05:00"
     };
 _blog_posts.push(_blog_post);
-_blog_posts_by_title['mclip'] = _blog_post;
+_blog_posts_by_title['mclip'] = _blog_post;*/
 _blog_post = {
     'content' : `
 <div id="content">A simple test, for critics.<br /><div class="source"><pre><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">OneLine</span><span class="p">()</span><br /><span class="p">{</span><br />    <span class="k">return</span> <span class="m">1</span><span class="p">;</span><br /><span class="p">}</span><br /><span class="k">static</span> <span class="kt">int</span> <span class="nf">TwoLine</span><span class="p">()</span><br /><span class="p">{</span><br />    <span class="kt">var</span> <span class="n">x</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span><br />    <span class="k">return</span> <span class="n">x</span><span class="p">;</span><br /><span class="p">}</span><br /></code></pre></div>IL:<br /><div class="source"><pre><code><span class="nl">OneLine:</span><br /><span class="nl">IL_0000:</span>  <span class="nf">ldc.i4.1</span>    <br /><span class="nl">IL_0001:</span>  <span class="nf">ret</span>         <br /><br /><span class="nl">TwoLine:</span><br /><span class="nl">IL_0000:</span>  <span class="nf">ldc.i4.2</span>    <br /><span class="nl">IL_0001:</span>  <span class="nf">stloc.0</span>     <br /><span class="nl">IL_0002:</span>  <span class="nf">ldloc.0</span>     <br /><span class="nl">IL_0003:</span>  <span class="nf">ret</span>         <br /></code></pre></div>JIT optimized assembly:<br /><div class="source"><pre><code><span class="c1">; return OneLine();</span><br /><span class="err">00000000</span>  <span class="nf">mov</span>         <span class="nb">eax</span><span class="p">,</span><span class="mi">1</span> <br /><span class="err">00000005</span>  <span class="nf">ret</span> <br /><br /><span class="c1">; return TwoLine();</span><br /><span class="err">00000000</span>  <span class="nf">mov</span>         <span class="nb">eax</span><span class="p">,</span><span class="mi">2</span> <br /><span class="err">00000005</span>  <span class="nf">ret</span> <br /></code></pre></div>Another example, <code>A</code> adds one, <code>B</code> squares.<br /><div class="source"><pre><code><span class="kt">int</span> <span class="n">a</span> <span class="p">=</span> <span class="n">A</span><span class="p">(</span><span class="n">B</span><span class="p">(</span><span class="m">2</span><span class="p">));</span><br /><span class="k">return</span> <span class="n">a</span><span class="p">;</span><br /></code></pre></div>vs.<br /><div class="source"><pre><code><span class="kt">int</span> <span class="n">b</span> <span class="p">=</span> <span class="n">B</span><span class="p">(</span><span class="m">2</span><span class="p">);</span><br /><span class="kt">int</span> <span class="n">a</span> <span class="p">=</span> <span class="n">A</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><br /><span class="k">return</span> <span class="n">a</span><span class="p">;</span><br /></code></pre></div>Compiles to:<br /><div class="source"><pre><code><span class="c1">; int a = A(B(2));</span><br /><span class="c1">; return a;</span><br /><span class="err">00000000</span>  <span class="nf">mov</span>         <span class="nb">eax</span><span class="p">,</span><span class="mi">5</span> <br /><span class="err">00000005</span>  <span class="nf">ret</span> <br /><br /><span class="c1">; int b = B(2);</span><br /><span class="c1">; int a = A(b);</span><br /><span class="c1">; return a;</span><br /><span class="err">00000000</span>  <span class="nf">mov</span>         <span class="nb">eax</span><span class="p">,</span><span class="mi">5</span> <br /><span class="err">00000005</span>  <span class="nf">ret</span> <br /></code></pre></div>Feel free to use lines.</div>`,
@@ -298,14 +298,14 @@ _blog_post = {
     };
 _blog_posts.push(_blog_post);
 _blog_posts_by_title['tbpyxie'] = _blog_post;
-_blog_post = {
+/*_blog_post = {
     'content' : `
 <p>Netflix website automation.</p><p>1) This script orders your queue by recommendation rating.</p><p><img alt="source glyph" src="source.png" /> <a href="orderq.py">orderq.py</a></p><p>2) Browser.py - 100 lines of header/cookie/session handling. Mimic a real browser.</p><div class="source"><pre><code><span class="n">web</span> <span class="o">=</span> <span class="n">Browser</span><span class="p">()</span><br /><br /><span class="n">web</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="s">&#39;https://www.netflix.com/Login&#39;</span><span class="p">)</span><br /><span class="n">body</span> <span class="o">=</span> <span class="p">{</span><br />  <span class="s">&#39;nextpage&#39;</span><span class="p">:</span><span class="s">&#39;https://www.netflix.com/Default&#39;</span><span class="p">,</span><br />  <span class="s">&#39;email&#39;</span><span class="p">:</span><span class="n">username</span><span class="p">,</span><br />  <span class="s">&#39;movieid&#39;</span><span class="p">:</span><span class="s">&#39;&#39;</span><span class="p">,</span><br />  <span class="s">&#39;trkid&#39;</span><span class="p">:</span><span class="s">&#39;&#39;</span><span class="p">,</span>    <br />  <span class="s">&#39;password1&#39;</span><span class="p">:</span><span class="n">password</span><span class="p">,</span><br />  <span class="s">&#39;SubmitButton&#39;</span><span class="p">:</span><span class="s">&#39;Click Here to Continue&#39;</span><span class="p">,</span><br /><span class="p">}</span>  <br /><span class="n">web</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="s">&#39;https://www.netflix.com/Login&#39;</span><span class="p">,</span><span class="s">&#39;POST&#39;</span><span class="p">,</span><span class="n">body</span><span class="p">)</span><br /><br /><span class="n">web</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="s">&#39;https://www.netflix.com/Queue&#39;</span><span class="p">)</span><br /></code></pre></div>  <p>3) NetflixQueue - 30 lines, parse netflix queue and movie properties from html with regex.</p><p><img alt="source glyph" src="source.png" /> <a href="NetflixMovieRX.txt">NetflixMovieRX.txt</a><br /><img alt="source glyph" src="source.png" /> <a href="NetflixQueueRX.txt">NetflixQueueRX.txt</a></p>`,
     'title' : "netflix",
     'published' : "2004-01-01T10:55:00.000-05:00"
     };
 _blog_posts.push(_blog_post);
-_blog_posts_by_title['netflix'] = _blog_post;
+_blog_posts_by_title['netflix'] = _blog_post;*/
 _blog_post = {
     'content' : `
 <p>Rewrite of my playtime winamp plugins for foobar2000, in the required C++.</p><p>Stores listening statistics, ratings, and comments in MSSQL via ADO.</p><p>The usual hotkey mapping via foobar configuration.</p><!--![foo_playtime](/weblog/static/foo_playtime.png)--> <a href="foo_playtime.png"><img src='foo_playtime.png' border=0></a>`,
@@ -381,7 +381,7 @@ _blog_post = {
     };
 _blog_posts.push(_blog_post);
 _blog_posts_by_title['recurse'] = _blog_post;
-_blog_post = {
+/*_blog_post = {
     'content' : `
 <p>Make per-directory playlists recursively. Threaded for ui updates.</p>
 <p><a href="playlister.png"><img alt="" src="playlister.png" border=0></a></p>`,
@@ -390,3 +390,4 @@ _blog_post = {
     };
 _blog_posts.push(_blog_post);
 _blog_posts_by_title['playlister'] = _blog_post;
+*/
