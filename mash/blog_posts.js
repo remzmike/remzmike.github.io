@@ -16,6 +16,18 @@ _blog_posts.push(_blog_post);
 _blog_posts_by_title['simpleui.js'] = _blog_post;
 _blog_post = {
     'content' : `
+<p>
+    A python module creating stock charts in SVG.
+</p>
+ <a href="chartk1-screenshot.png"><img border="0" src="chartk1-screenshot.png"></a>
+ `,
+    'title' : "PxV chart",
+    'published' : "2017-01-31T11:45:00.002-04:00"
+    };
+_blog_posts.push(_blog_post);
+_blog_posts_by_title['PxV chart'] = _blog_post;
+_blog_post = {
+    'content' : `
 <p>My tcp and udp port scanner, using non-blocking sockets. </p> <a href="https://github.com/remzmike/python-kports-portscanner/blob/master/kports.py">https://github.com/remzmike &gt; kports.py</a> <p>The tcp scan is a simple connect scan using epoll. </p> <p>The udp scan is more complicated. A closed port is one where subsequent sends throw an ECONNREFUSED errno. This is effectively detecting ICMP "Destination Unreachable" type 3 code 3 errors. An open port is one where a udp response is received. A port may also be "possibly open" due to the lack of a response or error from the target. These are returned as a separate list by udp_scan_ex. </p> <p>The advanced udp scan also accounts for rate-limiting of ICMP port unreachable errors at the target. Because of this, advanced scanning of 1024 udp ports can take around 20 minutes using udp_scan_ex with the default arguments. </p> <p>HOWEVER, this script will do a faster udp scan by default, checking for responsive, obviously open ports. The udp_scan function makes a special call to udp_scan_ex effectively disabling the advanced scanning features. </p> <p>This udp scanning technique is called the "lame" udp scan by nmap. </p> <p>You can modify some of this behavior using the global constants. </p> <pre><br />Examples:<br />1) python kports.py 1.2.3.4<br />{<br />                'target': '64.157.211.4',<br />                'status': 'valid ip',<br />                'tcp': [22,23,80,443],<br />                'udp': [ ]<br />}<br /><br />2) python kports.py www.ibm.com<br />{<br />                'target': 'www.ibm.com',<br />                'status': 'fqdn resolves',<br />                'tcp': [22,23,80,443],<br />                'udp': [53]<br />}<br /><br />3) python kports.py www.sdsds.xxz<br />{<br />                'target': 'www.sdsds.xxz',<br />                'status': 'fqdn does not resolve'<br />}<br /></pre>`,
     'title' : "kports",
     'published' : "2016-03-23T13:59:00.000-04:00"
