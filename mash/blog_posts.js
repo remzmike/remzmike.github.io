@@ -17,7 +17,7 @@ _blog_posts_by_title['simpleui.js'] = _blog_post;
 _blog_post = {
     'content' : `
 <p>
-    Wrote a python module creating stock charts in SVG.
+    Wrote a python module for creating stock charts in SVG.
 </p>
  <a href="chartk1-screenshot.png"><img border="0" src="chartk1-screenshot.png"></a>
  `,
