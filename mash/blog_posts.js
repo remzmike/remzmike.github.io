@@ -4,7 +4,7 @@ var _blog_posts_by_title = {};
 _blog_post = {
     'content' : `
 <p>
-    Ported simpleui to plain javascript and made a driver for the html5 canvas.
+    Ported my simpleui library to plain javascript and made a driver for the html5 canvas.
     (<a href='../simpleui'>live demo</a>)
 </p>
  <a href="simpleui-js-alpha-20161013b-crop.png"><img border="0" src="simpleui-js-alpha-20161013b-crop.png"></a>
