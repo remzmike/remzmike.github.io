@@ -35,63 +35,6 @@
                 }
             }
         }
-    </script>
-    <style>
-        body {
-            margin:auto;
-            max-width:800px;
-            line-height:1.4em;
-            font-size:18px;
-            color:#444;
-        }
-        #content {
-            padding:4em;
-            visibility:hidden;
-        }
-        h1, h2 {
-            font-variant-caps:small-caps;
-            line-height: 1.2;
-        }
-        h2 {
-            text-transform: lowercase;
-            font-variant-caps:small-caps;
-        }
-        hr {
-            height:2px;
-            border:none;
-            background-color:#E7E9EE;
-        }
-        .smallcaps span {
-            font-size:20px;
-            font-variant-caps:small-caps;
-        }
-        ul, ol {
-            padding-left:1em;
-        }
-        li {
-            padding-bottom:0.4em;
-        }
-    </style>
-</head>
-<body>
-<div id=content>
-
-    <h1><script>rzmk_out('em tuoba');</script></h1>
-
-    <noscript>
-        <div style="color:darkred">NOTICE: This page requires Javascript, because it's fun.</div>
-    </noscript>
-
-    <!--<p>I have written software for e-commerce, real-estate, online education, tax preparation, credit card processing, background screening, network security scanning, image processing, and more.</p>-->
-
-    <p>I wrote software for a long time and got pretty good at it.</p>
-
-    <p>
-        I understand traditional software engineering fundamentals, data structures, algorithms, performance, and security.
-        I can make things from scratch and wield many tools.
-    </p>
-
-    <script>
         function start_language_shuffle() {
             var languages = ['javascript', 'c#', 'python'];
             shuffle(languages);
@@ -102,82 +45,119 @@
                 span.textContent = languages[i];
             }
             setTimeout(start_language_shuffle, 8000);
-        }
-
-        var _data = {
-            'links-basic' : [
-                {href:'mash', text:'code samples & exercises'},
-                {href:'https://github.com/remzmike', text:'personal github'},
-                {href:'profile', text:'professional profile'},
-                {href:'self', text:'self employment'}
-            ],
-            'links-other' : [
-                {href:rzmk('cod.emuser-km/oi.buhtig.ekimzmer//:sptth'), text:'resume'},
-                {href:rzmk('moc.liamg@ekimzmer:otliam'), text:'email', target:'_blank'},
-                {href:'http://calendly.com/remzmike/15min', text:'phone', target:'_blank'}
-            ]
-        }
+        }        
     </script>
-
-    <script>
-        function do_links(header, content_key, item_container, item_separator) {
-            item_container = item_container || 'div'
-            item_separator = item_separator || '';
-
-            var h2 = create('h2');
-            h2.textContent = header;
-            var content = document.getElementById('content');
-            //content.appendChild(h2); hue.
-
-            var list = create('div');
-            var links = _data[content_key];
-
-            for(var i=0; i<links.length; i++) {
-                var resource = links[i];
-                var item = create(item_container);
-                var target = '';
-                if (resource.target) {
-                    target = format(' target="', resource.target,'"');
-                }
-                item.innerHTML += format('<a href="', resource.href,'"', target,'>', resource.text, '</a>');
-                if (resource.desc) {
-                    item.innerHTML += ', ' + resource.desc;
-                }
-                if (item_separator) {
-                    var is_last_item = i==links.length-1;
-                    if (!is_last_item) {
-                        item.innerHTML += item_separator;
-                    }
-                }
-                list.appendChild(item);
-            }
-            content.appendChild(list);
+    <style>
+        body {
+            margin: auto;
+            max-width: 800px;
+            line-height: 1.4em;
+            font-size: 18px;
+            color: #444;
         }
-    </script>
+        #content {
+            padding: 4em;
+        }
+        h1, h2 {
+            font-variant-caps: small-caps;
+            line-height: 1.2;
+            padding:0;
+            margin:0;
+        }
+        h2 {
+            text-transform: lowercase;
+            font-variant-caps: small-caps;
+        }
+        hr {
+            height: 2px;
+            border: none;
+            background-color: #E7E9EE;
+        }
+        .smallcaps span {
+            font-size: 20px;
+            font-variant-caps: small-caps;
+        }
+        ul, ol {
+            padding-left: 1em;
+        }
+        li {
+            padding-bottom: 0.0em;
+        }
+        .half {
+            display: inline-block;
+            width: 50%;
+            vertical-align: top;
+            box-sizing: border-box;
+        }
+        .nowrap {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<div id="content">
 
-    <script>do_links('links', 'links-basic', 'div', '');</script>
-    <br>
-    <script>do_links('sites', 'links-other', 'span', ' / ');</script>
+    <h1><script>rzmk_out('em tuoba');</script></h1>
 
-    <h2>Bullets</h2>
+    <noscript>
+        <div style="color:darkred">NOTICE: This page requires Javascript, because it's fun.</div>
+    </noscript>
+
+    <!--<p>I have written software for e-commerce, real-estate, online education, tax preparation, credit card processing, background screening, network security scanning, image processing, and more.</p>-->
+
+    <p>
+        I wrote software for a long time and got pretty good at it.
+    </p>
+
+    <p>
+        I understand traditional software engineering fundamentals, data structures, algorithms, performance, and security.
+        I can make things from scratch and wield many tools.
+    </p>
+
+    <p>
+        I prefer working remote. I accept difference.
+    </p>
 
     <ul>
-        <li>Web development since 1994</li>
-        <li>Linux user since 1996</li>
-        <li>Desktop GUI developer since 1997</li>
-        <li>Java developer since 1997</li>
-        <li>SQL database developer since 1999</li>
-        <li>Javascript developer since 1999</li>
-        <li>Windows user since 2000</li>
-        <li>Python developer since 2000</li>
-        <li>Microsoft stack web developer since 2001</li>
-        <li>C# developer since 2001</li>
-        <li>Python stack web developer since 2004</li>
-        <li>Delphi developer until 2005</li>
-        <li>And a few other things</li>
+        <li><a href="mash">code samples & exercises</a></li>
+        <li><a href="https://github.com/remzmike">personal github</a></li>
+        <li><a href="profile">shiny profile</a></li>
+        <li><a href="self">self employment</a></li>
     </ul>
 
+    <span class="nowrap">
+        <h2>Bullets</h2>
+        <div class="half">
+            <ul>
+                <li>Web development since 1994</li>
+                <li>Linux user since 1996</li>
+                <li>Desktop developer since 1997</li>
+                <li>Java developer since 1997</li>
+                <li>SQL database developer since 1999</li>
+                <li>Javascript developer since 1999</li>
+            </ul>
+        </div>
+        
+        <div class="half">
+            <ul>
+                <li>Windows user since 2000</li>
+                <li>Python developer since 2000</li>
+                <li>Microsoft stack web developer since 2001</li>
+                <li>C# developer since 2001</li>
+                <li>Python stack web developer since 2004</li>
+                <li>Delphi developer until 2005</li>
+            </ul>
+        </div>
+    </span>
+
+    <div>
+        <a href="https://stackoverflow.com/users/159022/rz-mk">
+        <img src="https://stackoverflow.com/users/flair/159022.png" width="208" height="58">
+        </a>
+    </div>
+
 </div>
+
 
 <script>
     function do_google_analytics() {
