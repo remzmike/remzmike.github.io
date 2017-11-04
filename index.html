@@ -48,6 +48,13 @@
         }        
     </script>
     <style>
+        html {
+            box-sizing: border-box;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+        /* --- */
         body {
             margin: auto;
             max-width: 800px;
@@ -83,14 +90,13 @@
         li {
             padding-bottom: 0.0em;
         }
-        .half {
-            display: inline-block;
-            width: 50%;
-            vertical-align: top;
-            box-sizing: border-box;
-        }
-        .nowrap {
+        .bullets {
             white-space: nowrap;
+        }
+        .bullets span {
+            white-space: normal;
+            display: inline-block;
+            vertical-align: top; 
         }
     </style>
 </head>
@@ -125,9 +131,9 @@
         <li><a href="self">self employment</a></li>
     </ul>
 
-    <span class="nowrap">
+    <span class="bullets">
         <h2>Bullets</h2>
-        <div class="half">
+        <span style="width:50%;">
             <ul>
                 <li>Web development since 1994</li>
                 <li>Linux user since 1996</li>
@@ -136,9 +142,9 @@
                 <li>SQL database developer since 1999</li>
                 <li>Javascript developer since 1999</li>
             </ul>
-        </div>
-        
-        <div class="half">
+        </span>
+
+        <span style="width:50%;">
             <ul>
                 <li>Windows user since 2000</li>
                 <li>Python developer since 2000</li>
@@ -147,7 +153,7 @@
                 <li>Python stack web developer since 2004</li>
                 <li>Delphi developer until 2005</li>
             </ul>
-        </div>
+        </span>
     </span>
 
     <div>
