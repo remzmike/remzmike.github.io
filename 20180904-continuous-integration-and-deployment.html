@@ -1,0 +1,485 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="qrc:/scripts/mermaid/mermaid.css">
+<script src="qrc:/scripts/mermaid/mermaid.full.min.js"></script>
+
+<style>/*
+ * https://bitbucket.org/kevinburke/markdowncss
+ *
+ * Copyright 2011 Kevin Burke unless otherwise noted.
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ *
+ *   Some content is copyrighted by Twitter, Inc., and also released under an
+ *   Apache License; these sections are noted in the source.
+ */
+body{
+    margin: 0 auto;
+    font-family: Georgia, Palatino, serif;
+    color: #444444;
+    line-height: 1;
+    max-width: 960px;
+    padding: 30px;
+}
+h1, h2, h3, h4 {
+    color: #111111;
+    font-weight: 400;
+}
+h1, h2, h3, h4, h5, p {
+    margin-bottom: 24px;
+    padding: 0;
+}
+h1 {
+    font-size: 48px;
+}
+h2 {
+    font-size: 36px;
+    /* The bottom margin is small. It's designed to be used with gray meta text
+     * below a post title. */
+    margin: 24px 0 6px;
+}
+h3 {
+    font-size: 24px;
+}
+h4 {
+    font-size: 21px;
+}
+h5 {
+    font-size: 18px;
+}
+a {
+    color: #0099ff;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+a:hover {
+    text-decoration: none;
+    color: #ff6600;
+}
+a:visited {
+    color: purple;
+}
+ul, ol {
+    padding: 0;
+    margin: 0;
+}
+li {
+    line-height: 24px;
+}
+li ul, li ul {
+    margin-left: 24px;
+}
+p, ul, ol {
+    font-size: 16px;
+    line-height: 24px;
+    max-width: 540px;
+}
+pre {
+    padding: 0px 24px;
+    max-width: 800px;
+    white-space: pre-wrap;
+}
+code {
+    font-family: Consolas, Monaco, Andale Mono, monospace;
+    line-height: 1.5;
+/*    font-size: 13px;*/
+}
+aside {
+    display: block;
+    float: right;
+    width: 390px;
+}
+blockquote {
+    border-left:.5em solid #eee;
+    padding: 0 2em;
+    margin-left:0;
+    max-width: 476px;
+}
+blockquote  cite {
+    font-size:14px;
+    line-height:20px;
+    color:#bfbfbf;
+}
+blockquote cite:before {
+    content: '\2014 \00A0';
+}
+
+blockquote p {  
+    color: #666;
+    max-width: 460px;
+}
+hr {
+    width: 540px;
+    text-align: left;
+    margin: 0 auto 0 0;
+    color: #999;
+}
+
+/* Code below this line is copyright Twitter Inc. */
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+button, input {
+  line-height: normal;
+  *overflow: visible;
+}
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+input[type=checkbox], input[type=radio] {
+  cursor: pointer;
+}
+/* override default chrome & firefox settings */
+input:not([type="image"]), textarea {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+label,
+input,
+select,
+textarea {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: normal;
+  margin-bottom: 18px;
+}
+input[type=checkbox], input[type=radio] {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+input[type=text],
+input[type=password],
+textarea,
+select {
+  display: inline-block;
+  width: 210px;
+  padding: 4px;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  height: 18px;
+  color: #808080;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+select, input[type=file] {
+  height: 27px;
+  line-height: 27px;
+}
+textarea {
+  height: auto;
+}
+
+/* grey out placeholders */
+:-moz-placeholder {
+  color: #bfbfbf;
+}
+::-webkit-input-placeholder {
+  color: #bfbfbf;
+}
+
+input[type=text],
+input[type=password],
+select,
+textarea {
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+  outline: none;
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+/* buttons */
+button {
+  display: inline-block;
+  padding: 4px 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: #0064cd;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+  background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+  background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+  background-image: linear-gradient(top, #049cdb, #0064cd);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border: 1px solid #004b9a;
+  border-bottom-color: #003f81;
+  -webkit-transition: 0.1s linear all;
+  -moz-transition: 0.1s linear all;
+  transition: 0.1s linear all;
+  border-color: #0064cd #0064cd #003f81;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+button:hover {
+  color: #fff;
+  background-position: 0 -15px;
+  text-decoration: none;
+}
+button:active {
+  -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+</style>
+</head>
+<body>
+<h1 id="My.experience.with.CI.CD">My experience with CI/CD</h1>
+
+<p>I am a software developer. This document describes my CI/CD experience.</p>
+
+<h2 id="TL.DR.--.My.CI.CD.scorecard:">TL;DR &ndash; My CI/CD scorecard:</h2>
+
+<ol>
+<li><p>Using version control<br></p>
+
+<ul>
+<li>YES, over 10 years of experience</li>
+</ul>
+</li>
+<li><p>Commit/Merge frequently</p>
+
+<ul>
+<li>YES, over 10 years of experience</li>
+</ul>
+</li>
+<li><p>Automated builds</p>
+
+<ul>
+<li>YES, over 10 years of experience<br></li>
+<li>scripts written by me</li>
+<li>tfs triggered builds configured by someone else</li>
+</ul>
+</li>
+<li><p>Automated testing on every commit</p>
+
+<ul>
+<li>NO, I have not done this</li>
+<li>I run tests manually in my personal development</li>
+<li>I have never worked at a company that ran automated tests after commit-triggered successful builds</li>
+</ul>
+</li>
+<li><p>Automated deployment</p>
+
+<ul>
+<li>YES, over 10 years of experience</li>
+<li>via custom scripts, and once with Microsoft ClickOnce for a desktop app</li>
+<li>NO experience with any other systems used for automated deployment</li>
+</ul>
+</li>
+</ol>
+
+
+<h2 id="Version.control.tools.I.have.used:">Version control tools I have used:</h2>
+
+<p>Ordered by relevance, mostly reverse-chronological.</p>
+
+<ul>
+<li>TFS
+
+<ul>
+<li>about 5 years experience with 3 or more companies between 2009 and the present (2018)</li>
+</ul>
+</li>
+<li>git
+
+<ul>
+<li>I currently use this for personal and contract work</li>
+<li>I have not used it in a full-time professional setting</li>
+</ul>
+</li>
+<li>mercurial
+
+<ul>
+<li>one year professional experience using mercurial from an ubuntu linux workstation
+
+<ul>
+<li>I also used this for a short time before migrating to bazaar vcs for my personal development in the mid 2000s.</li>
+</ul>
+</li>
+<li>I performand a comprehensive feature and efficiency comparison of darcs, codeville, mercurial, and bazaar in 2006
+
+<ul>
+<li>git was excluded from this round of tests because it wasn&rsquo;t available in Windows at the time</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>bazaar vcs
+
+<ul>
+<li>Early competitor to mercurial and git.</li>
+<li>I contributed Windows bug fixes when this was early in development.
+
+<ul>
+<li>I used this as my primary personal version control as far back as 2005 until git took over in recent years.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>custom rsync + python
+
+<ul>
+<li>rudimentary custom version control powered by python and rsync</li>
+<li>I developed this for Microbilt Corporation since they had no version control</li>
+<li>It solved big problems between different teams working on the same product</li>
+</ul>
+</li>
+<li>subversion SVN
+
+<ul>
+<li>I used this in my early professional development for a few different companies</li>
+<li>I also used it on a couple of occasions personally</li>
+</ul>
+</li>
+<li>VAX/VMS versioning filesystem
+
+<ul>
+<li>The second command-line interface I learned heavily after MS-DOS</li>
+<li>I became familiar with this versioning filesystem in the mid-90s</li>
+<li>I learned software development on this system and took sensible advantage of the automatic versioning of all files over my college years</li>
+<li>This was an obscure legacy system that I was happy to explore</li>
+</ul>
+</li>
+</ul>
+
+
+<h2 id="Addendum:.What.is.CI.CD.">Addendum: What is CI/CD?</h2>
+
+<p>I believe strongly in definitions, but I often lag behind in knowing what people mean when they use the latest buzzwords. This is deliberate. A term is most at risk of wide misinterpretation while it is gaining popularity. I also find most new terms are just new names and groupings for old things. So, I generally wait for their definition to come to me, like now.</p>
+
+<p>Quotes from the top four google results:</p>
+
+<hr />
+
+<p>Microsoft &ndash; <a href="https://docs.microsoft.com/en-us/azure/devops/learn/what-is-continuous-delivery">https://docs.microsoft.com/en-us/azure/devops/learn/what-is-continuous-delivery</a></p>
+
+<blockquote><p>&ldquo;Continuous Integration (CI) is the process of automating the build and testing of code every time a team member commits changes to version control. CI encourages developers to share their code and unit tests by merging their changes into a shared version control repository after every small task completion. Committing code triggers an automated build system to grab the latest code from the shared repository and to build, test, and validate the full master branch (also known as the trunk or main).&rdquo;</p>
+
+<p>&ldquo;Continuous Delivery (CD) is the process to build, test, configure and deploy from a build to a production environment. Multiple testing or staging environments create a Release Pipeline to automate the creation of infrastructure and deployment of applications.&rdquo;</p></blockquote>
+
+<hr />
+
+<p>Amazon &ndash; <a href="https://aws.amazon.com/devops/continuous-integration/">https://aws.amazon.com/devops/continuous-integration/</a></p>
+
+<blockquote><p>&ldquo;Continuous integration is a DevOps software development practice where developers regularly merge their code changes into a central repository, after which automated builds and tests are run. Continuous integration most often refers to the build or integration stage of the software release process and entails both an automation component (e.g. a CI or build service) and a cultural component (e.g. learning to integrate frequently).&rdquo;</p>
+
+<p>&ldquo;Why is Continuous Integration Needed?
+In the past, developers on a team might work in isolation for an extended period of time and only merge their changes to the master branch once their work was completed. This made merging code changes difficult and time-consuming, and also resulted in bugs accumulating for a long time without correction. These factors made it harder to deliver updates to customers quickly.&rdquo;</p>
+
+<p>&ldquo;With continuous delivery, code changes are automatically built, tested, and prepared for a release to production. Continuous delivery expands upon continuous integration by deploying all code changes to a testing environment and/or a production environment after the build stage.&rdquo;</p></blockquote>
+
+<p><img src="20180904-cicd-microsoft.png"></p>
+
+<hr />
+
+<p>Wikipedia &ndash; <a href="https://en.wikipedia.org/wiki/Continuous_delivery">https://en.wikipedia.org/wiki/Continuous_delivery</a></p>
+
+<blockquote><p>&ldquo;In software engineering, continuous integration (CI) is the practice of merging all developer working copies to a shared mainline several times a day.[1] Grady Booch first proposed the term CI in his 1991 method,[2] although he did not advocate integrating several times a day. Extreme programming (XP) adopted the concept of CI and did advocate integrating more than once per day – perhaps as many as tens of times per day.&rdquo;</p>
+
+<p>&ldquo;Continuous delivery (CD) is a software engineering approach in which teams produce software in short cycles, ensuring that the software can be reliably released at any time.[1] It aims at building, testing, and releasing software with greater speed and frequency. The approach helps reduce the cost, time, and risk of delivering changes by allowing for more incremental updates to applications in production. A straightforward and repeatable deployment process is important for continuous delivery.&rdquo;</p></blockquote>
+
+<p><a href="https://en.wikipedia.org/wiki/Continuous_delivery#Relationship_to_continuous_deployment">https://en.wikipedia.org/wiki/Continuous_delivery#Relationship_to_continuous_deployment</a></p>
+
+<blockquote><p>&ldquo;Continuous delivery is sometimes confused with continuous deployment. Some people even use these two terms interchangeably. However, most practitioners tend to clearly distinguish these two terms. The distinction is that under Continuous Deployment we deploy any change to production that passes a series of tests. In contrast, under Continuous Delivery, we ensure that the software can be reliably released at any time, but it is up to a human to decide when to release, usually based on business reasons.[5] In order to do continuous deployment one must be doing continuous delivery.[6]&rdquo;</p></blockquote>
+
+<p><img src="20180904-cicd-wikipedia.png"></p>
+
+<blockquote><p>&ldquo;Continuous delivery treats the commonplace notion of a deployment pipeline[7] as a lean Poka-Yoke:[8] a set of validations through which a piece of software must pass on its way to release. Code is compiled if necessary and then packaged by a build server every time a change is committed to a source control repository, then tested by a number of different techniques (possibly including manual testing) before it can be marked as releasable.&rdquo;</p>
+
+<p>&ldquo;Developers used to a long cycle time may need to change their mindset when working in a CD environment. It is important to understand that any code commit may be released to customers at any point. Patterns such as feature toggles can be very useful for committing code early which is not yet ready for use by end users. Using NoSQL can eliminate the step of data migrations and schema changes, often manual steps or exceptions to a continuous delivery workflow.[9] Other useful techniques for developing code in isolation such as code branching are not obsolete in a CD world, but must be adapted to fit the principles of CD - for example, running multiple long-lived code branches can prove impractical, as a releasable artifact must be built early in the CD process from a single code branch if it is to pass through all phases of the pipeline.&rdquo;</p></blockquote>
+
+<p>Thoughtworks &ndash; <a href="https://www.thoughtworks.com/continuous-integration">https://www.thoughtworks.com/continuous-integration</a></p>
+
+<blockquote><p>&ldquo;Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early.&rdquo;</p>
+
+<p>&ldquo;Continuous Deployment is closely related to Continuous Integration and refers to the release into production of software that passes the automated tests.&rdquo;</p>
+
+<p>&ldquo;Essentially, it is the practice of releasing every good build to users”</p></blockquote>
+
+<h2 id="Personal.perspective.on.CI.CD.experience.requirements.for.software.developers:">Personal perspective on CI/CD experience requirements for software developers:</h2>
+
+<h4 id="Am.I.going.to.be.defining.CI.CD.systems.or.just.using.them.">Am I going to be defining CI/CD systems or just using them?</h4>
+
+<ul>
+<li><p>If I am just using them then I am fully confident I will be able to do that and to suggest otherwise would be a serious oversight.</p></li>
+<li><p>Programming is 10 years harder than understanding continuous integration, continuous delivery, automated builds, and automated testing.</p></li>
+<li><p>If I am defining them, that&rsquo;s fine too. In that case I would do some light research in my spare time and then copy a prototypal workflow of industry best practices. I assume such a thing exists and I assume this is how most people would solve this problem. I do not expect a company would want me to do anything else unless that was their business.</p></li>
+</ul>
+
+
+<h4 id="Have.you.really.solved.the.real.problems.in.software.to.such.an.effective.degree.that.CI.CD.is.now.your.biggest.challenge.">Have you really solved the real problems in software to such an effective degree that CI/CD is now your biggest challenge?</h4>
+
+<ul>
+<li><p>I don&rsquo;t think this is possible, because software development is a far more expansive field than CI/CD.</p></li>
+<li><p>Isn&rsquo;t programming still harder than CI/CD?</p></li>
+<li><p>I don&rsquo;t see how this could not be true.</p></li>
+</ul>
+
+
+<p>The end.</p>
+</body>
+</html>
