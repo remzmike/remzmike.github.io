@@ -1,329 +1,255 @@
-<html>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="qrc:/scripts/mermaid/mermaid.css">
-<script src="qrc:/scripts/mermaid/mermaid.full.min.js"></script>
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>20180904-continuous-integration-and-deployment</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///C:\Users\Eowilson\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.3.5\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
-<style>/*
- * https://bitbucket.org/kevinburke/markdowncss
- *
- * Copyright 2011 Kevin Burke unless otherwise noted.
- *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
- *
- *   Some content is copyrighted by Twitter, Inc., and also released under an
- *   Apache License; these sections are noted in the source.
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
  */
-body{
-    margin: 0 auto;
-    font-family: Georgia, Palatino, serif;
-    color: #444444;
-    line-height: 1;
-    max-width: 960px;
-    padding: 30px;
-}
-h1, h2, h3, h4 {
-    color: #111111;
-    font-weight: 400;
-}
-h1, h2, h3, h4, h5, p {
-    margin-bottom: 24px;
-    padding: 0;
-}
-h1 {
-    font-size: 48px;
-}
-h2 {
-    font-size: 36px;
-    /* The bottom margin is small. It's designed to be used with gray meta text
-     * below a post title. */
-    margin: 24px 0 6px;
-}
-h3 {
-    font-size: 24px;
-}
-h4 {
-    font-size: 21px;
-}
-h5 {
-    font-size: 18px;
-}
-a {
-    color: #0099ff;
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline;
-}
-a:hover {
-    text-decoration: none;
-    color: #ff6600;
-}
-a:visited {
-    color: purple;
-}
-ul, ol {
-    padding: 0;
-    margin: 0;
-}
-li {
-    line-height: 24px;
-}
-li ul, li ul {
-    margin-left: 24px;
-}
-p, ul, ol {
-    font-size: 16px;
-    line-height: 24px;
-    max-width: 540px;
-}
-pre {
-    padding: 0px 24px;
-    max-width: 800px;
-    white-space: pre-wrap;
-}
-code {
-    font-family: Consolas, Monaco, Andale Mono, monospace;
-    line-height: 1.5;
-/*    font-size: 13px;*/
-}
-aside {
-    display: block;
-    float: right;
-    width: 390px;
-}
-blockquote {
-    border-left:.5em solid #eee;
-    padding: 0 2em;
-    margin-left:0;
-    max-width: 476px;
-}
-blockquote  cite {
-    font-size:14px;
-    line-height:20px;
-    color:#bfbfbf;
-}
-blockquote cite:before {
-    content: '\2014 \00A0';
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
 }
 
-blockquote p {  
-    color: #666;
-    max-width: 460px;
-}
-hr {
-    width: 540px;
-    text-align: left;
-    margin: 0 auto 0 0;
-    color: #999;
-}
-
-/* Code below this line is copyright Twitter Inc. */
-
-button,
-input,
-select,
-textarea {
-  font-size: 100%;
-  margin: 0;
-  vertical-align: baseline;
-  *vertical-align: middle;
-}
-button, input {
-  line-height: normal;
-  *overflow: visible;
-}
-button::-moz-focus-inner, input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  cursor: pointer;
-  -webkit-appearance: button;
-}
-input[type=checkbox], input[type=radio] {
-  cursor: pointer;
-}
-/* override default chrome & firefox settings */
-input:not([type="image"]), textarea {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-}
-
-input[type="search"] {
-  -webkit-appearance: textfield;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-}
-input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-label,
-input,
-select,
-textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  font-weight: normal;
-  line-height: normal;
-  margin-bottom: 18px;
-}
-input[type=checkbox], input[type=radio] {
-  cursor: pointer;
-  margin-bottom: 0;
-}
-input[type=text],
-input[type=password],
-textarea,
-select {
-  display: inline-block;
-  width: 210px;
-  padding: 4px;
-  font-size: 13px;
-  font-weight: normal;
-  line-height: 18px;
-  height: 18px;
-  color: #808080;
-  border: 1px solid #ccc;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
   border-radius: 3px;
-}
-select, input[type=file] {
-  height: 27px;
-  line-height: 27px;
-}
-textarea {
-  height: auto;
+  /* background: #fff; */
+  background: #f5f5f5;
 }
 
-/* grey out placeholders */
-:-moz-placeholder {
-  color: #bfbfbf;
-}
-::-webkit-input-placeholder {
-  color: #bfbfbf;
-}
-
-input[type=text],
-input[type=password],
-select,
-textarea {
-  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-  transition: border linear 0.2s, box-shadow linear 0.2s;
-  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-input[type=text]:focus, input[type=password]:focus, textarea:focus {
-  outline: none;
-  border-color: rgba(82, 168, 236, 0.8);
-  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
-  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
 }
 
-/* buttons */
-button {
-  display: inline-block;
-  padding: 4px 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  background-color: #0064cd;
-  background-repeat: repeat-x;
-  background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
-  background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
-  background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
-  background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
-  background-image: -o-linear-gradient(top, #049cdb, #0064cd);
-  background-image: linear-gradient(top, #049cdb, #0064cd);
-  color: #fff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  border: 1px solid #004b9a;
-  border-bottom-color: #003f81;
-  -webkit-transition: 0.1s linear all;
-  -moz-transition: 0.1s linear all;
-  transition: 0.1s linear all;
-  border-color: #0064cd #0064cd #003f81;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+.token.comment,
+.token.blockquote {
+  color: #969896;
 }
-button:hover {
-  color: #fff;
-  background-position: 0 -15px;
-  text-decoration: none;
+
+.token.cdata {
+  color: #183691;
 }
-button:active {
-  -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
 }
-button::-moz-focus-inner {
-  padding: 0;
-  border: 0;
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
 }
-</style>
-</head>
-<body>
-<h1 id="My.experience.with.CI.CD">My experience with CI/CD</h1>
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h1 class="mume-header" id="my-experience-with-cicd">My experience with CI/CD</h1>
 
 <p>I am a software developer. This document describes my CI/CD experience.</p>
-
-<h2 id="TL.DR.--.My.CI.CD.scorecard">TL;DR &ndash; My CI/CD scorecard</h2>
+<h2 class="mume-header" id="tldr-my-cicd-scorecard">TL;DR -- My CI/CD scorecard</h2>
 
 <ol>
-<li><p>Using version control<br></p>
-
+<li>
+<p>Using version control<br></p>
 <ul>
 <li>YES, over 10 years of experience</li>
 </ul>
 </li>
-<li><p>Commit/Merge frequently</p>
-
+<li>
+<p>Commit/Merge frequently</p>
 <ul>
 <li>YES, over 10 years of experience</li>
 </ul>
 </li>
-<li><p>Automated builds</p>
-
+<li>
+<p>Automated builds</p>
 <ul>
 <li>YES, over 10 years of experience<br></li>
 <li>scripts written by me</li>
 <li>tfs triggered builds configured by someone else</li>
 </ul>
 </li>
-<li><p>Automated testing on every commit</p>
-
+<li>
+<p>Automated testing on every commit</p>
 <ul>
 <li>NO, I have not done this</li>
 <li>I run tests manually in my personal development</li>
 <li>I have never worked at a company that ran automated tests after commit-triggered successful builds</li>
 </ul>
 </li>
-<li><p>Automated deployment</p>
-
+<li>
+<p>Automated deployment</p>
 <ul>
 <li>YES, over 10 years of experience</li>
 <li>via custom scripts, and once with Microsoft ClickOnce for a desktop app</li>
@@ -331,49 +257,39 @@ button::-moz-focus-inner {
 </ul>
 </li>
 </ol>
-
-
-<h2 id="Version.control.tools.I.have.used">Version control tools I have used</h2>
+<h2 class="mume-header" id="version-control-tools-i-have-used">Version control tools I have used</h2>
 
 <p>Ordered by relevance, mostly reverse-chronological.</p>
-
 <ul>
 <li>TFS
-
 <ul>
 <li>about 5 years experience with 3 or more companies between 2009 and the present (2018)</li>
 </ul>
 </li>
 <li>git
-
 <ul>
 <li>I currently use this for personal and contract work</li>
 <li>I have not used it in a full-time professional setting</li>
 </ul>
 </li>
 <li>mercurial
-
 <ul>
 <li>one year professional experience using mercurial from an ubuntu linux workstation
-
 <ul>
 <li>I also used this for a short time before migrating to bazaar vcs for my personal development in the mid 2000s.</li>
 </ul>
 </li>
 <li>I performed a comprehensive feature and efficiency comparison of darcs, codeville, mercurial, and bazaar in 2006
-
 <ul>
-<li>git was excluded from this round of tests because it wasn&rsquo;t available in Windows at the time</li>
+<li>git was excluded from this round of tests because it wasn't available in Windows at the time</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>bazaar vcs
-
 <ul>
 <li>Early competitor to mercurial and git.</li>
 <li>I contributed Windows bug fixes when this was early in development.
-
 <ul>
 <li>I used this as my primary personal version control as far back as 2005 until git took over in recent years.</li>
 </ul>
@@ -381,7 +297,6 @@ button::-moz-focus-inner {
 </ul>
 </li>
 <li>custom rsync + python
-
 <ul>
 <li>rudimentary custom version control powered by python and rsync</li>
 <li>I developed this for Microbilt Corporation since they had no version control</li>
@@ -389,14 +304,12 @@ button::-moz-focus-inner {
 </ul>
 </li>
 <li>subversion SVN
-
 <ul>
 <li>I used this in my early professional development for a few different companies</li>
 <li>I also used it on a couple of occasions personally</li>
 </ul>
 </li>
 <li>VAX/VMS versioning filesystem
-
 <ul>
 <li>The second command-line interface I learned heavily after MS-DOS</li>
 <li>I became familiar with this versioning filesystem in the mid-90s</li>
@@ -405,69 +318,82 @@ button::-moz-focus-inner {
 </ul>
 </li>
 </ul>
-
-
-<h2 id="Addendum:.What.is.CI.CD.">Addendum: What is CI/CD?</h2>
+<h2 class="mume-header" id="addendum-what-is-cicd">Addendum: What is CI/CD?</h2>
 
 <p>I believe strongly in definitions, but I often lag behind in knowing what people mean when they use the latest buzzwords. This is deliberate. A term is most at risk of wide misinterpretation while it is gaining popularity. I also find most new terms are just new names and groupings for old things. So, I generally wait for their definition to come to me, like now.</p>
-
 <p>Quotes from the top four google results:</p>
-
-<hr />
-
-<p>Microsoft &ndash; <a href="https://docs.microsoft.com/en-us/azure/devops/learn/what-is-continuous-delivery">https://docs.microsoft.com/en-us/azure/devops/learn/what-is-continuous-delivery</a></p>
-
-<blockquote><p>&ldquo;Continuous Integration (CI) is the process of automating the build and testing of code every time a team member commits changes to version control. CI encourages developers to share their code and unit tests by merging their changes into a shared version control repository after every small task completion. Committing code triggers an automated build system to grab the latest code from the shared repository and to build, test, and validate the full master branch (also known as the trunk or main).&rdquo;</p>
-
-<p>&ldquo;Continuous Delivery (CD) is the process to build, test, configure and deploy from a build to a production environment. Multiple testing or staging environments create a Release Pipeline to automate the creation of infrastructure and deployment of applications.&rdquo;</p></blockquote>
-
-<hr />
-
-<p>Amazon &ndash; <a href="https://aws.amazon.com/devops/continuous-integration/">https://aws.amazon.com/devops/continuous-integration/</a></p>
-
-<blockquote><p>&ldquo;Continuous integration is a DevOps software development practice where developers regularly merge their code changes into a central repository, after which automated builds and tests are run. Continuous integration most often refers to the build or integration stage of the software release process and entails both an automation component (e.g. a CI or build service) and a cultural component (e.g. learning to integrate frequently).&rdquo;</p>
-
-<p>&ldquo;Why is Continuous Integration Needed?
-In the past, developers on a team might work in isolation for an extended period of time and only merge their changes to the master branch once their work was completed. This made merging code changes difficult and time-consuming, and also resulted in bugs accumulating for a long time without correction. These factors made it harder to deliver updates to customers quickly.&rdquo;</p>
-
-<p>&ldquo;With continuous delivery, code changes are automatically built, tested, and prepared for a release to production. Continuous delivery expands upon continuous integration by deploying all code changes to a testing environment and/or a production environment after the build stage.&rdquo;</p></blockquote>
-
-<p><img src="20180904-cicd-microsoft.png"></p>
-
-<hr />
-
-<p>Wikipedia &ndash; <a href="https://en.wikipedia.org/wiki/Continuous_delivery">https://en.wikipedia.org/wiki/Continuous_delivery</a></p>
-
-<blockquote><p>&ldquo;In software engineering, continuous integration (CI) is the practice of merging all developer working copies to a shared mainline several times a day.[1] Grady Booch first proposed the term CI in his 1991 method,[2] although he did not advocate integrating several times a day. Extreme programming (XP) adopted the concept of CI and did advocate integrating more than once per day – perhaps as many as tens of times per day.&rdquo;</p>
-
-<p>&ldquo;Continuous delivery (CD) is a software engineering approach in which teams produce software in short cycles, ensuring that the software can be reliably released at any time.[1] It aims at building, testing, and releasing software with greater speed and frequency. The approach helps reduce the cost, time, and risk of delivering changes by allowing for more incremental updates to applications in production. A straightforward and repeatable deployment process is important for continuous delivery.&rdquo;</p></blockquote>
-
+<hr>
+<p>Microsoft -- <a href="https://docs.microsoft.com/en-us/azure/devops/learn/what-is-continuous-delivery">https://docs.microsoft.com/en-us/azure/devops/learn/what-is-continuous-delivery</a></p>
+<blockquote>
+<p>&quot;Continuous Integration (CI) is the process of automating the build and testing of code every time a team member commits changes to version control. CI encourages developers to share their code and unit tests by merging their changes into a shared version control repository after every small task completion. Committing code triggers an automated build system to grab the latest code from the shared repository and to build, test, and validate the full master branch (also known as the trunk or main).&quot;</p>
+</blockquote>
+<blockquote>
+<p>&quot;Continuous Delivery (CD) is the process to build, test, configure and deploy from a build to a production environment. Multiple testing or staging environments create a Release Pipeline to automate the creation of infrastructure and deployment of applications.&quot;</p>
+</blockquote>
+<hr>
+<p>Amazon -- <a href="https://aws.amazon.com/devops/continuous-integration/">https://aws.amazon.com/devops/continuous-integration/</a></p>
+<blockquote>
+<p>&quot;Continuous integration is a DevOps software development practice where developers regularly merge their code changes into a central repository, after which automated builds and tests are run. Continuous integration most often refers to the build or integration stage of the software release process and entails both an automation component (e.g. a CI or build service) and a cultural component (e.g. learning to integrate frequently).&quot;</p>
+</blockquote>
+<blockquote>
+<p>&quot;Why is Continuous Integration Needed?<br>
+In the past, developers on a team might work in isolation for an extended period of time and only merge their changes to the master branch once their work was completed. This made merging code changes difficult and time-consuming, and also resulted in bugs accumulating for a long time without correction. These factors made it harder to deliver updates to customers quickly.&quot;</p>
+</blockquote>
+<blockquote>
+<p>&quot;With continuous delivery, code changes are automatically built, tested, and prepared for a release to production. Continuous delivery expands upon continuous integration by deploying all code changes to a testing environment and/or a production environment after the build stage.&quot;</p>
+</blockquote>
+<img src="20180904-cicd-microsoft.png">
+<hr>
+<p>Wikipedia -- <a href="https://en.wikipedia.org/wiki/Continuous_delivery">https://en.wikipedia.org/wiki/Continuous_delivery</a></p>
+<blockquote>
+<p>&quot;In software engineering, continuous integration (CI) is the practice of merging all developer working copies to a shared mainline several times a day.[1] Grady Booch first proposed the term CI in his 1991 method,[2] although he did not advocate integrating several times a day. Extreme programming (XP) adopted the concept of CI and did advocate integrating more than once per day – perhaps as many as tens of times per day.&quot;</p>
+</blockquote>
+<blockquote>
+<p>&quot;Continuous delivery (CD) is a software engineering approach in which teams produce software in short cycles, ensuring that the software can be reliably released at any time.[1] It aims at building, testing, and releasing software with greater speed and frequency. The approach helps reduce the cost, time, and risk of delivering changes by allowing for more incremental updates to applications in production. A straightforward and repeatable deployment process is important for continuous delivery.&quot;</p>
+</blockquote>
 <p><a href="https://en.wikipedia.org/wiki/Continuous_delivery#Relationship_to_continuous_deployment">https://en.wikipedia.org/wiki/Continuous_delivery#Relationship_to_continuous_deployment</a></p>
+<blockquote>
+<p>&quot;Continuous delivery is sometimes confused with continuous deployment. Some people even use these two terms interchangeably. However, most practitioners tend to clearly distinguish these two terms. The distinction is that under Continuous Deployment we deploy any change to production that passes a series of tests. In contrast, under Continuous Delivery, we ensure that the software can be reliably released at any time, but it is up to a human to decide when to release, usually based on business reasons.[5] In order to do continuous deployment one must be doing continuous delivery.[6]&quot;</p>
+</blockquote>
+<img src="20180904-cicd-wikipedia.png">
+<blockquote>
+<p>&quot;Continuous delivery treats the commonplace notion of a deployment pipeline[7] as a lean Poka-Yoke:[8] a set of validations through which a piece of software must pass on its way to release. Code is compiled if necessary and then packaged by a build server every time a change is committed to a source control repository, then tested by a number of different techniques (possibly including manual testing) before it can be marked as releasable.&quot;</p>
+</blockquote>
+<blockquote>
+<p>&quot;Developers used to a long cycle time may need to change their mindset when working in a CD environment. It is important to understand that any code commit may be released to customers at any point. Patterns such as feature toggles can be very useful for committing code early which is not yet ready for use by end users. Using NoSQL can eliminate the step of data migrations and schema changes, often manual steps or exceptions to a continuous delivery workflow.[9] Other useful techniques for developing code in isolation such as code branching are not obsolete in a CD world, but must be adapted to fit the principles of CD - for example, running multiple long-lived code branches can prove impractical, as a releasable artifact must be built early in the CD process from a single code branch if it is to pass through all phases of the pipeline.&quot;</p>
+</blockquote>
+<p>Thoughtworks -- <a href="https://www.thoughtworks.com/continuous-integration">https://www.thoughtworks.com/continuous-integration</a></p>
+<blockquote>
+<p>&quot;Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early.&quot;</p>
+</blockquote>
+<blockquote>
+<p>&quot;Continuous Deployment is closely related to Continuous Integration and refers to the release into production of software that passes the automated tests.&quot;</p>
+</blockquote>
+<blockquote>
+<p>&quot;Essentially, it is the practice of releasing every good build to users”</p>
+</blockquote>
+<h2 class="mume-header" id="personal-perspective-on-cicd-experience-requirements-for-software-developers">Personal perspective on CI/CD experience requirements for software developers</h2>
 
-<blockquote><p>&ldquo;Continuous delivery is sometimes confused with continuous deployment. Some people even use these two terms interchangeably. However, most practitioners tend to clearly distinguish these two terms. The distinction is that under Continuous Deployment we deploy any change to production that passes a series of tests. In contrast, under Continuous Delivery, we ensure that the software can be reliably released at any time, but it is up to a human to decide when to release, usually based on business reasons.[5] In order to do continuous deployment one must be doing continuous delivery.[6]&rdquo;</p></blockquote>
-
-<p><img src="20180904-cicd-wikipedia.png"></p>
-
-<blockquote><p>&ldquo;Continuous delivery treats the commonplace notion of a deployment pipeline[7] as a lean Poka-Yoke:[8] a set of validations through which a piece of software must pass on its way to release. Code is compiled if necessary and then packaged by a build server every time a change is committed to a source control repository, then tested by a number of different techniques (possibly including manual testing) before it can be marked as releasable.&rdquo;</p>
-
-<p>&ldquo;Developers used to a long cycle time may need to change their mindset when working in a CD environment. It is important to understand that any code commit may be released to customers at any point. Patterns such as feature toggles can be very useful for committing code early which is not yet ready for use by end users. Using NoSQL can eliminate the step of data migrations and schema changes, often manual steps or exceptions to a continuous delivery workflow.[9] Other useful techniques for developing code in isolation such as code branching are not obsolete in a CD world, but must be adapted to fit the principles of CD - for example, running multiple long-lived code branches can prove impractical, as a releasable artifact must be built early in the CD process from a single code branch if it is to pass through all phases of the pipeline.&rdquo;</p></blockquote>
-
-<p>Thoughtworks &ndash; <a href="https://www.thoughtworks.com/continuous-integration">https://www.thoughtworks.com/continuous-integration</a></p>
-
-<blockquote><p>&ldquo;Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early.&rdquo;</p>
-
-<p>&ldquo;Continuous Deployment is closely related to Continuous Integration and refers to the release into production of software that passes the automated tests.&rdquo;</p>
-
-<p>&ldquo;Essentially, it is the practice of releasing every good build to users”</p></blockquote>
-
-<h2 id="Personal.perspective.on.CI.CD.experience.requirements.for.software.developers">Personal perspective on CI/CD experience requirements for software developers</h2>
-
-<h4 id="Am.I.going.to.be.defining.CI.CD.systems.or.just.using.them.">Am I going to be defining CI/CD systems or just using them?</h4>
+<h4 class="mume-header" id="am-i-going-to-be-defining-cicd-systems-or-just-using-them">Am I going to be defining CI/CD systems or just using them?</h4>
 
 <ul>
-<li><p>If I am just using them then I am fully confident I would be able to do that.</p></li>
-<li><p>If I am defining them, that&rsquo;s fine too. In that case I would do some light research in my spare time and then copy a prototypal workflow of industry best practices. I assume such a thing exists and I assume this is how most people would solve this problem. I do not expect a company would want me to do anything else unless that was their business.</p></li>
+<li>
+<p>If I am just using them then I am fully confident I would be able to do that.</p>
+</li>
+<li>
+<p>If I am defining them, that's fine too. In that case I would do some light research in my spare time and then copy a prototypal workflow of industry best practices. I assume such a thing exists and I assume this is how most people would solve this problem. I do not expect a company would want me to do anything else unless that was their business.</p>
+</li>
 </ul>
 
-</body>
-</html>
+      </div>
+      
+      
+    </body>
+    
+    
+    
+    
+    
+    
+    
+  </html>
