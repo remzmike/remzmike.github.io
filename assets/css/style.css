@@ -285,9 +285,21 @@ h3.masthead-title {
   /* 15px */
   color: rgba(255, 255, 255, 0.6);
   background-color: #202020;
-  -webkit-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out; }
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out; }
 
+/*.sidebar::after {
+  content: "";
+  background: url('/assets/subtle/concrete_wall_3.png');
+  mix-blend-mode: multiply;
+  opacity: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}*/
 @media (min-width: 30em) {
   .sidebar {
     font-size: .75rem;
