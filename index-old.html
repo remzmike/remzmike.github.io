@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+<head>
+    <title>mk - software professional</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        // walking a highwire //
+        function rzmk(s) { var a = []; for (i=s.length-1;i>=0;i--) { a.push(s.charAt(i)); } return a.join('');}
+        function rzmk_out(s) {document.write(rzmk(s));}
+        function create(tag_name) {
+            return document.createElement(tag_name);
+        }
+        function format() {
+            var args = Array.prototype.slice.call(arguments);
+            return args.join('');
+        }
+        function random_int(start, end) {
+            var top = end+1;
+            var x = start + Math.floor(Math.random()*top);
+            return x;
+        }
+        // brute force in-place, switch every el with a random el, lel
+        function shuffle(a) {
+            for(var i=0; i<a.length; i++) {
+                var x = random_int(0, a.length-1);
+                var orig_i = a[i];
+                var orig_x = a[x];
+                if (orig_i===orig_x) {
+                    continue;
+                } else {
+                    a[i] = orig_x;
+                    a[x] = orig_i;
+                }
+            }
+        }
+        function start_language_shuffle() {
+            var languages = ['javascript', 'c#', 'python'];
+            shuffle(languages);
+            var ids = ['lang_a', 'lang_b', 'lang_c'];
+            for(var i=0; i<ids.length; i++) {
+                var id = ids[i];
+                var span = document.getElementById(id);
+                span.textContent = languages[i];
+            }
+            setTimeout(start_language_shuffle, 8000);
+        }        
+    </script>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+        /* --- */
+        body {
+            margin: auto;
+            max-width: 720px;
+            line-height: 1.4em;
+            font-size: 18px;
+            color: #444;
+        }
+        #content {
+            padding: 4rem 2rem;
+        }
+        h1, h2 {
+            font-variant-caps: small-caps;
+            line-height: 1.2;
+            padding:0;
+            margin:0;
+        }
+        h2 {
+            text-transform: lowercase;
+            font-variant-caps: small-caps;
+        }
+        hr {
+            height: 2px;
+            border: none;
+            background-color: #E7E9EE;
+        }
+        .smallcaps span {
+            font-size: 20px;
+            font-variant-caps: small-caps;
+        }
+        ul, ol {
+            padding-left: 1em;
+        }
+        li {
+            padding-bottom: 0.0em;
+        }
+        .bullets {
+            white-space: nowrap;
+        }
+        .bullets span {
+            white-space: normal;
+            display: inline-block;
+            vertical-align: top;
+            min-width: 300px; 
+        }
+        /* */
+    </style>
+</head>
+<body>
+<div id="content">
+
+    <h1><script>rzmk_out('ekim tuoba');</script></h1>
+
+    <noscript>
+        <div style="color:darkred">NOTICE: This page requires Javascript, because it's fun.</div>
+    </noscript>
+
+    <!--<p>I have written software for e-commerce, real-estate, online education, tax preparation, credit card processing, background screening, network security scanning, image processing, and more.</p>-->
+
+    <p>
+        Remote work is my default. I am a good programmer who wants to write code and design systems. I like straightforward. I usually have some ideas. I am not a presenter or salesman.
+    </p>
+
+    <p>
+        I understand traditional software engineering fundamentals, data structures, algorithms, performance, and security.
+        I can make things from scratch and wield many tools.
+    </p>
+
+    <ul>
+        <li><a href="https://github.com/remzmike">personal github</a></li>
+        <li><a href="mash">snippets & more</a></li>        
+        <li><a href="profile">shiny heavy profile</a></li>
+        <li><a href="self">self employment</a></li>
+        <li><a href="https://stackoverflow.com/users/159022/rz-mk">stackoverflow</a></li>
+    </ul>
+
+    <span class="bullets">
+        <h2>Bullets</h2>
+        <div style="display: flex; flex-wrap: wrap;">
+            <span>
+                <ul>
+                    <li>Web development since 1994</li>
+                    <li>Linux user since 1996</li>
+                    <li>Desktop developer since 1997</li>
+                    <li>Java developer 1997-2001+</li>
+                    <li>SQL database developer since 1999</li>
+                    <li>Javascript developer since 1999</li>
+                </ul>
+            </span>
+            <span>
+                <ul>
+                    <li>Windows user since 2000</li>
+                    <li>Python developer since 2000</li>
+                    <li>Microsoft stack web developer since 2001</li>
+                    <li>C# developer since 2001</li>
+                    <li>Python stack web developer since 2004</li>
+                    <li>Delphi developer until 2005</li>
+                </ul>
+            </span>
+        </div>
+
+    </span>
+
+    <style>
+        .schedule-call {            
+            text-decoration: none;
+            color: #666;
+        }        
+        .schedule-call p {
+            border:1px solid #eee;            
+            border-radius:4px;            
+            padding:16px;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f6f8f9+0,e5ebee+50,f5f7f9+100 */
+            background: rgb(246,248,249); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(246,248,249,1) 0%, rgba(229,235,238,1) 50%, rgba(245,247,249,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(245,247,249,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(245,247,249,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
+        }
+        .schedule-call p:hover {
+            border:1px solid #888;
+            color: black;
+        }
+        .schedule-call p svg {
+            vertical-align: text-bottom;
+            margin-bottom:-8px;
+        }
+        .schedule-call p span {
+            padding-left:16px;
+            font-size:20px;
+            _font-variant-caps: small-caps;
+        }    
+    </style>
+
+    <a href="https://calendly.com/remzmike/meeting/" class="schedule-call">
+        <p>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 485.213 485.212" style="enable-background:new 0 0 485.213 485.212;" xml:space="preserve"><g>    <path d="M242.607,0C108.629,0,0.001,108.628,0.001,242.606c0,133.976,108.628,242.606,242.606,242.606   c133.978,0,242.604-108.631,242.604-242.606C485.212,108.628,376.585,0,242.607,0z M370.719,353.989l-19.425,19.429   c-3.468,3.463-13.623,5.624-13.949,5.624c-61.452,0.536-120.621-23.602-164.095-67.08c-43.593-43.618-67.759-102.998-67.11-164.657   c0-0.028,2.224-9.892,5.689-13.324l19.424-19.427c7.108-7.141,20.762-10.368,30.327-7.168l4.086,1.363   c9.537,3.197,19.55,13.742,22.185,23.457l9.771,35.862c2.635,9.743-0.919,23.604-8.025,30.712l-12.97,12.972   c12.734,47.142,49.723,84.138,96.873,96.903l12.965-12.975c7.141-7.141,20.997-10.692,30.719-8.061l35.857,9.806   c9.717,2.67,20.26,12.62,23.456,22.154l1.363,4.145C381.028,333.262,377.826,346.913,370.719,353.989z" fill="#5479de"/></g></svg>
+            <span>schedule phone call</span>
+        </p>
+    </a>
+
+    <!--
+    <p>
+        <a href="https://stackoverflow.com/users/159022/rz-mk">
+        <img src="https://stackoverflow.com/users/flair/159022.png" width="208" height="58">
+        </a>
+    </p>
+    -->
+    <h2>Etc</h2>
+    <ul>
+        <li><a href="20180904-continuous-integration-and-deployment.html">20180904 - My experience with CI/CD</a></li>
+        <li><a href="20180912-clean-vs-good-code-casey-muratori.html">20180912 - Clean code vs good code</a></li>
+    </ul>
+
+</div>
+
+<script>
+    function do_google_analytics() {
+        if (window.location.href)
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-56347821-2', 'auto');
+        ga('send', 'pageview');
+    }
+    window.onload = function() {
+        //start_language_shuffle();
+        var style = document.getElementById('content').style;
+        style.visibility = 'visible';
+        do_google_analytics();
+    };
+</script>
+
+</body>
+</html>
