@@ -7,7 +7,7 @@ _blog_post = {
     Ported my simpleui library to plain javascript and made a driver for the html5 canvas.
     (<a href='../simpleui'>live demo</a>)
 </p>
- <a href="simpleui-js-alpha-20161013b-crop.png"><img border="0" src="simpleui-js-alpha-20161013b-crop.png"></a>
+ <a href="simpleui-js-alpha-full.png"><img border="0" src="simpleui-js-alpha-crop.png"></a>
  `,
     'title' : "simpleui.js",
     'published' : "2016-10-08T11:45:00.002-04:00"
