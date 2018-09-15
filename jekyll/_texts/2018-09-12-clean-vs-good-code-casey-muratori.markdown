@@ -1,0 +1,64 @@
+---
+layout: post
+title:  "Clean code vs good code"
+date: 2018-09-12
+---
+
+#### Clean code vs good code.
+
+> "A BIG difference between good programmers and bad programmers is whether they understand this or not."
+
+Here is an on-stream response Casey Muratori gave to complaints about the perception of "messy" code.
+
+#### TL;DR -- "messy code" is not necessarily "bad code"
+
+> Somebody was saying on the forums a while back that they felt the code was too messy.
+
+> And, again, I really wanna stress the fact that I don't really wanna try to tell people that the way that they code is wrong, because, you know, I feel like
+that just leads to a lot of pedantic arguments that aren't particularly constructive.
+
+> But what I can say is...
+
+> In my mind nobody should be thinking that this code is messy. **This code is exactly what it should be.** It's code that we are writing to figure out how we want to structure our program. And if you're spending time right now thinking about how to make this code not messy, whatever that means to you, then essentially what you're doing is you're wasting time.
+
+> Right?
+
+> You're spending time, that should have been spent thinking about the problem, thinking about the code. And the end state, the end goal, of your program is NOT to have clean code. It's to have GOOD working code. **Cleanliness has nothing to do with those things.**
+
+> If you have the ugliest code in the world that someone would look at and call very messy, but it has no bugs and runs great...
+
+> Then, it didn't matter. Right?
+
+> And so, to the point that we care about how clean code is, we only care about that in so far as it has an effect on our end product.
+
+> And what we know right now is what we're trying to do is just define the structure of the code.
+
+> So none of the code will ship in the game and if it does it's because it got pulled out and changed around a little, and, you know, put in its proper place.
+
+> And so, we know that it will clean up over time as we know what it will be.
+
+> **But, prematurely cleaning it is actually worse than just wasting time.** It may lead us down the wrong paths and end up making us have to do gyrations to make stuff work together because we segregated it in a bad way too early on.
+
+> And so I really wanna stress that fact, that like, if the way you look at code is that you think of it as messy or clean, that is a VERY bad habit in my opinion.
+
+> And so, all I can really do is say as friendly as possible, "Stop thinking that way."
+
+> Instead, think about the problem you are trying to solve. When you are done, and to your satisfaction, solving that problem in however messy a way as you can, then that is the time to start thinking about cleanliness of code.
+
+> And what we mean when we say cleanliness of code there is:
+
+> * Can I find the bugs in it easily?
+> * Is it easy for me to understand?
+> * Is it easy for me to re-use in the places that I need to re-use it?
+
+> Those sorts of things; and NEVER some set of prescribed things that somebody said was clean code, because there is no such thing. There is no set of rules that tells you whether a particular set of code is clean based on what the code looks like.
+
+> **It's only based on what the usage looks like and what the debugging process looks like that actually tells you whether a piece of code is clean or not.**
+
+> And I really can't stress that enough.
+
+> **A BIG difference between good programmers and bad programmers is whether they understand this or not.**
+
+--20180912--
+
+See Also: [Semantic Compression](https://caseymuratori.com/blog_0015)

@@ -1,0 +1,67 @@
+---
+layout: default
+title: "remzmike"
+---
+<div class="introduction">
+
+    <p>
+        Remote work is my default. I am a good programmer who wants to write code and design systems. I like straightforward. I usually have some ideas. I am not a presenter or salesman.        
+    </p>
+
+    <p>
+        I understand traditional software engineering fundamentals, data structures, algorithms, performance, and security. I can make things from scratch and wield many tools.        
+    </p>
+
+    <ul>
+        <li><a href="https://github.com/remzmike">personal github</a></li>
+        <li><a href="/mash">snippets & more</a></li>        
+        <li><a href="/profile">shiny heavy profile</a></li> 
+        <li><a href="https://stackoverflow.com/users/159022/rz-mk">stackoverflow</a></li>     
+    </ul>
+
+    <span class="bullets">
+        <h2>Bullets</h2>
+        <div style="display: flex; flex-wrap: wrap;">
+            <span>
+                <ul>
+                    <li>Web development since 1994</li>
+                    <li>Linux user since 1996</li>
+                    <li>Desktop developer since 1997</li>
+                    <li>Java developer 1997-2001+</li>
+                    <li>SQL database developer since 1999</li>
+                    <li>Javascript developer since 1999</li>
+                </ul>
+            </span>
+            <span>
+                <ul>
+                    <li>Windows user since 2000</li>
+                    <li>Python developer since 2000</li>                    
+                    <li>C# developer since 2001</li>
+                    <li>Microsoft web since 2001</li>
+                    <li>Python web since 2004</li>
+                    <li>Delphi developer until 2005</li>
+                </ul>
+            </span>
+        </div>
+
+    </span>
+    
+    {% include schedule-call.html %}
+
+</div>
+
+<hr>
+
+<div class="toc">
+  <h2>Texts</h2>
+  {% for item in site.texts %}
+  
+    <a href="{{ site.baseurl }}{{ item.url }}">
+    {{ item.date | date: "%Y-%m-%d" }} &ndash; {{ item.title }}
+    </a><br>
+
+  {% endfor %}
+</div>
+
+
+
