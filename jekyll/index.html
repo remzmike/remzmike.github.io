@@ -1,51 +1,156 @@
 ---
 layout: default
 title: "remzmike"
+foo: "WHAT"
+bars:
+    - a:
+        href: https://github.com/remzmike
+        text: personal github
+        desc: 50 repos, 20 years, 10 languages
+      img:
+        width: 64px
+        height: 64px
+        src: https://avatars1.githubusercontent.com/u/1653856?s=460&v=4
+
+    - a: 
+        href: /simpleui
+        text: simpleui
+        desc: straightforward immediate mode ui
+      img:
+        width: 64px
+        height: 64px
+        src: https://remzmike.github.io/mash/simpleui-js-alpha-crop.png      
+
+    - a:
+        href: /mash
+        text: screens & snippets
+        desc: programming experiments
+      img:
+        width: 64px
+        height: 64px
+        src: https://remzmike.github.io/mash/astar-generic-noise-perlin.png
+        src2: https://remzmike.github.io/mash/chartk1-screenshot.png
+
 ---
 <div class="introduction">
-
+    
+    <!--
     <p>
         Remote work is my default. I am a good programmer who wants to write code and design systems. I like straightforward. I usually have some ideas. I am not a presenter or salesman.        
     </p>
+    -->
 
+    <!--
     <p>
         I understand traditional software engineering fundamentals, data structures, algorithms, performance, and security. I can make things from scratch and wield many tools.        
     </p>
+    -->
+    <style>
+        .flexbar {
+            display: flex;
+            align-items: center; /* top */
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;                        
+            padding: 0.25rem;
+            margin-bottom: 0.33rem;
+            line-height: 1.25rem;
+        }
+        .thumbnail {            
+            flex: 0 0 auto;
+            border:0 solid #ddd; /* 0.25rem */
+            border-radius: 0.25rem;
+            margin-right: 1rem;
+            width: 64px;
+            height: 64px;
+            min-width: 64px;
+            min-height: 64px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        @media (min-width: 38em) {
+            .thumbnail, .thumbnail img {
+                width: 128px;
+                height: 128px;
+                min-width: 128px;
+                min-height: 128px;
+            }
+        }
 
-    <ul>
-        <li><a href="https://github.com/remzmike">personal github</a></li>
-        <li><a href="/mash">snippets & more</a></li>        
-        <li><a href="/profile">shiny heavy profile</a></li> 
-        <li><a href="https://stackoverflow.com/users/159022/rz-mk">stackoverflow</a></li>     
-    </ul>
-
-    <span class="bullets">
-        <h2>Bullets</h2>
-        <div style="display: flex; flex-wrap: wrap;">
-            <span>
-                <ul>
-                    <li>Web development since 1994</li>
-                    <li>Linux user since 1996</li>
-                    <li>Desktop developer since 1997</li>
-                    <li>Java developer 1997-2001+</li>
-                    <li>SQL database developer since 1999</li>
-                    <li>Javascript developer since 1999</li>
-                </ul>
-            </span>
-            <span>
-                <ul>
-                    <li>Windows user since 2000</li>
-                    <li>Python developer since 2000</li>                    
-                    <li>C# developer since 2001</li>
-                    <li>Microsoft web since 2001</li>
-                    <li>Python web since 2004</li>
-                    <li>Delphi developer until 2005</li>
-                </ul>
-            </span>
-        </div>
-
-    </span>
+        .bar-link > * {
+            text-decoration: none;
+            font-weight: normal;
+            font-style: normal;
+        }
+        .bar-link:hover {
+            text-decoration: none;
+        }
+        .flexbar:hover {            
+            border-color: #004A56;
+            background: #f7f7f7;
+        }
+    </style>
+           
+    <p style='text-align: center; font-variant: small-caps; text-transform: lowercase;'>
+        <span style="display: inline-block">
+            <a href="mk-resume.html">html</a>
+            &larr;
+            <span style='font-weight: bold;'>resume</span>
+            &rarr;
+            <a href="mk-resume.doc">doc</a>
+        </span>
+    </p>    
     
+    {% for o in page.bars %}
+        <a class="bar-link" href="{{o.a.href}}">
+        <div class="flexbar">
+            <div class="thumbnail" style="background-image: url({{o.img.src}});"></div>
+            <div style="width:auto;">
+                <div style="margin-top: 0.25rem; border-bottom:1px solid #ddd;">
+                    {{o.a.text}}<!--<a href="{{o.a.href}}">{{o.a.text}}</a>-->
+                </div>
+                <div style="color:black;">
+                    {{o.a.desc}}
+                </div>
+            </div>
+        </div>
+        </a>    
+    {% endfor %}  
+            
+    <!--
+        https://gist.github.com/remzmike
+
+        <div>
+        <a href="/profile">shiny heavy profile</a>
+    </div>-->
+    <!--<div>
+        <a href="https://stackoverflow.com/users/159022/rz-mk">stackoverflow</a>
+    </div>-->
+
+    
+    <div style="display: flex; flex-wrap: wrap; align-items: stretch; margin-top: 1rem;">
+        <span style="flex: 1 1 auto;">
+            <ul style="list-style-position: inside; margin: 0; padding: 0; padding-right: 1rem;">
+                <li>Web development since 1994</li>
+                <li>Linux user since 1996</li>
+                <li>Desktop developer since 1997</li>
+                <li>Java developer 1997-2001+</li>
+                <li>SQL developer since 1999</li>
+                <li>Javascript developer since 1999</li>
+            </ul>
+        </span>
+        <span style="flex: 1 1 auto;">
+            <ul style="list-style-position: inside; margin: 0; padding: 0; padding-right: 0rem;">
+                <li>Windows user since 2000</li>
+                <li>Python developer since 2000</li>                    
+                <li>C# developer since 2001</li>
+                <li>Microsoft web since 2001</li>
+                <li>Python web since 2004</li>
+                <li>Delphi developer until 2005</li>
+            </ul>
+        </span>
+    </div>    
+
+    <br>
     {% include schedule-call.html %}
 
 </div>
@@ -53,14 +158,17 @@ title: "remzmike"
 <hr>
 
 <div class="toc">
-  <h2>Texts</h2>
-  {% for item in site.texts %}
-  
-    <a href="{{ site.baseurl }}{{ item.url }}">
-    {{ item.date | date: "%Y-%m-%d" }} &ndash; {{ item.title }}
-    </a><br>
+    <!--<p style='font-variant: small-caps; text-transform: lowercase;'>
+        <span style='font-weight: bold;'>texts</span>
+    </p>-->
+        
+    {% for item in site.texts %}
+    
+        <a href="{{ site.baseurl }}{{ item.url }}">
+            {{ item.date | date: "%Y-%m-%d" }} &ndash; {{ item.title }}
+        </a><br>
 
-  {% endfor %}
+    {% endfor %}
 </div>
 
 

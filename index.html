@@ -28,7 +28,7 @@
     
     <meta property="og:title" content="remzmike"/>
     <meta property="og:description" content="">
-    <meta property="fb:admins" content="elotroalex"/>
+    <meta property="fb:admins" content="whateverdood"/>
     <meta property="og:type" content="website" />
     <meta property="og:url" content="/"/>
     <meta property="fb:app_id" content="589495744558280"/>
@@ -54,6 +54,8 @@
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml"/>
+
+  <script>function jsec(s) { for (i=s.length-1;i>=0;i--) { document.write(s.charAt(i)); } }</script> <!-- this code saved his crew from a roadside bomb -->
 </head>
 
 
@@ -116,10 +118,8 @@
         }
     </style>
     <span class="sidebar-nav-item"><a class="glyph-external" href="https://github.com/remzmike">personal github</a></span>
-    <span class="sidebar-nav-item"><a href="/mash">snippets & more</a></span>
-    <span class="sidebar-nav-item"><a href="/profile">shiny heavy profile</a></span>
-    <span class="sidebar-nav-item"><a class="glyph-external" href="https://stackoverflow.com/users/159022/rz-mk">stackoverflow</a></span>
-
+    <span class="sidebar-nav-item"><a href="/simpleui">simpleui</a></span>
+    <span class="sidebar-nav-item"><a href="/mash">screens & snippets</a></span>
   </nav>
 
   <div class="sidebar-item">    
@@ -151,7 +151,7 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="/" title="Home">About Mike</a>
+            <a href="/" title="Home"><script>jsec('lseK leahciM');</script><!--About Mike--></a>
             <br><small>senior software developer</small>
           </h3>
         </div>
@@ -159,49 +159,152 @@
 
       <div class="container content" id="main">
         <div class="introduction">
-
+    
+    <!--
     <p>
         Remote work is my default. I am a good programmer who wants to write code and design systems. I like straightforward. I usually have some ideas. I am not a presenter or salesman.        
     </p>
+    -->
 
+    <!--
     <p>
         I understand traditional software engineering fundamentals, data structures, algorithms, performance, and security. I can make things from scratch and wield many tools.        
     </p>
+    -->
+    <style>
+        .flexbar {
+            display: flex;
+            align-items: center; /* top */
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;                        
+            padding: 0.25rem;
+            margin-bottom: 0.33rem;
+            line-height: 1.25rem;
+        }
+        .thumbnail {            
+            flex: 0 0 auto;
+            border:0 solid #ddd; /* 0.25rem */
+            border-radius: 0.25rem;
+            margin-right: 1rem;
+            width: 64px;
+            height: 64px;
+            min-width: 64px;
+            min-height: 64px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        @media (min-width: 38em) {
+            .thumbnail, .thumbnail img {
+                width: 128px;
+                height: 128px;
+                min-width: 128px;
+                min-height: 128px;
+            }
+        }
 
-    <ul>
-        <li><a href="https://github.com/remzmike">personal github</a></li>
-        <li><a href="/mash">snippets & screens</a></li> 
-        <li><a href="/profile">shiny heavy profile</a></li> 
-        <li><a href="https://stackoverflow.com/users/159022/rz-mk">stackoverflow</a></li>     
-    </ul>
-
-    <span class="bullets">
-        <h2>Bullets</h2>
-        <div style="display: flex; flex-wrap: wrap;">
-            <span>
-                <ul>
-                    <li>Web development since 1994</li>
-                    <li>Linux user since 1996</li>
-                    <li>Desktop developer since 1997</li>
-                    <li>Java developer 1997-2001+</li>
-                    <li>SQL database developer since 1999</li>
-                    <li>Javascript developer since 1999</li>
-                </ul>
-            </span>
-            <span>
-                <ul>
-                    <li>Windows user since 2000</li>
-                    <li>Python developer since 2000</li>                    
-                    <li>C# developer since 2001</li>
-                    <li>Microsoft web since 2001</li>
-                    <li>Python web since 2004</li>
-                    <li>Delphi developer until 2005</li>
-                </ul>
-            </span>
-        </div>
-
-    </span>
+        .bar-link > * {
+            text-decoration: none;
+            font-weight: normal;
+            font-style: normal;
+        }
+        .bar-link:hover {
+            text-decoration: none;
+        }
+        .flexbar:hover {            
+            border-color: #004A56;
+            background: #f7f7f7;
+        }
+    </style>
+           
+    <p style='text-align: center; font-variant: small-caps; text-transform: lowercase;'>
+        <span style="display: inline-block">
+            <a href="mk-resume.html">html</a>
+            &larr;
+            <span style='font-weight: bold;'>resume</span>
+            &rarr;
+            <a href="mk-resume.doc">doc</a>
+        </span>
+    </p>    
     
+    
+        <a class="bar-link" href="https://github.com/remzmike">
+        <div class="flexbar">
+            <div class="thumbnail" style="background-image: url(https://avatars1.githubusercontent.com/u/1653856?s=460&v=4);"></div>
+            <div style="width:auto;">
+                <div style="margin-top: 0.25rem; border-bottom:1px solid #ddd;">
+                    personal github<!--<a href="https://github.com/remzmike">personal github</a>-->
+                </div>
+                <div style="color:black;">
+                    50 repos, 20 years, 10 languages
+                </div>
+            </div>
+        </div>
+        </a>    
+    
+        <a class="bar-link" href="/simpleui">
+        <div class="flexbar">
+            <div class="thumbnail" style="background-image: url(https://remzmike.github.io/mash/simpleui-js-alpha-crop.png);"></div>
+            <div style="width:auto;">
+                <div style="margin-top: 0.25rem; border-bottom:1px solid #ddd;">
+                    simpleui<!--<a href="/simpleui">simpleui</a>-->
+                </div>
+                <div style="color:black;">
+                    straightforward immediate mode ui
+                </div>
+            </div>
+        </div>
+        </a>    
+    
+        <a class="bar-link" href="/mash">
+        <div class="flexbar">
+            <div class="thumbnail" style="background-image: url(https://remzmike.github.io/mash/astar-generic-noise-perlin.png);"></div>
+            <div style="width:auto;">
+                <div style="margin-top: 0.25rem; border-bottom:1px solid #ddd;">
+                    screens & snippets<!--<a href="/mash">screens & snippets</a>-->
+                </div>
+                <div style="color:black;">
+                    programming experiments
+                </div>
+            </div>
+        </div>
+        </a>    
+      
+            
+    <!--
+        https://gist.github.com/remzmike
+
+        <div>
+        <a href="/profile">shiny heavy profile</a>
+    </div>-->
+    <!--<div>
+        <a href="https://stackoverflow.com/users/159022/rz-mk">stackoverflow</a>
+    </div>-->
+
+    
+    <div style="display: flex; flex-wrap: wrap; align-items: stretch; margin-top: 1rem;">
+        <span style="flex: 1 1 auto;">
+            <ul style="list-style-position: inside; margin: 0; padding: 0; padding-right: 1rem;">
+                <li>Web development since 1994</li>
+                <li>Linux user since 1996</li>
+                <li>Desktop developer since 1997</li>
+                <li>Java developer 1997-2001+</li>
+                <li>SQL developer since 1999</li>
+                <li>Javascript developer since 1999</li>
+            </ul>
+        </span>
+        <span style="flex: 1 1 auto;">
+            <ul style="list-style-position: inside; margin: 0; padding: 0; padding-right: 0rem;">
+                <li>Windows user since 2000</li>
+                <li>Python developer since 2000</li>                    
+                <li>C# developer since 2001</li>
+                <li>Microsoft web since 2001</li>
+                <li>Python web since 2004</li>
+                <li>Delphi developer until 2005</li>
+            </ul>
+        </span>
+    </div>    
+
+    <br>
         <style>
         .schedule-call {            
             text-decoration: none;
@@ -245,26 +348,29 @@
 <hr>
 
 <div class="toc">
-  <h2>Texts</h2>
-  
-  
-    <a href="/texts/2017-01-17-self-employment/">
-    2017-01-17 &ndash; Self Employment
-    </a><br>
+    <!--<p style='font-variant: small-caps; text-transform: lowercase;'>
+        <span style='font-weight: bold;'>texts</span>
+    </p>-->
+        
+    
+    
+        <a href="/texts/2017-01-17-self-employment/">
+            2017-01-17 &ndash; Self Employment
+        </a><br>
 
-  
-  
-    <a href="/texts/2018-09-04-continuous-integration-and-deployment/">
-    2018-09-04 &ndash; My experience with CI/CD
-    </a><br>
+    
+    
+        <a href="/texts/2018-09-04-continuous-integration-and-deployment/">
+            2018-09-04 &ndash; My experience with CI/CD
+        </a><br>
 
-  
-  
-    <a href="/texts/2018-09-12-clean-vs-good-code-casey-muratori/">
-    2018-09-12 &ndash; Clean code vs good code
-    </a><br>
+    
+    
+        <a href="/texts/2018-09-12-clean-vs-good-code-casey-muratori/">
+            2018-09-12 &ndash; Clean code vs good code
+        </a><br>
 
-  
+    
 </div>
 
 
