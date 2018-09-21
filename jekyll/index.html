@@ -90,15 +90,12 @@ bars:
         }
     </style>
            
-    <p style='text-align: center; font-variant: small-caps; text-transform: lowercase;'>
-        <span style="display: inline-block">
-            <a href="mk-resume.html">html</a>
-            &larr;
-            <span style='font-weight: bold;'>resume</span>
-            &rarr;
-            <a href="mk-resume.doc">doc</a>
+    <p style='text-align: center; font-variant: small-caps; text-transform: lowercase; line-height: 1rem;'>
+        <span>
+            <!-- kerning on other font not good in small caps -->
+            <a style="font-size: 1.5rem; font-family:'Times New Roman', Times, serif" href="mk-resume.html">resume</a>            
         </span>
-    </p>    
+    </p>
     
     {% for o in page.bars %}
         <a class="bar-link" href="{{o.a.href}}">

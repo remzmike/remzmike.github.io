@@ -1,4 +1,4 @@
-**Mike K. – public resume**
+**Mike K. – public resume** ([doc format](mk-resume.doc))
 Acworth, Georgia 30101
 gmail: remzmike
 
@@ -77,7 +77,7 @@ Full-stack Microsoft developer for TaxWiseOnline, a complete web-based tax prepa
 * Worked with proprietary tax form scripting language
 
 **July 5, 2005 – August 8, 2008**
-Web Developer at Microbilt Corporation of Kennesaw, Georgia
+Software Developer at Microbilt Corporation of Kennesaw, Georgia
 
 Full-stack Microsoft developer for CreditCommander, a web-based credit and background screening suite; and hundreds of private labels.
 
