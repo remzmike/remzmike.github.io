@@ -9,12 +9,14 @@
             }
         });
 
-        var layout = ui.layout_push('vertical', 2, rect[_x], rect[_y]);
+        var layout = ui.layout_push('vertical', 2, rect.x, rect.y);
         var rect2 = uidraw.rectangle_dilate(rect, 2);
+        uidraw.rectangle(rect2, Color(1,1,1));
+        uidraw.rectangle(rect, Color(0.5,0.5,1));
 
-        var slider_max = item_count*row_height - rect[_h];
+        var slider_max = item_count*row_height - rect.height;
         // the concept of first_value instead of normal simpleui value param, one way binding...
-        _ = ui.vslider('scroll-experiment-slider', Rectangle(20, rect[_h]), 0, slider_max, cache.yscroll);
+        _ = ui.vslider('scroll-experiment-slider', Rectangle(20, rect.height), 0, slider_max, cache.yscroll);
         if (_.changed) {
             cache.yscroll = _.value;
         }
@@ -22,14 +24,14 @@
 
         var scroll = cache;
         scroll.first_visible_index = Math.floor(scroll.yscroll / scroll.row_height);
-        var max_visible = Math.ceil(scroll.rect[_h] / scroll.row_height) + 1
+        var max_visible = Math.ceil(scroll.rect.height / scroll.row_height) + 1
         scroll.last_visible_index = scroll.first_visible_index + max_visible;
 
         context.save();
         var enable_clip = true;
         if (enable_clip) {
             context.beginPath();
-            context.rect(rect[_x], rect[_y], rect[_w], rect[_h]);
+            context.rect(rect.x, rect.y, rect.width, rect.height);
             context.clip();
         }
 
@@ -48,7 +50,7 @@
         var scroll = ui.get_cache(scroll_uiid);
         scroll.translate_y = i * scroll.row_height;
         if (false) {
-            scroll.widget_y1 = scroll.rect[_y] + scroll.translate_y - scroll.yscroll;
+            scroll.widget_y1 = scroll.rect.y + scroll.translate_y - scroll.yscroll;
             scroll.widget_y2 = scroll.widget_y1 + scroll.row_height;
         } else {
             scroll.widget_y1 = layout_parent.y + scroll.translate_y - scroll.yscroll - layout_parent.totalh;
@@ -81,8 +83,8 @@
         }
         // debug draws
         if (false) {
-            uidraw.rectangle(Rectangle(scroll.rect[_x], scroll.widget_y1, 200, 2), Color(0.2,0.4,0.4,0.5));
-            uidraw.rectangle(Rectangle(scroll.rect[_x], scroll.widget_y2-1, 200, 1), Color(0.4,0,0,0.5));
+            uidraw.rectangle(Rectangle(scroll.rect.x, scroll.widget_y1, 200, 2), Color(0.2,0.4,0.4,0.5));
+            uidraw.rectangle(Rectangle(scroll.rect.x, scroll.widget_y2-1, 200, 1), Color(0.4,0,0,0.5));
         }
 
         ui.layout_pop();

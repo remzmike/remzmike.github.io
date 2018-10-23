@@ -2,11 +2,11 @@
 
     /* ------------------------------------------------------------------ */
     // gridfonts : later: breakout
-    let _gridfonts = {
+    var _gridfonts = {
         'hint-four': {}
     }
-    let _letters = 'abcdefghijklmnopqrstuvwxyz';
-    let _f = _gridfonts['hint-four'];
+    var _letters = 'abcdefghijklmnopqrstuvwxyz';
+    var _f = _gridfonts['hint-four'];
     // list of segments, each segment is a standalone stroke from x1,y1 to x2,y2
     _f[' '] = [ ];
     _f.a = [ [0,2,1,2], [1,2,2,3], [2,3,1,4], [1,4,0,3], [0,3,1,3] ];
@@ -36,19 +36,20 @@
     _f.y = [ [0,2,0,3], [0,3,1,4], [1,4,2,3], [2,3,2,4], [2,4,2,5], [2,5,1,6] ];
     _f.z = [ [1,2,2,2], [2,2,1,3], [1,3,0,4], [0,4,1,4], [1,4,2,4] ];        
 
-    let _gridfont_gradient = make_drawbox_gradient(
+    var _gridfont_gradient = make_drawbox_gradient(
         context,
         400, 400,
         1000, 1000,
-        m_simpleui.add_color(0x00/255, 0xB5/255, 0xE3/255),
-        m_simpleui.add_color(1,0,1)
+        Color(0x00/255, 0xB5/255, 0xE3/255),
+        Color(1,0,1)
     );
 
-    //global init
-    let _gridfont_chars_a = 'abcdefghijklmnopqrstuvwxyz '.split('');
-    let _gridfont_chars = {};
-    for(let i=0;i<_gridfont_chars_a.length; i++) {
-        _gridfont_chars[_gridfont_chars_a[i]] = true;
+    {//global init
+        var _gridfont_chars_a = 'abcdefghijklmnopqrstuvwxyz '.split('');
+        var _gridfont_chars = {};
+        for(var i=0;i<_gridfont_chars_a.length; i++) {
+            _gridfont_chars[_gridfont_chars_a[i]] = true;
+        }
     }
 
     function draw_line(x1,y1,x2,y2) {
@@ -62,12 +63,12 @@
     // http://cogsci.indiana.edu/gridfonts.html
     // see also: hershey fonts: http://sol.gfxile.net/hershey/fontprev.html
     function do_gridfont(uiid, s, name, x, y, scale, reset) {
-        let a = s.split('');
-        let complete = true;
-        let reset_complete = true;
+        var a = s.split('');
+        var complete = true;
+        var reset_complete = true;
         scale = scale || 6;
-        for(let i=0; i<a.length; i++) {
-            let letter = a[i];
+        for(var i=0; i<a.length; i++) {
+            var letter = a[i];
             if (!_gridfont_chars[letter]) {
                 letter = ' ';
             }
@@ -79,63 +80,58 @@
         return {'complete': complete, 'reset_complete': reset_complete};
     }
 
-    function _cache_do_gridfont_letter() {
-        return {
-            complete: false,
-            reset_complete: false,
-            segment: 1,
-            partial: 0
-        };
-    }
     function do_gridfont_letter(uiid, name, x, y, letter, scale, reset) {
-        let fl = _f[letter]; // font letter
+        var fl = _f[letter]; // font letter
         // nice place for lua coroutines... :-(
 
-        const layout = ui.layout_peek();
-        x = x + layout.x;
-        y = y + layout.y;
+        var cache = ui.get_cache(uiid, function() {
+            return {
+                'complete': false,
+                'reset_complete': false,
+                'segment': 1,
+                'partial': 0
+            };
+        });
 
-        let cache = ui.get_cache(uiid, _cache_do_gridfont_letter);
-
-        let segment = cache.segment;
-        let partial = cache.partial;
+        var segment = cache.segment;
+        var partial = cache.partial;
 
         // draw lines up to segment count
-        for (let i=0; i<fl.length; i++) {
+        for (var i=0; i<fl.length; i++) {
             if (i==segment)
                 break;
-            let a1 = fl[i][0];
-            let b1 = fl[i][1];
-            let a2 = fl[i][2];
-            let b2 = fl[i][3];
-            let x1 = x + a1 * scale;
-            let y1 = y + b1 * scale;
-            let x2 = x + a2 * scale;
-            let y2 = y + b2 * scale;
+            var a1 = fl[i][0];
+            var b1 = fl[i][1];
+            var a2 = fl[i][2];
+            var b2 = fl[i][3];
+            var x1 = x + a1 * scale;
+            var y1 = y + b1 * scale;
+            var x2 = x + a2 * scale;
+            var y2 = y + b2 * scale;
             draw_line(x1, y1, x2, y2);
         }
         // now draw current line... over multiple frames...
         // when complete then increment segment...
         if (segment < fl.length) {
-            let i = segment;
-            let a1 = fl[i][0];
-            let b1 = fl[i][1];
-            let a2 = fl[i][2];
-            let b2 = fl[i][3];
-            let x1 = x + a1 * scale;
-            let y1 = y + b1 * scale;
-            let x2 = x + a2 * scale;
-            let y2 = y + b2 * scale;
-            let dx = x2 - x1;
-            let dy = y2 - y1;
+            var i = segment;
+            var a1 = fl[i][0];
+            var b1 = fl[i][1];
+            var a2 = fl[i][2];
+            var b2 = fl[i][3];
+            var x1 = x + a1 * scale;
+            var y1 = y + b1 * scale;
+            var x2 = x + a2 * scale;
+            var y2 = y + b2 * scale;
+            var dx = x2 - x1;
+            var dy = y2 - y1;
 
-            let p1 = x1 + dx * partial;
-            let p2 = y1 + dy * partial;
+            var p1 = x1 + dx * partial;
+            var p2 = y1 + dy * partial;
             draw_line(x1, y1, p1, p2);
 
-            let cursor_radius = 3;
-            //let cursize = (1-partial) * cursor_radius;
-            let cursize = cursor_radius;
+            var cursor_radius = 3;
+            //var cursize = (1-partial) * cursor_radius;
+            var cursize = cursor_radius;
             context.save();
             context.strokeStyle = _gridfont_gradient;
             context.fillStyle = _gridfont_gradient;
@@ -143,11 +139,11 @@
             //draw_line(Math.random()*2*400,Math.random()*2*500, p1, p2);
             context.restore();
 
-            cache.partial += 0.033 * 3;
+            cache.partial += 0.033;
             partial = cache.partial; // blah.
 
             if (partial >= 1.0) {
-                let leftover = partial - 1;
+                var leftover = partial - 1;
                 if (leftover > 0) {
                     // later: leftovers! :-)
                 }
@@ -159,7 +155,7 @@
         if (reset) {
             cache.segment = 1;
             cache.partial = 0;
-            cache.reset_complete = true; // deopt!
+            cache.reset_complete = true;
         }
 
         cache.complete = segment>=fl.length;
