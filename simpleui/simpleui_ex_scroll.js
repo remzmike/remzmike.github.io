@@ -5,25 +5,22 @@
             return {
                 'yscroll': 0,
                 'rect' : rect,
-                'row_height' : row_height
+                'row_height' : row_height,
+                'item_count' : item_count,
+                'layout' : {},
             }
         });
 
         var layout = ui.layout_push('vertical', 2, rect[_x], rect[_y]);
-        var rect2 = uidraw.rectangle_dilate(rect, 2);
-
-        var slider_max = item_count*row_height - rect[_h];
-        // the concept of first_value instead of normal simpleui value param, one way binding...
-        _ = ui.vslider('scroll-experiment-slider', Rectangle(20, rect[_h]), 0, slider_max, cache.yscroll);
-        if (_.changed) {
-            cache.yscroll = _.value;
-        }
-        layout.x += 20;
+        cache.layout = layout;
 
         var scroll = cache;
         scroll.first_visible_index = Math.floor(scroll.yscroll / scroll.row_height);
         var max_visible = Math.ceil(scroll.rect[_h] / scroll.row_height) + 1
         scroll.last_visible_index = scroll.first_visible_index + max_visible;
+
+        let rect2 = uidraw.rectangle_dilate(scroll.rect, 1);        
+        uidraw.rectangle(rect2, panel_color2);
 
         context.save();
         var enable_clip = true;
@@ -36,7 +33,22 @@
         return cache;
     }
     function do_scroll_end(uiid) {
+        var cache = ui.get_cache(uiid);
+        let item_count = cache.item_count;
+        let row_height = cache.row_height;   
+        let rect = cache.rect;     
+
         context.restore();
+
+        var slider_max = item_count*row_height - rect[_h];
+        // the concept of first_value instead of normal simpleui value param, one way binding...
+        cache.layout.y -= (rect[_h] + 42);
+        cache.layout.x += (rect[_h] - 20);
+        _ = ui.vslider('scroll-experiment-slider', Rectangle(20, rect[_h]), 0, slider_max, cache.yscroll);
+        if (_.changed) {
+            cache.yscroll = _.value;
+        }                
+
         ui.layout_pop();
     }
 
@@ -75,6 +87,7 @@
 
     function do_scroll_item_end(scroll_uiid) {
         var scroll = ui.get_cache(scroll_uiid);
+                
         if (scroll.in_view) {
             var layout = ui.layout_peek();
             layout.y += scroll.partial_item; // not sure if this is needed FOR NOW, but probably could be in the future, and would probably be hard to track down
