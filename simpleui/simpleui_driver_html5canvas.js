@@ -126,7 +126,7 @@ let canvas_off = document.createElement('canvas');
 let canvas = canvas_screen; // screen seems slightly faster
 console.assert(canvas);
 let context = canvas.getContext('2d');
-setpixelated(context);
+//setpixelated(context);
 
 canvas.addEventListener('mousemove', on_mouse_move, false);
 // touch move? (NO!)
