@@ -1,35 +1,18 @@
-const _x = 0;
-const _y = 1;
-const _w = 2;
-const _h = 3;
-
 let round = Math.round;
-let assert = console.assert;
-let log = console.log;
 
-var box_gradient_x1 = 112; //40;
-var box_gradient_y1 = -100; //0;
-var box_gradient_x2 = 260; //200;
-var box_gradient_y2 = 121; //240;
-var box_gradient_color_stop1 = { r: 15, g: 15, b: 76, a: 0.39166666666666666 };
-var box_gradient_color_stop2 = { r: 72, g: 157, b: 210, a: 0.21666666666666667 };
-var bg_color = { r: 0, g: 15, b: 38, a: 1 };
-var panel_color1 = { r: 26, g: 38, b: 64, a: 1 };
-var panel_color2 = { r: 51, g: 77, b: 102, a: 1 };
+var box_gradient_x1 = 112;
+var box_gradient_y1 = -100;
+var box_gradient_x2 = 260;
+var box_gradient_y2 = 121;
+var box_gradient_color_stop1 = Color(15/255, 15/255, 76/255, 0.39166666666666666);
+var box_gradient_color_stop2 = Color(72/255, 157/255, 210/255, 0.21666666666666667);
+var bg_color = Color(0, 15/255, 38/255, 1);
+var panel_color1 = Color(26/255, 38/255, 64/255, 1);
+var panel_color2 = Color(51/255, 77/255, 102/255, 1);
 
 var window_active = true;
 
 _mouse_pos = { x: 0, y: 0 };
-
-function sum(a) {
-    let result = 0;
-    for (let i = 0; i < a.length; i++) {
-        let v = a[i];
-        result += v;
-    }
-    return result;
-}
-assert(sum([1, 2, 3]) == 6);
 
 function init_array(size, init_val) {
     let a = [];
@@ -54,12 +37,12 @@ function set_size() {
 }
 
 function randomize_color(color) {
-    let a = ['r', 'g', 'b', 'a'];
+    let a = [_r, _g, _b, _a];    
     for (let i = 0; i < a.length; i++) {
         let k = a[i];
         let v;
-        if (k == 'a') {
-            v = 0.5 + Math.random() / 2;
+        if (k == _a) {
+            v = 125 + Math.round(Math.random() * (255-125));
         } else {
             v = 55 + Math.round(Math.random() * 200);
         }
@@ -78,10 +61,6 @@ function on_mouse_down(evt) {
     let x = evt.clientX;
     let y = evt.clientY;
     let button = evt.button;
-    // Left button=0, middle button=1 (if present), right button=2
-    if (button == 0) button = 'l';
-    if (button == 1) button = 'm';
-    if (button == 2) button = 'r';
     ui.on_mousepressed(x, y, button);
 }
 
@@ -89,9 +68,6 @@ function on_mouse_up(evt) {
     let x = evt.clientX;
     let y = evt.clientY;
     let button = evt.button;
-    if (button == 0) button = 'l';
-    if (button == 1) button = 'm';
-    if (button == 2) button = 'r';
     ui.on_mousereleased(x, y, button);
 }
 
@@ -99,15 +75,14 @@ function on_mouse_up(evt) {
 function on_touch_start(evt) {
     let x = evt.clientX;
     let y = evt.clientY;
-    ui.on_mousepressed(x, y, 'l');
+    ui.on_mousepressed(x, y, _left);
 }
 
 function on_touch_end(evt) {
     let x = evt.clientX;
     let y = evt.clientX;
-    ui.on_mousereleased(x, y, 'l');
+    ui.on_mousereleased(x, y, _left);
 }
-
 
 function make_css_color(color) {
     let css;
@@ -120,16 +95,16 @@ function make_css_color(color) {
     }
 
     if (use_alpha) {
-        css = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+        css = `rgba(${color[_r]}, ${color[_g]}, ${color[_b]}, ${color[_a]/255})`;
     } else {
-        css = `rgba(${color.r}, ${color.g}, ${color.b}, 1)`;
+        css = `rgba(${color[_r]}, ${color[_g]}, ${color[_b]}, 1)`;
     }
 
     return css;
 }
 
 function make_drawbox_gradient(context, x1, y1, x2, y2, colorstop1, colorstop2) {
-    assert(context);
+    console.assert(context);
     let grd = context.createLinearGradient(x1, y1, x2, y2);
     grd.addColorStop(0.0, make_css_color(colorstop1));
     grd.addColorStop(0.5, make_css_color(colorstop2));
@@ -138,19 +113,29 @@ function make_drawbox_gradient(context, x1, y1, x2, y2, colorstop1, colorstop2) 
 
 /* -------------------------------------------------------------------------- */
 
+function setpixelated(context){
+    context['imageSmoothingEnabled'] = false;       /* standard */
+    context['mozImageSmoothingEnabled'] = false;    /* Firefox */
+    context['oImageSmoothingEnabled'] = false;      /* Opera */
+    context['webkitImageSmoothingEnabled'] = false; /* Safari */
+    context['msImageSmoothingEnabled'] = false;     /* IE */
+}
+
 let canvas_screen = document.getElementById('myCanvas');
 let canvas_off = document.createElement('canvas');
 let canvas = canvas_screen; // screen seems slightly faster
-assert(canvas);
+console.assert(canvas);
 let context = canvas.getContext('2d');
+setpixelated(context);
 
 canvas.addEventListener('mousemove', on_mouse_move, false);
-// touch move?
+// touch move? (NO!)
+
 canvas.addEventListener('mousedown', on_mouse_down, false);
-//canvas.addEventListener('touchdown', on_touch_down, false);
+canvas.addEventListener('touchstart', on_touch_start, {capture: false, passive: true});
+    
 canvas.addEventListener('mouseup', on_mouse_up, false);
 canvas.addEventListener('touchend', on_touch_end, false);
-
 
 /* */
 
@@ -178,7 +163,7 @@ function DrawText_Stroke(text, x, y, color) {
     let font = fonts[2];
     context.font = font.size + "px '" + font.name + "'";
     if (color == null) {
-        color = m_simpleui.add_color(1, 1, 1, 1);
+        color = m_simpleui.Color(1, 1, 1, 1);
     }
     context.fillStyle = make_css_color(color);
     let yoffset = fontsize - 2;
@@ -254,94 +239,18 @@ function DrawText_Original(text, x, y, color) { // 10-12 ms ff
 }
 let DrawText = DrawText_Cached; // cached works now, and does increase performance.
 
-let _drawbox_cache = {};
-// a box cache that uses a single canvas might be possible...
-//let _drawbox_cache_canvas;
-function DrawBox_Cached(rect, color) {
+// todo: later: pass intent instead of color? or maybe that's a level above this
+function DrawBox(rect, color) {
 
     let x = rect[_x];
     let y = rect[_y];
     let width = rect[_w];
     let height = rect[_h];
 
-    /*
-    if (width==0) {
-        //console.error('width 0 in DrawBox_Cached');
-        return;
-    }
-    
-    if (height==0) {
-        //console.error('height 0 in DrawBox_Cached');
-        return;
-    }*/
-
-    // original is 2, cached is 6-7, lets find out which rects are causing this?
-    let use_original = false;
-    //use_original = use_original || width<40; // 6-7 becomes 5-6...
-    use_original = use_original || width == 0 || height == 0; // 6-7 becomes... 2-3...
-    // so big ones are a problem apparently...
-    // apparently drawing boxes is already fast...
-    // i wonder if making them their own dom elements helps anything..
-    // can make simpleui without canvas...?
-
-    if (use_original) {
-        return DrawBox_Original(x, y, width, height, color);
-    }
-
-    let key_elements = [width, height];
-
-    if (color) {
-        key_elements.push(
-            round(color.r * 100),
-            round(color.g * 100),
-            round(color.b * 100),
-            round(color.a * 100)
-        );
-    }
-    let key = key_elements.join(',');
-
-    if (!(key in _drawbox_cache)) {
-
-        let prev_context = context;
-        let prev_canvas = canvas;
-
-        let cv = document.createElement('canvas');
-
-        let ctx = cv.getContext('2d');
-        cv.width = width;
-        cv.height = height;
-        let o = { 'canvas': cv, 'context': ctx };
-
-        // draw into custom
-        canvas = o.canvas;
-        context = o.context;
-        {
-            DrawBox_Original(0, 0, width, height, color);
-        }
-        context = prev_context;
-        canvas = prev_canvas;
-
-        _drawbox_cache[key] = o;
-    }
-
-    // now just draw the cached canvas onto screen canvas
-    context.drawImage(_drawbox_cache[key].canvas, x, y); // this seems to be more of a bottleneck than just drawing boxes themselves
-
-}
-
-function DrawBox_Original(rect, color) {
-
-    let x = rect[_x];
-    let y = rect[_y];
-    let width = rect[_w];
-    let height = rect[_h];
-
-    // what if, we dont pass color... we pass something else, like an id or a key.. maybe 'purpose' or 'intent' lol (of the box)
     const soft = m_simpleui.config.drawbox_soft_enable;
 
     if (color) {
         context.fillStyle = make_css_color(color);
-        //context.strokeStyle = make_css_color(color);
     }
 
     if (soft) {
@@ -384,11 +293,13 @@ function DrawBox_Original(rect, color) {
 
 }
 
-const DrawBox = DrawBox_Original;
-
+/** make rgba color from normalized floats [0-1] */
 function Color(r, g, b, a) {
-    if (a == null) {
-        a = 1;
-    }
-    return { r: round(r * 255), g: round(g * 255), b: round(b * 255), a: a };
+    let color = [
+        round(r * 255)|0,
+        round(g * 255)|0,
+        round(b * 255)|0,
+        round(a * 255)|0
+    ]    
+    return color;
 }

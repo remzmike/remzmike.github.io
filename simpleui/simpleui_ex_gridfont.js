@@ -40,8 +40,8 @@
         context,
         400, 400,
         1000, 1000,
-        m_simpleui.add_color(0x00/255, 0xB5/255, 0xE3/255),
-        m_simpleui.add_color(1,0,1)
+        Color(0x00/255, 0xB5/255, 0xE3/255, 1),
+        Color(1,0,1,1)
     );
 
     //global init
@@ -79,7 +79,7 @@
         return {'complete': complete, 'reset_complete': reset_complete};
     }
 
-    function _cache_do_gridfont_letter() {
+    function _gridfont_letter_state_setter() {
         return {
             complete: false,
             reset_complete: false,
@@ -92,13 +92,11 @@
         // nice place for lua coroutines... :-(
 
         const layout = ui.layout_peek();
-        x = x + layout.x;
-        y = y + layout.y;
 
-        let cache = ui.get_cache(uiid, _cache_do_gridfont_letter);
+        let state = ui.get_state(uiid, _gridfont_letter_state_setter);
 
-        let segment = cache.segment;
-        let partial = cache.partial;
+        let segment = state.segment;
+        let partial = state.partial;
 
         // draw lines up to segment count
         for (let i=0; i<fl.length; i++) {
@@ -143,25 +141,25 @@
             //draw_line(Math.random()*2*400,Math.random()*2*500, p1, p2);
             context.restore();
 
-            cache.partial += 0.033 * 3;
-            partial = cache.partial; // blah.
+            state.partial += 0.033 * 3;
+            partial = state.partial; // blah.
 
             if (partial >= 1.0) {
                 let leftover = partial - 1;
                 if (leftover > 0) {
                     // later: leftovers! :-)
                 }
-                cache.partial = 0;
-                cache.segment += 1;
+                state.partial = 0;
+                state.segment += 1;
             }
         }
 
         if (reset) {
-            cache.segment = 1;
-            cache.partial = 0;
-            cache.reset_complete = true; // deopt!
+            state.segment = 1;
+            state.partial = 0;
+            state.reset_complete = true; // deopt!?!?
         }
 
-        cache.complete = segment>=fl.length;
-        return cache;
+        state.complete = segment>=fl.length;
+        return state;
     }

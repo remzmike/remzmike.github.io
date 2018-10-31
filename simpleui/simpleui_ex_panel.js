@@ -6,24 +6,25 @@ function do_panel_begin(uiid, first_x, first_y, first_visible, first_expanded) {
     const debug_color = { r: 0, g: 200, b: 200, a: 0.5 };
     const debug_color2 = { r: 200, g: 200, b: 0, a: 0.5 };
 
-    assert(first_x, 'do_panel_begin: first_x required');
-    assert(first_y, 'do_panel_begin: first_y required');
+    console.assert(first_x, 'do_panel_begin: first_x required');
+    console.assert(first_y, 'do_panel_begin: first_y required');
     if (first_visible == null) first_visible = true;
     if (first_expanded == null) first_expanded = true;
 
-    let cache = ui.get_cache(uiid, function () {
+    let state = ui.get_state(uiid, function () {
         return {
             'uiid': uiid,
-            'rect': Rectangle(first_x, first_y, 10, 10),
+            'rect': Rectangle(first_x, first_y, 1, 1),
             'visible': first_visible,
             'expanded': first_expanded
         };
     });
 
-    let rect = cache.rect;
-    let vlayout = ui.layout_push('vertical', app.panel_layout_padding, rect[_x], rect[_y]); // pops in *_end
+    let rect = state.rect;
 
-    if (!cache.visible) return cache;
+    let vlayout = ui.layout_push(_vertical, app.panel_layout_padding, rect[_x], rect[_y]); // pops in *_end    
+
+    if (!state.visible) return state;
 
     let x = rect[_x];
     let y = rect[_y];
@@ -32,7 +33,7 @@ function do_panel_begin(uiid, first_x, first_y, first_visible, first_expanded) {
     let bar_height = 24;
 
     let handle_w;
-    if (cache.expanded) {
+    if (state.expanded) {
         handle_w = rect[_w] + dilate * 2 - bar_height;
     } else {
         handle_w = 200;
@@ -41,39 +42,51 @@ function do_panel_begin(uiid, first_x, first_y, first_visible, first_expanded) {
     // todo: later: push_id('handle');
     // or: next_id('-handle'); etc.
 
-    ui.layout_push('none', vlayout.padding, vlayout.x - dilate, vlayout.y - dilate - bar_height);
+    let inner = ui.layout_push(_none, vlayout[_padding], vlayout[_x] - dilate, vlayout[_y] - dilate - bar_height);
     {
-        let glyph = cache.expanded ? 'v' : '>';
+        if (state.expanded) {
+            //ui.layout_push('none');
+            let back_rect = Rectangle(inner[_x], inner[_y], rect[_w] + dilate*2, rect[_h] + dilate*2 + bar_height);
+            let back_rect_d1 = uidraw.rectangle_dilate(back_rect, 1);
+            let back_rect_e1 = uidraw.rectangle_erode(back_rect, 1);
+            uidraw.rectangle(back_rect, panel_color2);
+            uidraw.rectangle(back_rect_e1, panel_color1);
+            //ui.layout_pop();   
+        } 
+
+        let glyph = state.expanded ? 'v' : '>';
         let text_width = 10; // hax
         let text_ox = bar_height / 2 - text_width / 2; // (bar_height/2)-(text_width/2);
         let text_oy = text_ox / 2;
-        _ = ui.checkbutton(uiid + '-button', glyph, Rectangle(0, 0, bar_height, bar_height),
-            cache.expanded, text_ox, text_oy);
-        if (_.changed) {
-            cache.expanded = !cache.expanded;
-        }
 
-        _ = ui.handle(uiid + '-handle', Rectangle(bar_height, 0, handle_w, bar_height), x, y);
-        if (_.changed) {
-            cache.rect[_x] = _.delta_x;
-            cache.rect[_y] = _.delta_y;
-        }
+        _button = ui.checkbutton(uiid + '-button', glyph, Rectangle(0, 0, bar_height, bar_height), state.expanded, text_ox, text_oy);
+        _handle = ui.handle(uiid + '-handle', Rectangle(bar_height, 0, handle_w, bar_height), x, y);
 
         ui.label(uiid + '-handle-label', uiid, Rectangle(bar_height + 10, 0, handle_w + dilate, bar_height));
 
         // panel bg
-        if (cache.expanded) {
+        if (state.expanded) {
             if (rect) {
-                let rect0 = Rectangle(rect[_x], rect[_y] - 1, rect[_w], rect[_h]);
+                let rect0 = Rectangle(rect[_x], rect[_y], rect[_w], rect[_h]);
                 let rect1 = uidraw.rectangle_dilate(rect0, dilate);
                 let rect2 = uidraw.rectangle_dilate(rect0, dilate - 1);
 
-                uidraw.rectangle(rect1, panel_color2);
-                uidraw.rectangle(rect2, panel_color1);
+                //uidraw.rectangle(rect1, Color(1,0,0,1));
+                //uidraw.rectangle(rect1, panel_color2);                
+                //uidraw.rectangle(rect2, panel_color1);
 
                 ui.add_hotspot(uiid + '-bg-hotspot', rect1);
             }
         }
+
+        if (_button.changed) {
+            state.expanded = !state.expanded;
+        }
+        if (_handle.changed) {
+            state.rect[_x] = _handle.delta_x;
+            state.rect[_y] = _handle.delta_y;
+        }
+
     }
 
     if (debug_draw) {
@@ -82,24 +95,24 @@ function do_panel_begin(uiid, first_x, first_y, first_visible, first_expanded) {
 
         // draw layout origin
         let layout = ui.layout_peek();
-        let absolute_rect = Rectangle(layout.x - 2, layout.y - 2, 4, 4);
+        let absolute_rect = Rectangle(layout[_x] - 2, layout[_y] - 2, 4, 4);
         uidraw.rectangle(absolute_rect, debug_color);
 
         //ui.label(uiid + '-debug-first_xy', 'first xy', Rectangle(0, 0, 100, 40), debug_color);
     }
 
-    ui.layout_pop();
+    ui.layout_pop(); // inner
 
-    return cache;
+    return state;
 }
 
 function do_panel_end(uiid) {
-    let cache = ui.get_cache(uiid);
-    if (cache.visible && cache.expanded) {
-        assert(cache); // should have been created in _begin
+    let state = ui.get_state(uiid);
+    if (state.visible && state.expanded) {
+        console.assert(state); // should have been created in _begin
         const layout = ui.layout_peek();
-        cache.rect[_w] = layout.totalw;
-        cache.rect[_h] = layout.totalh;
+        state.rect[_w] = layout[_totalw];
+        state.rect[_h] = layout[_totalh];
     }
     ui.layout_pop(); // popping the layout created in do_panel_begin
 }

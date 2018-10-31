@@ -1,25 +1,24 @@
 // later: modularize
 
     function do_scroll_begin(uiid, rect, row_height, item_count) {
-        var cache = ui.get_cache(uiid, function() {
+        var state = ui.get_state(uiid, function() {
             return {
                 'yscroll': 0,
-                'rect' : rect,
+                'rect': rect,
                 'row_height' : row_height,
                 'item_count' : item_count,
                 'layout' : {},
             }
         });
 
-        var layout = ui.layout_push('vertical', 2, rect[_x], rect[_y]);
-        cache.layout = layout;
+        var layout = ui.layout_push(_vertical, 2, rect[_x], rect[_y]);
+        state.layout = layout;
 
-        var scroll = cache;
-        scroll.first_visible_index = Math.floor(scroll.yscroll / scroll.row_height);
-        var max_visible = Math.ceil(scroll.rect[_h] / scroll.row_height) + 1
-        scroll.last_visible_index = scroll.first_visible_index + max_visible;
+        state.first_visible_index = Math.floor(state.yscroll / state.row_height);
+        var max_visible = Math.ceil(rect[_h] / state.row_height) + 1
+        state.last_visible_index = state.first_visible_index + max_visible;
 
-        let rect2 = uidraw.rectangle_dilate(scroll.rect, 1);        
+        let rect2 = uidraw.rectangle_dilate(rect, 1);
         uidraw.rectangle(rect2, panel_color2);
 
         context.save();
@@ -30,23 +29,25 @@
             context.clip();
         }
 
-        return cache;
+        state.rect = rect; // this is equivalent to prop-changed-so-update-state-mirror in vue/react/etc
+
+        return state;
     }
     function do_scroll_end(uiid) {
-        var cache = ui.get_cache(uiid);
-        let item_count = cache.item_count;
-        let row_height = cache.row_height;   
-        let rect = cache.rect;     
+        var state = ui.get_state(uiid);
+        let item_count = state.item_count;
+        let row_height = state.row_height;   
+        let rect = state.rect;     
 
         context.restore();
 
         var slider_max = item_count*row_height - rect[_h];
         // the concept of first_value instead of normal simpleui value param, one way binding...
-        cache.layout.y -= (rect[_h] + 42);
-        cache.layout.x += (rect[_h] - 20);
-        _ = ui.vslider('scroll-experiment-slider', Rectangle(20, rect[_h]), 0, slider_max, cache.yscroll);
+        state.layout[_y] = state.layout[_y] - (rect[_h] + 42);
+        state.layout[_x] = state.layout[_x] + (rect[_h] - 20);
+        _ = ui.vslider('scroll-experiment-slider', Rectangle(0, 0, 20, rect[_h]), 0, slider_max, state.yscroll);
         if (_.changed) {
-            cache.yscroll = _.value;
+            state.yscroll = _.value;
         }                
 
         ui.layout_pop();
@@ -56,41 +57,41 @@
     function do_scroll_item_begin(scroll_uiid, i) {
         var layout_parent = ui.layout_peek();
         //console.log(layout_parent);
-        var layout = ui.layout_push('vertical');
-        var scroll = ui.get_cache(scroll_uiid);
+        var layout = ui.layout_push(_vertical);
+        var scroll = ui.get_state(scroll_uiid);
         scroll.translate_y = i * scroll.row_height;
         if (false) {
             scroll.widget_y1 = scroll.rect[_y] + scroll.translate_y - scroll.yscroll;
             scroll.widget_y2 = scroll.widget_y1 + scroll.row_height;
         } else {
-            scroll.widget_y1 = layout_parent.y + scroll.translate_y - scroll.yscroll - layout_parent.totalh;
+            scroll.widget_y1 = layout_parent[_y] + scroll.translate_y - scroll.yscroll - layout_parent[_totalh];
             //console.log(layout_parent);
             scroll.widget_y2 = scroll.widget_y1 + scroll.row_height;
         }
 
         // this stuff became optional once i decided to use static row_height (for now)
 
-        /*scroll.in_view = scroll.widget_y1 >= scroll.rect.y && scroll.widget_y1 <= scroll.rect.y + scroll.rect.height
-            || scroll.widget_y2 >= scroll.rect.y && scroll.widget_y2 <= scroll.rect.y + scroll.rect.height;*/
+        /*scroll.in_view = scroll.widget_y1 >= scroll.rect[_y] && scroll.widget_y1 <= scroll.rect[_y] + scroll.rect[_h]
+            || scroll.widget_y2 >= scroll.rect[_y] && scroll.widget_y2 <= scroll.rect[_y] + scroll.rect[_h];*/
 
         //if (true || scroll.in_view) {
             //var layout = ui.layout_peek();
-            //scroll.prev_layout_y = layout.y;
-
-            scroll.partial_item = (layout.y - scroll.widget_y1);
+            //scroll.prev_layout_y = layout[_y];
+    
+            scroll.partial_item = (layout[_y] - scroll.widget_y1);
             // im emulating the layout here, because i know it is vertical... (TODO: LATER: FIXERINO)
-            layout.y -= scroll.partial_item;
+            layout[_y] -= scroll.partial_item;
             //console.log(layout);
         //}
         
     }
 
     function do_scroll_item_end(scroll_uiid) {
-        var scroll = ui.get_cache(scroll_uiid);
+        var scroll = ui.get_state(scroll_uiid);
                 
         if (scroll.in_view) {
             var layout = ui.layout_peek();
-            layout.y += scroll.partial_item; // not sure if this is needed FOR NOW, but probably could be in the future, and would probably be hard to track down
+            layout[_y] += scroll.partial_item; // not sure if this is needed FOR NOW, but probably could be in the future, and would probably be hard to track down
         }
         // debug draws
         if (false) {
