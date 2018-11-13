@@ -1,18 +1,18 @@
 let round = Math.round;
 
-var box_gradient_x1 = 7;
-var box_gradient_y1 = 18;
-var box_gradient_x2 = 3;
-var box_gradient_y2 = -32;
-var box_gradient_color_stop1 = Color(0, 30, 76, 92);
-var box_gradient_color_stop2 = Color(72, 157, 210, 48);
+var box_gradient_x1 = 40;
+var box_gradient_y1 = 0;
+var box_gradient_x2 = 260;
+var box_gradient_y2 = 121;
+var box_gradient_color_stop1 = Color(72, 157, 210, 55);
+var box_gradient_color_stop2 = Color(15, 15, 76, 100);
 var bg_color = Color(0, 15, 38, 255);
 var panel_color1 = Color(26, 38, 64, 255);
 var panel_color2 = Color(51, 77, 102, 255);
 
 var window_active = true;
 
-let _mouse_pos = [0 | 0, 0 | 0];
+let _mouse_pos = [0 | 0, 0 | 0]; //m_simpleui.Point(0, 0);
 
 function init_array(size, init_val) {
     let a = [];
@@ -23,15 +23,12 @@ function init_array(size, init_val) {
 }
 
 function set_size() {
-    canvas.width = window.innerWidth - app.canvas_size_hack;
-    canvas.height = window.innerHeight - app.canvas_size_hack;
-
-    //canvas.width = Math.max(canvas.width, 800);
-    //canvas.height = Math.max(canvas.height, 600);
-    // later: always stay the max size we see... (maybe)
-
-    canvas_screen.width = canvas.width;
-    canvas_screen.height = canvas.height;
+    let w = window.innerWidth - app.canvas_size_hack;
+    let h = window.innerHeight - app.canvas_size_hack;
+    
+    //w = Math.max(w, 800);
+    //h = Math.max(h, 600);
+    pixi_app.renderer.resize(w,h)
 }
 
 function randomize_color(color) {
@@ -102,11 +99,12 @@ function make_css_color(color) {
 }
 
 function make_drawbox_gradient(context, x1, y1, x2, y2, colorstop1, colorstop2) {
-    console.assert(context);
+    /*console.assert(context);
     let grd = context.createLinearGradient(x1, y1, x2, y2);
     grd.addColorStop(0.0, make_css_color(colorstop1));
-    grd.addColorStop(1.0, make_css_color(colorstop2));
-    return grd;
+    grd.addColorStop(0.5, make_css_color(colorstop2));
+    return grd;*/
+    return {};
 }
 
 /* -------------------------------------------------------------------------- */
@@ -154,52 +152,31 @@ function DrawText_Bitmap(text, x, y, color) {
             def = bmfont_mana.chars[idx - 31];
         }
 
-        context.drawImage(
+        /*context.drawImage(
             bmfont_mana_img,
             def.x, def.y, def.width, def.height,
             x + def.xoffset, y + def.yoffset, def.width, def.height
-        );
+        );*/
         x += def.xadvance;
     }
 }
 
-// new idea, cache bitmaps instead of worrying about batching
-let _drawtext_cache = {};
-function DrawText_Cached(text, x, y, color) {
+const _pixi_text_objects = {};
 
-    // draw normal if it's a number?
-    //return DrawText_Original(text, x, y, color);
-    //return;
-
-    let key = text;
-    if (!(key in _drawtext_cache)) {
-
-        let prev_context = context;
-        let prev_canvas = canvas;
-
-        let cv = document.createElement('canvas');
-
-        let ctx = cv.getContext('2d');
-        cv.width = text.length * 10;
-        cv.height = 20;
-        //document.body.appendChild(cv);
-        let o = { 'canvas': cv, 'context': ctx };
-
-        // draw into custom
-        canvas = o.canvas;
-        context = o.context;
-        {
-            DrawText_Original(text, 0, 0, color);
-        }
-        context = prev_context;
-        canvas = prev_canvas;
-
-        _drawtext_cache[key] = o;
+function DrawText_PixiText(text, x, y, color) {
+    let int_color = color[_r] << 16 | color[_g] << 8 | color[_b];
+    const key = `${text}:${int_color};${x}x${y}`;
+    let o = _pixi_text_objects[key];
+    if (!o) {
+        o = new PIXI.Text(
+            text,
+            {fontFamily : 'Arial', fontSize: 14, fill : int_color}
+        );
+        _pixi_text_objects[key] = o;
     }
-
-    // now just draw the cached canvas onto screen canvas
-    context.drawImage(_drawtext_cache[key].canvas, x, y);
-
+    o.x = x;
+    o.y = y;
+    pixi_app.stage.addChild(o);
 }
 
 function DrawText_Original(text, x, y, color) { // 10-12 ms ff
@@ -209,25 +186,31 @@ function DrawText_Original(text, x, y, color) { // 10-12 ms ff
         DrawText_Stroke(text, x, y, color);
     }
 }
-let DrawText = DrawText_Cached; // cached works now, and does increase performance.
 
-function DrawBox_(rect, color) {
-    return;
-}
-
-// todo: later: pass intent instead of color? or maybe that's a level above this
 function DrawBox(rect, color) {
-
-    let x = rect[_x];
-    let y = rect[_y];
-    let width = rect[_w];
-    let height = rect[_h];
+    
+    const x = rect[_x];
+    const y = rect[_y];
+    const width = rect[_w];
+    const height = rect[_h];
 
     const soft = m_simpleui.config.drawbox_soft_enable;
 
     //if (color) {
-        context.fillStyle = make_css_color(color);
+        const rgb = color[_r] << 16 | color[_g] << 8 | color[_b] << 0;
+        graphics.beginFill(rgb); //, color.a/255);
+        //graphics.beginFill(0xFF3300);
+        //graphics.lineStyle(4, 0xffd900, 1);
+    
     //}
+
+    /*
+    // test texture resampling from white pixel in font
+    context.drawImage(
+        bmfont_mana_img,
+        2, 2, 1, 1,
+        rect[_x], rect[_y], rect[_w], rect[_h],       
+    );*/
 
     if (soft) {
         const z = 1;
@@ -260,11 +243,12 @@ function DrawBox(rect, color) {
             use_gradient = false;
         }
     }
-    if (use_gradient) {
-        context.translate(x, y);
+    const disabled_for_gl_port = true;
+    if (!disabled_for_gl_port && use_gradient) {
+        context.translate(x, y); // for gradient
         context.fillStyle = m_simpleui.config.drawbox_gradient;
         context.fillRect(1, 1, width - 2, height - 2);
-        context.translate(-x, -y);
+        context.translate(-x, -y); // this appears to be faster than wrapping save/restore :->
     }
 
 }
@@ -273,11 +257,10 @@ function draw_line(x1, y1, x2, y2) {
     x1 = 0 | x1;
     y1 = 0 | y1;
     x2 = 0 | x2;
-    y2 = 0 | y2;    
-    context.beginPath();
+    y2 = 0 | y2;
+    graphics.lineStyle(1, 0xFFFFFF, 1);
     context.moveTo(x1, y1);
     context.lineTo(x2, y2);
-    context.stroke();
 }
 
 /** make rgba color from unsigned bytes [0-255] (Smi's) */
@@ -290,23 +273,46 @@ function Color(r, g, b, a) {
     ];
 }
 
-/* */
+const DrawText = DrawText_PixiText;
 
-function setpixelated(context){
-    context['imageSmoothingEnabled'] = false;       /* standard */
-    context['mozImageSmoothingEnabled'] = false;    /* Firefox */
-    context['oImageSmoothingEnabled'] = false;      /* Opera */
-    context['webkitImageSmoothingEnabled'] = false; /* Safari */
-    context['msImageSmoothingEnabled'] = false;     /* IE */
+PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST; // {LINEAR: 0 (default), NEAREST: 1}
+
+let pixi_app = new PIXI.Application({
+    width: 512,
+    height: 512,
+    antialias: false,
+    transparent: false,
+    resolution: 1
+});
+let canvas = pixi_app.view;
+document.body.appendChild(canvas);
+let canvas_off = document.createElement('canvas'); // vestige
+
+let graphics = new PIXI.Graphics();
+
+let context = graphics;
+context.fillRect = function(x,y,w,h) {
+    //graphics.beginFill(0xFF3300);
+    graphics.lineStyle(0, 0xffffff, 1);
+    context.drawRect(x,y,w,h);
 }
+context.save = function() {};
+context.restore = function() {};
+context.clip = function() {};
+context.rect = function() {};
+context.translate = function() {};
+context.stroke = function() {};
+context.beginPath = function() {};
 
-let canvas_screen = document.getElementById('myCanvas');
-let canvas_off = document.createElement('canvas');
-let canvas = canvas_screen; // screen seems slightly faster
-console.assert(canvas);
-let context = canvas.getContext('2d');
-context.font = '14px Arial';
-//setpixelated(context);
+//pixi_app.stage.addChild(graphics);
+
+let font_sprite;
+
+function on_pixi_ready() {
+    font_sprite = new PIXI.Sprite(
+        PIXI.loader.resources['upfmana16_0.png'].texture
+    );
+}
 
 canvas.addEventListener('mousemove', on_mouse_move, false);
 // touch move? (NO!)
@@ -316,4 +322,34 @@ canvas.addEventListener('touchstart', on_touch_start, {capture: false, passive: 
     
 canvas.addEventListener('mouseup', on_mouse_up, false);
 canvas.addEventListener('touchend', on_touch_end, false);
+
+/*
+let renderer = PIXI.autoDetectRenderer(800, 600, { antialias: false, backgroundColor: 0x1099bb });
+if (renderer instanceof PIXI.CanvasRenderer) {
+    console.warning('[PIXI is rendering to canvas]');
+}*/
+//document.body.appendChild(renderer.view);
+
+//let stage = new PIXI.Container();
+
+/*var stage = new PIXI.Stage(0xFFFFFF, true);
+stage.setInteractive(false);
+
+var sprite = PIXI.Sprite.fromImage("upfmana16_0.png");
+//stage.addChild(sprite);
+// create a renderer instance
+//var renderer = new PIXI.CanvasRenderer(800, 600);//PIXI.autoDetectRenderer(800, 600);
+var renderer = PIXI.autoDetectRenderer(620, 380);
+
+// set the canvas width and height to fill the screen
+//renderer.view.style.width = window.innerWidth + "px";
+//renderer.view.style.height = window.innerHeight + "px";
+renderer.view.style.display = "block";
+    
+// add render view to DOM
+document.body.appendChild(renderer.view);
+*/
+
+// -------------------------------------------------------- //
+
 

@@ -1,18 +1,18 @@
 let round = Math.round;
 
-var box_gradient_x1 = 7;
-var box_gradient_y1 = 18;
-var box_gradient_x2 = 3;
-var box_gradient_y2 = -32;
-var box_gradient_color_stop1 = Color(0, 30, 76, 92);
-var box_gradient_color_stop2 = Color(72, 157, 210, 48);
-var bg_color = Color(0, 15, 38, 255);
-var panel_color1 = Color(26, 38, 64, 255);
-var panel_color2 = Color(51, 77, 102, 255);
+var box_gradient_x1 = 112;
+var box_gradient_y1 = -100;
+var box_gradient_x2 = 260;
+var box_gradient_y2 = 121;
+var box_gradient_color_stop1 = Color(15/255, 15/255, 76/255, 0.39166666666666666);
+var box_gradient_color_stop2 = Color(72/255, 157/255, 210/255, 0.21666666666666667);
+var bg_color = Color(0, 15/255, 38/255, 1);
+var panel_color1 = Color(26/255, 38/255, 64/255, 1);
+var panel_color2 = Color(51/255, 77/255, 102/255, 1);
 
 var window_active = true;
 
-let _mouse_pos = [0 | 0, 0 | 0];
+_mouse_pos = { x: 0, y: 0 };
 
 function init_array(size, init_val) {
     let a = [];
@@ -22,12 +22,14 @@ function init_array(size, init_val) {
     return a;
 }
 
+function str(s) { return s + ''; }
+
 function set_size() {
     canvas.width = window.innerWidth - app.canvas_size_hack;
     canvas.height = window.innerHeight - app.canvas_size_hack;
 
-    //canvas.width = Math.max(canvas.width, 800);
-    //canvas.height = Math.max(canvas.height, 600);
+    canvas.width = Math.max(canvas.width, 800);
+    canvas.height = Math.max(canvas.height, 600);
     // later: always stay the max size we see... (maybe)
 
     canvas_screen.width = canvas.width;
@@ -35,8 +37,7 @@ function set_size() {
 }
 
 function randomize_color(color) {
-    //let a = [_r, _g, _b, _a];    
-    let a = [_r, _g, _b];
+    let a = [_r, _g, _b, _a];    
     for (let i = 0; i < a.length; i++) {
         let k = a[i];
         let v;
@@ -51,11 +52,12 @@ function randomize_color(color) {
 
 function on_mouse_move(evt) {
     let rect = canvas.getBoundingClientRect();
-    _mouse_pos[_x] = 0 | (evt.clientX - rect.left);
-    _mouse_pos[_y] = 0 | (evt.clientY - rect.top);
+    _mouse_pos[_x] = evt.clientX - rect.left;
+    _mouse_pos[_y] = evt.clientY - rect.top;
 }
 
 function on_mouse_down(evt) {
+    //log(evt);
     let x = evt.clientX;
     let y = evt.clientY;
     let button = evt.button;
@@ -105,22 +107,48 @@ function make_drawbox_gradient(context, x1, y1, x2, y2, colorstop1, colorstop2) 
     console.assert(context);
     let grd = context.createLinearGradient(x1, y1, x2, y2);
     grd.addColorStop(0.0, make_css_color(colorstop1));
-    grd.addColorStop(1.0, make_css_color(colorstop2));
+    grd.addColorStop(0.5, make_css_color(colorstop2));
     return grd;
 }
 
 /* -------------------------------------------------------------------------- */
 
+function setpixelated(context){
+    context['imageSmoothingEnabled'] = false;       /* standard */
+    context['mozImageSmoothingEnabled'] = false;    /* Firefox */
+    context['oImageSmoothingEnabled'] = false;      /* Opera */
+    context['webkitImageSmoothingEnabled'] = false; /* Safari */
+    context['msImageSmoothingEnabled'] = false;     /* IE */
+}
+
+let canvas_screen = document.getElementById('myCanvas');
+let canvas_off = document.createElement('canvas');
+let canvas = canvas_screen; // screen seems slightly faster
+console.assert(canvas);
+let context = canvas.getContext('2d');
+//setpixelated(context);
+
+canvas.addEventListener('mousemove', on_mouse_move, false);
+// touch move? (NO!)
+
+canvas.addEventListener('mousedown', on_mouse_down, false);
+canvas.addEventListener('touchstart', on_touch_start, {capture: false, passive: true});
+    
+canvas.addEventListener('mouseup', on_mouse_up, false);
+canvas.addEventListener('touchend', on_touch_end, false);
+
+/* */
+
 function GetCursorX() {
-    return 0 | _mouse_pos[_x];
+    return _mouse_pos[_x];
 }
 
 function GetCursorY() {
-    return 0 | _mouse_pos[_y];
+    return _mouse_pos[_y];
 }
 
 function GetFontSize() {
-    return 0 | 14;
+    return 14;
 }
 
 let fonts = [
@@ -135,7 +163,7 @@ function DrawText_Stroke(text, x, y, color) {
     let font = fonts[2];
     context.font = font.size + "px '" + font.name + "'";
     if (color == null) {
-        color = m_simpleui.Color(255, 255, 255, 255);
+        color = m_simpleui.Color(1, 1, 1, 1);
     }
     context.fillStyle = make_css_color(color);
     let yoffset = fontsize - 2;
@@ -203,17 +231,13 @@ function DrawText_Cached(text, x, y, color) {
 }
 
 function DrawText_Original(text, x, y, color) { // 10-12 ms ff
-    if (m_simpleui.config.drawtext_bitmap) {
+    if (ui.config.drawtext_bitmap) {
         DrawText_Bitmap(text, x, y, color);
     } else {
         DrawText_Stroke(text, x, y, color);
     }
 }
 let DrawText = DrawText_Cached; // cached works now, and does increase performance.
-
-function DrawBox_(rect, color) {
-    return;
-}
 
 // todo: later: pass intent instead of color? or maybe that's a level above this
 function DrawBox(rect, color) {
@@ -225,9 +249,9 @@ function DrawBox(rect, color) {
 
     const soft = m_simpleui.config.drawbox_soft_enable;
 
-    //if (color) {
+    if (color) {
         context.fillStyle = make_css_color(color);
-    //}
+    }
 
     if (soft) {
         const z = 1;
@@ -261,59 +285,21 @@ function DrawBox(rect, color) {
         }
     }
     if (use_gradient) {
-        context.translate(x, y);
+        context.translate(x, y); // for gradient
         context.fillStyle = m_simpleui.config.drawbox_gradient;
         context.fillRect(1, 1, width - 2, height - 2);
-        context.translate(-x, -y);
+        context.translate(-x, -y); // this appears to be faster than wrapping save/restore :->
     }
 
 }
 
-function draw_line(x1, y1, x2, y2) {
-    x1 = 0 | x1;
-    y1 = 0 | y1;
-    x2 = 0 | x2;
-    y2 = 0 | y2;    
-    context.beginPath();
-    context.moveTo(x1, y1);
-    context.lineTo(x2, y2);
-    context.stroke();
-}
-
-/** make rgba color from unsigned bytes [0-255] (Smi's) */
+/** make rgba color from normalized floats [0-1] */
 function Color(r, g, b, a) {
-    return [
-        0 | r,
-        0 | g,
-        0 | b,
-        0 | a
-    ];
+    let color = [
+        round(r * 255)|0,
+        round(g * 255)|0,
+        round(b * 255)|0,
+        round(a * 255)|0
+    ]    
+    return color;
 }
-
-/* */
-
-function setpixelated(context){
-    context['imageSmoothingEnabled'] = false;       /* standard */
-    context['mozImageSmoothingEnabled'] = false;    /* Firefox */
-    context['oImageSmoothingEnabled'] = false;      /* Opera */
-    context['webkitImageSmoothingEnabled'] = false; /* Safari */
-    context['msImageSmoothingEnabled'] = false;     /* IE */
-}
-
-let canvas_screen = document.getElementById('myCanvas');
-let canvas_off = document.createElement('canvas');
-let canvas = canvas_screen; // screen seems slightly faster
-console.assert(canvas);
-let context = canvas.getContext('2d');
-context.font = '14px Arial';
-//setpixelated(context);
-
-canvas.addEventListener('mousemove', on_mouse_move, false);
-// touch move? (NO!)
-
-canvas.addEventListener('mousedown', on_mouse_down, false);
-canvas.addEventListener('touchstart', on_touch_start, {capture: false, passive: true});
-    
-canvas.addEventListener('mouseup', on_mouse_up, false);
-canvas.addEventListener('touchend', on_touch_end, false);
-
