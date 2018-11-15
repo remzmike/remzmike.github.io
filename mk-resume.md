@@ -4,7 +4,7 @@ gmail: remzmike
 
 Over 20 years of programming freedom. Remote work is my default.
 
-I am a good programmer who wants to write code and design systems. I like straightforward. I don't mind minimal. I usually have some ideas. I am not a presenter or salesman. I am not a manipulator of people.
+I am a good programmer who wants to write code and design systems. I like straightforward. I don't mind minimal. I usually have some ideas. I am not a salesman. I am a real programmer. Show me the code.
 
 Review sample code and exercises @ https://remzmike.github.io/
 
@@ -58,7 +58,7 @@ Self Employed, Acworth, Georgia
     * Developed multiple server-less front-end prototypes using React
 
 **October 26, 2009 – January 6, 2014**
-Software Developer at CCH Small Firm Services of Kennesaw, Georgia
+Senior Software Developer at CCH Small Firm Services of Kennesaw, Georgia
 
 Full-stack Microsoft developer for TaxWiseOnline, a complete web-based tax preparation and e-filing solution used by the IRS.
 
