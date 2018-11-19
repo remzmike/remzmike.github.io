@@ -560,6 +560,17 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             do_panel_end(inner_uiid);
         }
 
+        function do_linestar_panel(uiid, first_x, first_y, first_visible, first_expanded) {
+            let panel = do_panel_begin(uiid, first_x, first_y, first_visible, first_expanded);
+
+            if (panel.expanded) {
+                do_linestar_edit(uiid + '-linestar-edit');
+            }
+
+            do_panel_end(uiid);
+            return panel;
+        }            
+
         function do_scrolltest_panel(uiid, first_x, first_y, first_visible, first_expanded) {
 
             let panel = do_panel_begin(uiid, first_x, first_y, first_visible, first_expanded);
@@ -607,7 +618,8 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
         const anim_items = [];
         const anim_vectors = [];
         const anim_colors = [];
-        const anim_color = make_css_color(Color(160, 160, 160, 12));
+        const anim_color1 = make_css_color(Color(255, 255, 255, 8));
+        const anim_color2 = make_css_color(Color(255, 255, 255, 8));
         let _bg_init = 0 | false;
         let _anim_gradient = make_drawbox_gradient(
             context,
@@ -666,13 +678,13 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
 
             context.setLineDash([]);
             context.lineWidth = 1;
-            context.strokeStyle = anim_color; // anim_colors[i];
+            context.strokeStyle = anim_color1; // anim_colors[i];
             context.stroke();
 
             const dash_scale = 20
             context.setLineDash([1*dash_scale, 3*dash_scale, 3*dash_scale, 5*dash_scale, 5*dash_scale, 8*dash_scale, 8*dash_scale, 13*dash_scale]);
             context.lineWidth = 3;
-            context.strokeStyle = anim_color; // anim_colors[i];
+            context.strokeStyle = anim_color2; // anim_colors[i];
             context.stroke();
 
             context.setLineDash([]);
@@ -684,10 +696,11 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
         function do_ui() {
             do_background_anim();
             do_sidepanel();
-            do_color_panel('color panel', 240, 64, true, true);
-            do_gradient_panel('gradient panel', 905, 64, true, true);
-            do_scrolltest_panel('scroll test panel', 1113, 486, true, true);
-            do_gridfont_panel('gridfont panel ', 240, 547, true, true);
+            do_color_panel('color panel', 240, 90, true, true);
+            do_gradient_panel('gradient panel', 905, 90, true, true);
+            do_scrolltest_panel('scroll test panel', 1113, 486+30, true, true);
+            do_gridfont_panel('gridfont panel ', 240, 547+30, true, true);
+            do_linestar_panel('linestar panel', 1372, 90, true, true);
         }
 
         function main() {
