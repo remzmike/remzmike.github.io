@@ -195,6 +195,8 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
 
             let vert1 = ui.layout_push(_vertical, pad, pad, pad);
             {
+                ui.label('simpleui v0.3', Rectangle(0, 0, 100, 24));
+                
                 // reload
                 _ = ui.button('sidepanel-reload-button', 'reload', Rectangle(0, 0, 100, 24));
                 if (_[_clicked]) {
@@ -259,6 +261,8 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
                 do_ms_graph('sidepanel-actual-graph', 'cpu time graph', app.main_proc_time, 20);
 
                 // canvas size hack
+                // disabling until i do it with flicker
+                /*
                 ui.label('canvas trim', Rectangle(0, 0, 100, 20));
                 ui.layout_push(_horizontal);
                 _ = ui.slider('sidepanel-canvas-size-hack-slider', Rectangle(0, 0, 100, 20), 0, 60, app.canvas_size_hack, '');
@@ -268,6 +272,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
                 }
                 ui.label(app.canvas_size_hack + 'px', Rectangle(0, 0, 100, 20));
                 ui.layout_pop();
+                */
 
                 // show/hides
                 /*{
@@ -693,9 +698,12 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
 
         var _test_handle_x = 100;
         var _test_handle_y = 100;
-        function do_ui() {
+        function do_ui() {                        
             do_background_anim();
-            do_sidepanel();
+            do_sidepanel();                        
+
+            ui.label('This is not html, it is an image updated by javascript.', Rectangle(220, 14, 400, 0));
+            
             do_color_panel('color panel', 240, 90, true, true);
             do_gradient_panel('gradient panel', 905, 90, true, true);
             do_scrolltest_panel('scroll test panel', 1113, 486+30, true, true);
