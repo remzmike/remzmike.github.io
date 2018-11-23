@@ -566,9 +566,13 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
         }
 
         let _linestar_segments = 13;
-        let _linestar_segments_anim = 1;
+        let _linestar_segments_direction = 1;
+        let _linestar_segments_accumulator = 0;
+        let _linestar_segments_accumulator_max = 8;
         let _linestar_joints = 12;
-        let _linestar_joints_anim = 1;
+        let _linestar_joints_direction = 1;
+        let _linestar_joints_accumulator = 0;
+        let _linestar_joints_accumulator_max = 5;
         let _linestar_webs = 5;        
         let _linestar_anim_enabled = 0 | false;
         function do_linestar_panel(uiid, first_x, first_y, first_visible, first_expanded) {
@@ -581,26 +585,52 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
                     _linestar_joints = _[2];
                     _linestar_webs = _[3];
                 } else if (_linestar_anim_enabled) {
-                    if (_linestar_segments > 30) {
-                        _linestar_segments_anim = -_linestar_segments_anim;
-                    } else if (_linestar_segments < 3) {
-                        _linestar_segments_anim = -_linestar_segments_anim;
+                    _linestar_segments_accumulator++;
+                    if (_linestar_segments > 20 || _linestar_segments < 3) {
+                        _linestar_segments = Math.max(3, Math.min(20, _linestar_segments));
+                        _linestar_segments_direction = -_linestar_segments_direction;
+                    }                    
+                    if (_linestar_segments_accumulator == _linestar_segments_accumulator_max) {
+                        _linestar_segments = _linestar_segments + _linestar_segments_direction;
+                        _linestar_segments_accumulator = 0;
                     }
-                    _linestar_segments = _linestar_segments + _linestar_segments_anim;
 
-                    if (_linestar_joints > 30) {
-                        _linestar_joints_anim = -_linestar_joints_anim;
-                    } else if (_linestar_joints < 3) {
-                        _linestar_joints_anim = -_linestar_joints_anim;
-                    }
-                    _linestar_joints = _linestar_joints + _linestar_joints_anim;                    
+                    _linestar_joints_accumulator++;
+                    if (_linestar_joints > 20 || _linestar_joints < 3) {
+                        _linestar_joints = Math.max(3, Math.min(20, _linestar_joints));
+                        _linestar_joints_direction = -_linestar_joints_direction;
+                    }                    
+                    if (_linestar_joints_accumulator == _linestar_joints_accumulator_max) {
+                        _linestar_joints = _linestar_joints + _linestar_joints_direction;
+                        _linestar_joints_accumulator = 0;
+                    }                    
                 }
 
                 const label = ( _linestar_anim_enabled ? 'disable' : 'enable' ) + ' idle animation';
-                _ = ui.button(uiid-'-enable-anim-button', label, Rectangle(0, 0, 200, 24));
-                if (_[_clicked]) {
-                    _linestar_anim_enabled = !_linestar_anim_enabled;
+                _ = ui.checkbutton(uiid + '-enable-anim-button', label, Rectangle(0, 0, 200, 24), _linestar_anim_enabled);
+                if (_[_changed]) {
+                    _linestar_anim_enabled = _[_value];
                 }
+
+                const rect = Rectangle(0, 0, 200, 20);
+                ui.layout_push(_horizontal);
+                _ = ui.slider(uiid + '-slider-1', rect, 1, 20, _linestar_segments_accumulator_max, '');
+                if (_[_changed]) {
+                    _linestar_segments_accumulator = 0;
+                    _linestar_segments_accumulator_max = 0 | _[_value];
+                }
+                ui.label('segment anim delay', rect);
+                ui.layout_pop();
+
+                ui.layout_push(_horizontal);
+                _ = ui.slider(uiid + '-slider-2', rect, 1, 20, _linestar_joints_accumulator_max, '');
+                if (_[_changed]) {
+                    _linestar_joints_accumulator = 0;
+                    _linestar_joints_accumulator_max = 0 | _[_value];
+                }
+                ui.label('joint anim delay', rect);
+                ui.layout_pop();
+                
 
             }
 
