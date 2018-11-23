@@ -565,11 +565,43 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             do_panel_end(inner_uiid);
         }
 
+        let _linestar_segments = 13;
+        let _linestar_segments_anim = 1;
+        let _linestar_joints = 12;
+        let _linestar_joints_anim = 1;
+        let _linestar_webs = 5;        
+        let _linestar_anim_enabled = 0 | false;
         function do_linestar_panel(uiid, first_x, first_y, first_visible, first_expanded) {
             let panel = do_panel_begin(uiid, first_x, first_y, first_visible, first_expanded);
 
             if (panel.expanded) {
-                do_linestar_edit(uiid + '-linestar-edit');
+                let _ = do_linestar_edit(uiid + '-linestar-edit', _linestar_segments, _linestar_joints, _linestar_webs);
+                if (_[_changed]) {
+                    _linestar_segments = _[1];
+                    _linestar_joints = _[2];
+                    _linestar_webs = _[3];
+                } else if (_linestar_anim_enabled) {
+                    if (_linestar_segments > 30) {
+                        _linestar_segments_anim = -_linestar_segments_anim;
+                    } else if (_linestar_segments < 3) {
+                        _linestar_segments_anim = -_linestar_segments_anim;
+                    }
+                    _linestar_segments = _linestar_segments + _linestar_segments_anim;
+
+                    if (_linestar_joints > 30) {
+                        _linestar_joints_anim = -_linestar_joints_anim;
+                    } else if (_linestar_joints < 3) {
+                        _linestar_joints_anim = -_linestar_joints_anim;
+                    }
+                    _linestar_joints = _linestar_joints + _linestar_joints_anim;                    
+                }
+
+                const label = ( _linestar_anim_enabled ? 'disable' : 'enable' ) + ' idle animation';
+                _ = ui.button(uiid-'-enable-anim-button', label, Rectangle(0, 0, 200, 24));
+                if (_[_clicked]) {
+                    _linestar_anim_enabled = !_linestar_anim_enabled;
+                }
+
             }
 
             do_panel_end(uiid);
@@ -702,13 +734,20 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             do_background_anim();
             do_sidepanel();                        
 
-            ui.label('This is not html, it is an image updated by javascript.', Rectangle(220, 14, 400, 0));
+            ui.label('This is not html. It is an image updated by javascript.', Rectangle(220, 14, 400, 0));
             
-            do_color_panel('color panel', 240, 90, true, true);
-            do_gradient_panel('gradient panel', 905, 90, true, true);
-            do_scrolltest_panel('scroll test panel', 1113, 486+30, true, true);
-            do_gridfont_panel('gridfont panel ', 240, 547+30, true, true);
-            do_linestar_panel('linestar panel', 1372, 90, true, true);
+            const row_x0 = 240;
+            const row_y0 = 90;
+            do_linestar_panel('linestar panel', row_x0, row_y0, true, true);
+
+            const row_x1 = row_x0 + 465;
+            do_color_panel('color panel', row_x1, row_y0, true, true);
+            
+            const row_x2 = row_x1 + 666;
+            do_gradient_panel('gradient panel', row_x2, row_y0, true, true);
+
+            do_gridfont_panel('gridfont panel ', row_x1, 547+27, true, true);
+            do_scrolltest_panel('scroll test panel', 1579, 486+25, true, true);            
         }
 
         function main() {
