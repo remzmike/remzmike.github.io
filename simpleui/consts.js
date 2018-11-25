@@ -86,3 +86,8 @@ function init_array(size, init_val) {
     }
     return a;
 }
+
+// https://stackoverflow.com/a/36673184
+function is_touch_device() {
+    return (navigator.maxTouchPoints || 'ontouchstart' in document.documentElement);
+}

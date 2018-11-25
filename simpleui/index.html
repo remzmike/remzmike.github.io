@@ -17,8 +17,8 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
     <meta property="og:title" content="simpleui: realtime immediate-mode ui">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://remzmike.github.io/simpleui">
-    <meta property="og:image" content="http://remzmike.github.io/mash/simpleui-js-alpha-crop.png?2">
-    <meta property="og:image:secure_url" content="https://remzmike.github.io/mash/simpleui-js-alpha-crop.png?2" />
+    <meta property="og:image" content="http://remzmike.github.io/mash/simpleui-js-alpha-crop.png?3">
+    <meta property="og:image:secure_url" content="https://remzmike.github.io/mash/simpleui-js-alpha-crop.png?3" />
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1600">
     <meta property="og:image:height" content="838">
@@ -48,8 +48,6 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
     <script src="./dist/bundle.js" charset="utf-8"></script>
     <!-- -->
     <script>
-        m_simpleui.config.drawbox_gradient_enable = true;
-
         // aliases
         var ui = m_simpleui;
         var uidraw = m_simpleui_drawing;
@@ -766,18 +764,20 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
 
             ui.label('This is not html. It is an image updated by javascript.', Rectangle(220, 14, 400, 0));
             
+            const expanded = !is_touch_device();
+
             const row_x0 = 240;
             const row_y0 = 90;
-            do_linestar_panel('linestar panel', row_x0, row_y0, true, true);
+            do_linestar_panel('linestar panel', row_x0, row_y0, true, expanded);
 
             const row_x1 = row_x0 + 465;
-            do_color_panel('color panel', row_x1, row_y0, true, true);
+            do_color_panel('color panel', row_x1, row_y0, true, expanded);
             
             const row_x2 = row_x1 + 666;
-            do_gradient_panel('gradient panel', row_x2, row_y0, true, true);
+            do_gradient_panel('gradient panel', row_x2, row_y0, true, expanded);
 
-            do_gridfont_panel('gridfont panel ', row_x1, 547+27, true, true);
-            do_scrolltest_panel('scroll test panel', 1579, 486+25, true, true);            
+            do_gridfont_panel('gridfont panel ', row_x1, 547+27, true, expanded);
+            do_scrolltest_panel('scroll test panel', 1579, 486+25, true, expanded);            
         }
 
         function main() {

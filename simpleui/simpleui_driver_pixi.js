@@ -15,10 +15,7 @@ function init_array(size, init_val) {
 function set_size() {
     let w = window.innerWidth - app.canvas_size_hack;
     let h = window.innerHeight - app.canvas_size_hack;
-    
-    //w = Math.max(w, 800);
-    //h = Math.max(h, 600);
-    pixi_app.renderer.resize(w,h)
+    pixi_app.renderer.resize(w,h);
 }
 
 function randomize_color(color) {
@@ -201,8 +198,6 @@ function DrawBoxInternal(rect, color, soft) {
     );*/
 
     if (soft) {
-        const z = 1;
-        //let z2 = z*2;
         const lines = 1; // adjustor
         context.fillRect(x, y + lines, width, height - (lines * 2)); // mid
 
@@ -255,7 +250,7 @@ function draw_line(x1, y1, x2, y2) {
     y1 = 0 | y1;
     x2 = 0 | x2;
     y2 = 0 | y2;
-    graphics.lineStyle(1, 0xFFFFFF, 1);
+    graphics.lineStyle(1, 0xFFFFFF, 1, 0);
     context.moveTo(x1, y1);
     context.lineTo(x2, y2);
 }
@@ -273,15 +268,22 @@ function Color(r, g, b, a) {
 const DrawText = DrawText_PixiText;
 //const DrawText = DrawText_Bitmap;
 
-PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST; // {LINEAR: 0 (default), NEAREST: 1}
+//PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST; // {LINEAR: 0 (default), NEAREST: 1}
+PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.LINEAR; // doesnt really matter wrt antialiasing
+
+console.log('window.devicePixelRatio', window.devicePixelRatio);
 
 let pixi_app = new PIXI.Application({
-    width: 512,
-    height: 512,
-    antialias: true,
+    width: 256,
+    height: 256,
+    antialias: false, // enables extremely weak antialiasing
+    forceFXAA: false,
     transparent: true,
-    resolution: 1
+    resolution: 1, //window.devicePixelRatio,
 });
+pixi_app.renderer.roundPixels = true;
+console.log(pixi_app.renderer);
+
 let canvas = pixi_app.view;
 document.body.appendChild(canvas);
 let canvas_off = document.createElement('canvas'); // vestige
@@ -290,8 +292,7 @@ let graphics = new PIXI.Graphics();
 
 let context = graphics;
 context.fillRect = function(x,y,w,h) {
-    //graphics.beginFill(0xFF3300);
-    graphics.lineStyle(0, 0xffffff, 1);
+    graphics.lineStyle(0, 0xffffff, 1, 0);
     context.drawRect(x,y,w,h);
 }
 context.save = function() {};
