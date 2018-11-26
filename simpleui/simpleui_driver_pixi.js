@@ -110,14 +110,10 @@ function GetFontSize() {
 
 let fonts = [
     { name: 'sans-serif', size: 14, line_size: 14 },
-    { name: 'VJ Nina', size: 14, line_size: 14 },
-    { name: 'UPF Mana-16', size: 8, line_size: 14 },
-    { name: 'UPF Elementar Basica 13.11.4 a', size: 8, line_size: 14 }
 ];
 function DrawText_Stroke(text, x, y, color) {
-    //context.beginPath();
     let fontsize = GetFontSize();
-    let font = fonts[2];
+    let font = fonts[0];
     context.font = font.size + "px '" + font.name + "'";
     if (color == null) {
         color = m_simpleui.Color(255, 255, 255, 255);
@@ -125,7 +121,6 @@ function DrawText_Stroke(text, x, y, color) {
     context.fillStyle = make_css_color(color);
     let yoffset = fontsize - 2;
     context.fillText(text, x, y + yoffset);
-    //context.closePath();
 }
 
 function DrawText_Bitmap(text, x, y, color) {

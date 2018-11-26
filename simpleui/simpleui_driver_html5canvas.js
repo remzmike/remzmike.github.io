@@ -1,17 +1,17 @@
-var window_active = true;
+var window_active = 0 | true;
 
 let _mouse_pos = [0 | 0, 0 | 0];
+
+let _boundingClientRect;
 
 function set_size() {
     canvas.width = window.innerWidth - app.canvas_size_hack;
     canvas.height = window.innerHeight - app.canvas_size_hack;
 
-    //canvas.width = Math.max(canvas.width, 800);
-    //canvas.height = Math.max(canvas.height, 600);
-    // later: always stay the max size we see... (maybe)
-
     canvas_screen.width = canvas.width;
     canvas_screen.height = canvas.height;
+
+    _boundingClientRect = canvas.getBoundingClientRect();
 }
 
 function randomize_color(color) {
@@ -24,36 +24,25 @@ function randomize_color(color) {
 }
 
 function on_mouse_move(evt) {
-    let rect = canvas.getBoundingClientRect();
-    _mouse_pos[_x] = 0 | (evt.clientX - rect.left);
-    _mouse_pos[_y] = 0 | (evt.clientY - rect.top);
+    _mouse_pos[_x] = 0 | (evt.clientX - _boundingClientRect.left);
+    _mouse_pos[_y] = 0 | (evt.clientY - _boundingClientRect.top);
 }
 
 function on_mouse_down(evt) {
-    let x = evt.clientX;
-    let y = evt.clientY;
-    let button = evt.button;
-    ui.on_mousepressed(x, y, button);
+    ui.on_mousepressed(evt.clientX, evt.clientY, evt.button);
 }
 
 function on_mouse_up(evt) {
-    let x = evt.clientX;
-    let y = evt.clientY;
-    let button = evt.button;
-    ui.on_mousereleased(x, y, button);
+    ui.on_mousereleased(evt.clientX, evt.clientY, evt.button);
 }
 
 // meh
 function on_touch_start(evt) {
-    let x = evt.clientX;
-    let y = evt.clientY;
-    ui.on_mousepressed(x, y, _left);
+    ui.on_mousepressed(evt.clientX, evt.clientY, _left);
 }
 
 function on_touch_end(evt) {
-    let x = evt.clientX;
-    let y = evt.clientX;
-    ui.on_mousereleased(x, y, _left);
+    ui.on_mousereleased(evt.clientX, evt.clientY, _left);
 }
 
 function make_css_color(color) {
@@ -97,24 +86,12 @@ function GetFontSize() {
     return 0 | 14;
 }
 
-let fonts = [
-    { name: 'sans-serif', size: 14, line_size: 14 },
-    { name: 'VJ Nina', size: 14, line_size: 14 },
-    { name: 'UPF Mana-16', size: 8, line_size: 14 },
-    { name: 'UPF Elementar Basica 13.11.4 a', size: 8, line_size: 14 }
-];
 function DrawText_Stroke(text, x, y, color) {
-    //context.beginPath();
     let fontsize = GetFontSize();
-    let font = fonts[2];
-    context.font = font.size + "px '" + font.name + "'";
-    if (color == null) {
-        color = m_simpleui.Color(255, 255, 255, 255);
-    }
-    context.fillStyle = make_css_color(color);
-    let yoffset = fontsize - 2;
+    context.font = "16px Arial";
+    context.fillStyle = make_css_color( color );
+    let yoffset = fontsize;
     context.fillText(text, x, y + yoffset);
-    //context.closePath();
 }
 
 function DrawText_Bitmap(text, x, y, color) {
@@ -163,7 +140,7 @@ function DrawText_Cached(text, x, y, color) {
         canvas = o.canvas;
         context = o.context;
         {
-            DrawText_Original(text, 0, 0, color);
+            DrawText_Bitmap(text, 0, 0, color);
         }
         context = prev_context;
         canvas = prev_canvas;
@@ -176,14 +153,18 @@ function DrawText_Cached(text, x, y, color) {
 
 }
 
-function DrawText_Original(text, x, y, color) { // 10-12 ms ff
+function DrawText_Dynamic(text, x, y, color) { // 10-12 ms ff
     if (m_simpleui.config.drawtext_bitmap) {
-        DrawText_Bitmap(text, x, y, color);
+        if (true) {
+            DrawText_Cached(text, x, y, color);            
+        } else {
+            DrawText_Bitmap(text, x, y, color);
+        }
     } else {
         DrawText_Stroke(text, x, y, color);
     }
 }
-let DrawText = DrawText_Cached; // cached works now, and does increase performance.
+let DrawText = DrawText_Dynamic; // cached works now, and does increase performance.
 
 function DrawBox_(rect, color) {
     return;
@@ -280,7 +261,6 @@ let canvas = canvas_screen; // screen seems slightly faster
 console.assert(canvas);
 
 let context = canvas.getContext('2d', {alpha: false});
-context.font = '14px Arial';
 
 // i wanted to draw aliased/jagged lines on html5 canvas, but it's not possible (except manually)
 //
