@@ -17,7 +17,7 @@ Modifications to legacy ASP&#46;NET Webforms application.
 * Designed and developed custom json web api and developed new endpoints
 * Backported the AlchemySharp.cs query builder so we could use it
 * Re-implemented the largest page in the application using the new tech stack
-* Introduced npm to configure and build third party Javascript libraries
+* Introduced Node.js to configure and build third party Javascript libraries
 * Modified third party UI components to match our application look and feel
 * Created developer previews and documentation for new technology stack
 * Fixed bugs for Element, an open-source Vue.js component library
