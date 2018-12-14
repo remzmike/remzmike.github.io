@@ -19,6 +19,7 @@ const _ui_sound = {
 let yodel_buffer;
 let yodel_file_requested = 0 | false;
 let yodel_file_request_time;
+let yodel_pending_play = 0 | false;
   
 function play(audioBuffer) {
 
@@ -37,10 +38,13 @@ function play(audioBuffer) {
             .then(array_buffer => _ui_sound.audio.decodeAudioData(array_buffer))
             .then(audio_buffer => {
                 yodel_buffer = audio_buffer;
+                yodel_pending_play = 0 | true;
             });
         }        
     }
 
+    yodel_pending_play = 0 | false;
+    
     const source = _ui_sound.audio.createBufferSource();
     source.buffer = audioBuffer;
 
@@ -244,7 +248,7 @@ function do_sound_panel(uiid, first_x, first_y, first_visible, first_expanded) {
             ui.label('audio file requested...', Rectangle(0,0,200,24));
         } else {
             _ = ui.button(uiid + '-button-yodel', 'yodel', Rectangle(0,0,200,24));
-            if (_[_clicked]) {
+            if (yodel_pending_play || _[_clicked]) {
                 play(yodel_buffer);
             }    
         }
