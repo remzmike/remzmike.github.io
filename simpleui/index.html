@@ -77,29 +77,6 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
     <script src="app-ui-audio.js"></script>
 
     <script>
-        function render() {
-            //for (var i=0; i < uidraw.commands_count; ) {
-            for (var i = _hack; i < uidraw.commands.length; ) {                    
-                const fn = uidraw.commands[i];
-                i++;
-                const arg_count = uidraw.commands[i];
-                i++;
-                const args = [];
-                for (var j=0; j < arg_count; j++) {
-                    const arg = uidraw.commands[i];
-                    i++;
-                    args.push(arg);
-                }
-                /*const fn = cmd[0];
-                const args = cmd[1];                    
-                fn.apply(null, args);*/
-                fn.apply(null, args);
-                //fn.call(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-            }
-            //_hack = uidraw.commands.length;
-            uidraw.commands.length = 0; // i guess this assumes super-smart browser array implementation
-        }
-
         function do_ui() {
             do_background_anim();
             do_sidepanel();
@@ -121,7 +98,6 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
 
             if (app.window_active) {
                 ui.driver.FrameClear();
-                render();
                 ui.run(do_ui);
             } else {
                 // later: "click to enable" indicator here
@@ -153,9 +129,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
 
             window.requestAnimationFrame(main); // schedule first frame
             app.main_tick = performance.now();
-        };        
-
-        // https://github.com/petkaantonov/bluebird/wiki/Optimization-killers
+        };                
     </script>
 
 </body>

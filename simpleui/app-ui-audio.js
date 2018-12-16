@@ -1,134 +1,142 @@
-const _ui_sound_osc_types = ['sine', 'square', 'sawtooth', 'triangle'];
-
-const _ui_sound = {
+const _ui_audio = {
+    context: null,
     tone_point: Point(200, 200),
-    audio: null,
+    freq_range: 1200,    
     osc1: null,
     osc1_started: 0 | false,
     osc1_type_index: 0,
+    osc_types: ['sine', 'square', 'sawtooth', 'triangle'],
     volume: 10, // [0-100]
     gain1: null,
     analyser1: null,
     analyser1_times: null,
     analyser1_freqs: null,
-    throttle: 50, //80,
+    throttle: 50,
     conv1: null,
+    source1: null,
     sound_playing: 0 | false,
+    play_file_requested: 0 | false,
+    play_file_request_time: null,
+    play_pending: 0 | false,
+    play_buffer: null
 };
 
-let yodel_buffer;
-let yodel_file_requested = 0 | false;
-let yodel_file_request_time;
-let yodel_pending_play = 0 | false;
-  
-function play(audioBuffer) {
+function load_and_play(url) {
+    if (_ui_audio.play_file_requested) {
+        //return;            
+    } else {        
+        _ui_audio.play_file_requested = 0 | true;
+        _ui_audio.play_file_request_time = Date.now();            
 
-    if (!yodel_buffer) {
-
-        if (yodel_file_requested) {
-            return;            
-        } else {        
-            const URL = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/Yodel_Sound_Effect.mp3';
-
-            yodel_file_requested = 0 | true;
-            yodel_file_request_time = Date.now();
-
-            window.fetch(URL)
-            .then(response => response.arrayBuffer())
-            .then(array_buffer => _ui_sound.audio.decodeAudioData(array_buffer))
-            .then(audio_buffer => {
-                yodel_buffer = audio_buffer;
-                yodel_pending_play = 0 | true;
-            });
-        }        
+        window.fetch(url)
+        .then(response => response.arrayBuffer())
+        .then(array_buffer => _ui_audio.context.decodeAudioData(array_buffer))
+        .then(audio_buffer => {
+            _ui_audio.play_pending = 0 | true;
+            _ui_audio.play_buffer = audio_buffer;                
+        });
+        //return;
     }
-
-    yodel_pending_play = 0 | false;
-    
-    const source = _ui_sound.audio.createBufferSource();
-    source.buffer = audioBuffer;
-
-    _ui_sound.analyser1 = _ui_sound.audio.createAnalyser();
-    _ui_sound.analyser1.smoothingTimeConstant = 0.8; // 0.8 default
-    _ui_sound.analyser1.fftSize = 1024;
-    
-    _ui_sound.analyser1_times = new Uint8Array(_ui_sound.analyser1.frequencyBinCount);
-    _ui_sound.analyser1_freqs = new Uint8Array(_ui_sound.analyser1.frequencyBinCount);
-
-    _ui_sound.gain1.gain.value = get_volume();
-
-    source.connect(_ui_sound.analyser1);    
-    _ui_sound.analyser1.connect(_ui_sound.gain1);
-    _ui_sound.gain1.connect(_ui_sound.audio.destination);
-
-    source.start();
-    _ui_sound.sound_playing = 0 | true;
 }
 
-const _freq_range = 1200;
+function play() {
+
+    if (!_ui_audio.play_buffer) {
+
+        load_and_play('Yodel_Sound_Effect.mp3');
+
+    } else {
+
+        console.assert(_ui_audio.play_buffer);
+    
+        // a source object can only be .start()'ed once
+        // so you have to make one every time you want to play a sound
+        _ui_audio.source1 = _ui_audio.context.createBufferSource();
+        _ui_audio.source1.buffer = _ui_audio.play_buffer;
+            
+        _ui_audio.play_pending = 0 | false;
+    
+        _ui_audio.analyser1 = _ui_audio.context.createAnalyser();
+        _ui_audio.analyser1.smoothingTimeConstant = 0.8; // 0.8 default
+        _ui_audio.analyser1.fftSize = 1024;
+        
+        _ui_audio.analyser1_times = new Uint8Array(_ui_audio.analyser1.frequencyBinCount);
+        _ui_audio.analyser1_freqs = new Uint8Array(_ui_audio.analyser1.frequencyBinCount);
+    
+        _ui_audio.gain1.gain.value = get_volume();
+    
+        _ui_audio.source1.connect(_ui_audio.analyser1);    
+        _ui_audio.analyser1.connect(_ui_audio.gain1);
+        _ui_audio.gain1.connect(_ui_audio.context.destination);
+    
+        _ui_audio.source1.start(); // cannot call this more than once per source object, yadoink
+    
+        _ui_audio.sound_playing = 0 | true;    
+    }
+}
 
 function get_volume() {
-    const volume2 = _ui_sound.tone_point[_y] / _freq_range;
-    const final_volume = (_ui_sound.volume / 100) * volume2;
+    const volume2 = _ui_audio.tone_point[_y] / _ui_audio.freq_range;
+    const final_volume = (_ui_audio.volume / 100) * volume2;
     return final_volume;
 }
 
 function start_tone() {
     console.log('[start_tone]');
-    const frequency = _ui_sound.tone_point[_x];
-    const osc1_type = _ui_sound_osc_types[_ui_sound.osc1_type_index];
+    const frequency = _ui_audio.tone_point[_x];
+    const osc1_type = _ui_audio.osc_types[_ui_audio.osc1_type_index];
 
     // i guess i need this for now?
-    if (_ui_sound.osc1_started) {
-        _ui_sound.osc1.stop();
-        _ui_sound.osc1_started = 0 | false;
+    if (_ui_audio.osc1_started) {
+        _ui_audio.osc1.stop();
+        _ui_audio.osc1_started = 0 | false;
     }
 
-    _ui_sound.osc1 = _ui_sound.audio.createOscillator();
-    _ui_sound.conv1 = _ui_sound.audio.createConvolver();
+    _ui_audio.osc1 = _ui_audio.context.createOscillator();
+    _ui_audio.conv1 = _ui_audio.context.createConvolver();
 
-    _ui_sound.analyser1 = _ui_sound.audio.createAnalyser();
-    _ui_sound.analyser1.smoothingTimeConstant = 0.8; // 0.8 default
-    _ui_sound.analyser1.fftSize = 1024;
+    _ui_audio.analyser1 = _ui_audio.context.createAnalyser();
+    _ui_audio.analyser1.smoothingTimeConstant = 0.8; // 0.8 default
+    _ui_audio.analyser1.fftSize = 1024;
 
-    _ui_sound.analyser1_times = new Uint8Array(_ui_sound.analyser1.frequencyBinCount);
-    _ui_sound.analyser1_freqs = new Uint8Array(_ui_sound.analyser1.frequencyBinCount);
+    _ui_audio.analyser1_times = new Uint8Array(_ui_audio.analyser1.frequencyBinCount);
+    _ui_audio.analyser1_freqs = new Uint8Array(_ui_audio.analyser1.frequencyBinCount);
 
-    _ui_sound.osc1.type = osc1_type;
-    _ui_sound.osc1.frequency.value = frequency;
+    _ui_audio.osc1.type = osc1_type;
+    _ui_audio.osc1.frequency.value = frequency;
     
-    _ui_sound.gain1.gain.value = get_volume();
+    _ui_audio.gain1.gain.value = get_volume();
 
     // hmph, connecting things correctly matters xd
-    _ui_sound.osc1.connect(_ui_sound.analyser1);
-    _ui_sound.analyser1.connect(_ui_sound.gain1);
-    _ui_sound.gain1.connect(_ui_sound.audio.destination);
+    _ui_audio.osc1.connect(_ui_audio.analyser1);
+    _ui_audio.analyser1.connect(_ui_audio.gain1);
+    _ui_audio.gain1.connect(_ui_audio.context.destination);
 
-    _ui_sound.osc1.start(0);
-    _ui_sound.osc1_started = 0 | true;
+    _ui_audio.osc1.start(0);
+    _ui_audio.osc1_started = 0 | true;
 }
 
 function stop_tone() {
-    if (_ui_sound.osc1_started) {
-        _ui_sound.osc1.stop(0);
+    if (_ui_audio.osc1_started) {
+        _ui_audio.osc1.stop(0);
     }
-    _ui_sound.osc1_started = 0 | false;
+    _ui_audio.osc1_started = 0 | false;
 }
 
-let start_tone_limited = ui.throttle(start_tone, _ui_sound.throttle);
+let start_tone_limited = ui.throttle(start_tone, _ui_audio.throttle);
 
 function reset_tone() {
-    start_tone_limited = ui.throttle(start_tone, _ui_sound.throttle);
+    start_tone_limited = ui.throttle(start_tone, _ui_audio.throttle);
 
-    if (_ui_sound.osc1_started) {
+    if (_ui_audio.osc1_started) {
         stop_tone();
         start_tone_limited();
     }
 }
 
 function sample_analyser() {
-    _ui_sound.analyser1.getByteFrequencyData(_ui_sound.analyser1_freqs);
-    _ui_sound.analyser1.getByteTimeDomainData(_ui_sound.analyser1_times);
+    _ui_audio.analyser1.getByteFrequencyData(_ui_audio.analyser1_freqs);
+    _ui_audio.analyser1.getByteTimeDomainData(_ui_audio.analyser1_times);
 }
 
 function do_sound_panel(uiid, first_x, first_y, first_visible, first_expanded) {
@@ -138,34 +146,34 @@ function do_sound_panel(uiid, first_x, first_y, first_visible, first_expanded) {
     if (panel.visible && panel.expanded) {
 
         ui.layout_push(_horizontal);
-        _ = ui.slider(uiid + '-slider-volume', Rectangle(0, 0, 200, 20), 0, 100, _ui_sound.volume, '');
+        _ = ui.slider(uiid + '-slider-volume', Rectangle(0, 0, 200, 20), 0, 100, _ui_audio.volume, '');
         ui.label('volume', Rectangle(0,0,200,20));
         if (_[_changed]) {
-            _ui_sound.volume = _[_value];
+            _ui_audio.volume = _[_value];
             reset_tone();
         }
         ui.layout_pop();
 
         ui.layout_push(_horizontal);
-        _ = ui.slider(uiid + '-slider-throttle', Rectangle(0, 0, 200, 20), 0, 1000, _ui_sound.throttle, '');
+        _ = ui.slider(uiid + '-slider-throttle', Rectangle(0, 0, 200, 20), 0, 1000, _ui_audio.throttle, '');
         ui.label('throttle', Rectangle(0,0,200,20));
         if (_[_changed]) {
-            _ui_sound.throttle = _[_value];
+            _ui_audio.throttle = _[_value];
             reset_tone();
         }
         ui.layout_pop();
 
         ui.layout_push(_horizontal, -1);
         ui.group_buttons_begin();
-        for (var i = 0; i < _ui_sound_osc_types.length; i++) {
-            const iter_type = _ui_sound_osc_types[i];
-            const osc1_type = _ui_sound_osc_types[_ui_sound.osc1_type_index];
+        for (var i = 0; i < _ui_audio.osc_types.length; i++) {
+            const iter_type = _ui_audio.osc_types[i];
+            const osc1_type = _ui_audio.osc_types[_ui_audio.osc1_type_index];
             const is_checked = iter_type == osc1_type;
             _ = ui.checkbutton(uiid + '-osc_type_button-' + iter_type, iter_type, Rectangle(0, 0, 80, 24), is_checked);
             if (_[_changed] && _[_value]) {
-                _ui_sound.osc1_type_index = i;
+                _ui_audio.osc1_type_index = i;
                 // dont relay change for osc1 type change unless currently playing
-                _changed = 0 | _ui_sound.osc1_started;
+                _changed = 0 | _ui_audio.osc1_started;
             }
         }
         ui.group_buttons_end();
@@ -175,11 +183,17 @@ function do_sound_panel(uiid, first_x, first_y, first_visible, first_expanded) {
         const lx = peek[_x];
         const ly = peek[_y] + 300;
 
-        _ = do_slider2d(uiid + '-slider2d', Rectangle(0, 0, 400, 400), 0, _freq_range, _ui_sound.tone_point);
+        _ = do_slider2d(uiid + '-slider2d', Rectangle(0, 0, 400, 400), 0, _ui_audio.freq_range, _ui_audio.tone_point);
         if (_[_changed]) {
-            if (_ui_sound.tone_point[_x] != _[_x1] || _ui_sound.tone_point[_y] != _[_y1]) {
-                _ui_sound.tone_point[_x] = _[_x1];
-                _ui_sound.tone_point[_y] = _[_y1];
+            
+            // these two lines are bad, slider2d should return what i need instead
+            // _[_]
+            const bg_uiid = uiid + '-slider2d-bg';
+            const item_went_down = ui.state.item_went_down == bg_uiid;
+
+            if (item_went_down || (_ui_audio.tone_point[_x] != _[_x1] || _ui_audio.tone_point[_y] != _[_y1])) {
+                _ui_audio.tone_point[_x] = _[_x1];
+                _ui_audio.tone_point[_y] = _[_y1];
                 _changed = 0 | true;
             }
         }
@@ -188,17 +202,17 @@ function do_sound_panel(uiid, first_x, first_y, first_visible, first_expanded) {
             start_tone_limited();
         }
 
-        if (_ui_sound.analyser1 && _ui_sound.osc1_started || _ui_sound.sound_playing) {
-            //uidraw.label(_ui_sound.analyser1_times.length + '', Point(0, 0));
-            //uidraw.label(_ui_sound.analyser1_freqs.length + '', Point(0, 20));
+        if (_ui_audio.analyser1 && _ui_audio.osc1_started || _ui_audio.sound_playing) {
+            //uidraw.label(_ui_audio.analyser1_times.length + '', Point(0, 0));
+            //uidraw.label(_ui_audio.analyser1_freqs.length + '', Point(0, 20));
 
-            //console.log(_ui_sound.analyser1_times);
-            //console.log(_ui_sound.analyser1_freqs);            
+            //console.log(_ui_audio.analyser1_times);
+            //console.log(_ui_audio.analyser1_freqs);            
 
             sample_analyser();
 
-            const data1 = _ui_sound.analyser1_freqs;
-            const data2 = _ui_sound.analyser1_times;
+            const data1 = _ui_audio.analyser1_freqs;
+            const data2 = _ui_audio.analyser1_times;
 
             function asdf(uiid, rect, data1, data2) {
                 if (data1.length == 0 || data2.length == 0) return;
@@ -243,13 +257,13 @@ function do_sound_panel(uiid, first_x, first_y, first_visible, first_expanded) {
             asdf(uiid-'-graph', Rectangle(), data1, data2);
         }
 
-        // show this when (requested) and (no buffer -or- buffer was fetched in less than 1 second)
-        if ( yodel_file_requested && (!yodel_buffer || (Date.now() - yodel_file_request_time) < 1000)) {
+        // show this when (requested) -and- (no buffer -or- buffer was fetched in less than 1 second)
+        if ( _ui_audio.play_file_requested && (!_ui_audio.play_buffer || (Date.now() - _ui_audio.play_file_request_time) < 1000)) {
             ui.label('audio file requested...', Rectangle(0,0,200,24));
         } else {
-            _ = ui.button(uiid + '-button-yodel', 'yodel', Rectangle(0,0,200,24));
-            if (yodel_pending_play || _[_clicked]) {
-                play(yodel_buffer);
+            _ = ui.button(uiid + '-button-yodel', 'play yodel mp3', Rectangle(0,0,200,24));
+            if (_ui_audio.play_pending || _[_clicked]) {
+                play(_ui_audio.source1);
             }    
         }
 
@@ -262,16 +276,28 @@ function do_sound_panel(uiid, first_x, first_y, first_visible, first_expanded) {
     do_panel_end(uiid);
 }
 
+function do_message_panel(uiid, first_x, first_y, first_visible, first_expanded, message) {
+    let panel = do_panel_begin(uiid, first_x, first_y, first_visible, first_expanded);
+    if (panel.visible && panel.expanded) {
+        ui.label(message, Rectangle(0,0,200,20));
+    }
+    do_panel_end(uiid);
+}
+
 function do_ui_audio() {
     const row_x0 = 240;
     const row_y0 = 90;
 
     const expanded = !is_touch_device();
 
-    if (_ui_sound.audio) {
+    if (_ui_audio.context) {
         do_sound_panel('tone panel', row_x0, row_y0, true, expanded);
-    } else {
-        _ui_sound.audio = new AudioContext();
-        _ui_sound.gain1 = _ui_sound.audio.createGain();
+    } else {        
+        if (AudioContext) {
+            _ui_audio.context = new AudioContext();
+            _ui_audio.gain1 = _ui_audio.context.createGain();            
+        } else {
+            do_message_panel('audio error', row_x0, row_y0, true, true, 'AudioContext unavailable.');
+        }
     }
 }
