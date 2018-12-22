@@ -56,13 +56,6 @@ function play() {
 
         _tone_panel.play_pending = 0 | false;
 
-        _tone_panel.analyser1 = _tone_panel.context.createAnalyser();
-        _tone_panel.analyser1.smoothingTimeConstant = 0.8; // 0.8 default
-        _tone_panel.analyser1.fftSize = 1024;
-
-        _tone_panel.analyser1_times = new Uint8Array(_tone_panel.analyser1.frequencyBinCount);
-        _tone_panel.analyser1_freqs = new Uint8Array(_tone_panel.analyser1.frequencyBinCount);
-
         _tone_panel.gain1.gain.value = get_tone_volume();
 
         _tone_panel.source1.connect(_tone_panel.analyser1);
@@ -93,14 +86,6 @@ function start_tone() {
     }
 
     _tone_panel.osc1 = _tone_panel.context.createOscillator();
-    _tone_panel.conv1 = _tone_panel.context.createConvolver();
-
-    _tone_panel.analyser1 = _tone_panel.context.createAnalyser();
-    _tone_panel.analyser1.smoothingTimeConstant = 0.8; // 0.8 default
-    _tone_panel.analyser1.fftSize = 1024;
-
-    _tone_panel.analyser1_times = new Uint8Array(_tone_panel.analyser1.frequencyBinCount);
-    _tone_panel.analyser1_freqs = new Uint8Array(_tone_panel.analyser1.frequencyBinCount);
 
     _tone_panel.osc1.type = osc1_type;
     _tone_panel.osc1.frequency.value = frequency;
@@ -157,9 +142,7 @@ function do_analyser_graph(uiid, local_rect, data1, data2, color1, color2) {
         ui.layout_increment2(w, h);
         return;
     }
-
-    uidraw.push_linewidth(2);
-
+    
     uidraw.begin_path();
     uidraw.push_strokestyle(make_css_color(color1));
     let irange = data1.length;
@@ -174,6 +157,7 @@ function do_analyser_graph(uiid, local_rect, data1, data2, color1, color2) {
     uidraw.pop_strokestyle();
     uidraw.stroke();
 
+    uidraw.push_linewidth(2);
     uidraw.begin_path();
     uidraw.push_strokestyle(make_css_color(color2));
     irange = data2.length;
@@ -188,7 +172,6 @@ function do_analyser_graph(uiid, local_rect, data1, data2, color1, color2) {
     }
     uidraw.pop_strokestyle();
     uidraw.stroke();
-
     uidraw.pop_linewidth();
 
     ui.layout_increment2(w, h);
@@ -369,9 +352,15 @@ const _trix_panel = {
     analyser_freqs: null,
     play: 0 | false,
     volume: 0 | 5, // [0-100]
-    piano_grid: [[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0]],
-    bass_grid: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0]],
-    misc_grid: [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
+    piano_grid: [[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0]],        
+    bass_grid: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0]],    
+    misc_grid: [[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,0,0,0],[0,1,0,0],[1,0,0,0],[0,0,1,0],[0,0,0,1],[1,0,0,0],[0,0,0,0],[0,0,1,0],[1,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,1,0],[0,1,0,0]],
+    piano_gain: null,
+    bass_gain: null,    
+    misc_gain: null,
+    piano_volume: 0 | 50, // [0-100]
+    bass_volume: 0 | 80, // [0-100]
+    misc_volume: 0 | 100, // [0-100]
     time: 0,
     wait: 0,
     play_x: 0,
@@ -382,6 +371,7 @@ const _trix_panel = {
     scale_index: 0,
     grid_edit_tools: ['+', '-'],
     grid_edit_tool: 0,
+    schedule_notes_ahead: 3, // how many notes to schedule ahead-of-time while playing (to ensure precise note timing)
 }
 
 const MIN_TEMPO = 0.5;
@@ -398,6 +388,97 @@ function volume_to_gain(volume) {
     // 0.005848963143130564
     const gain = (Math.exp(volume_float) - 1) / (Math.E - 1);
     return gain;
+}
+
+/** pass grid width, height (in cells), cell dim (in pixels), values (array of columns) */
+function draw_trix_grid(w, h, dim, values) {
+    const peek = ui.layout_peek();
+    const rect = ui.layout_translated(Rectangle(0, 0, dim * w, dim * h));
+    uidraw.rectangle(rect, uidraw.normal_back);
+
+    for (let x = 0; x < w; x++) {
+        for (let y = 0; y < h; y++) {
+            if ((x >= 0 && x < 4) || (x >= 8 && x < 12)) {
+                uidraw.rectangle(Rectangle(rect[_x] + x * dim + 1, rect[_y] + y * dim + 1, dim - 2, dim - 2), Color(36 + 18 + 9, 36 + 18 + 9, 36 + 18 + 9, 255));
+            } else {
+                uidraw.rectangle(Rectangle(rect[_x] + x * dim + 1, rect[_y] + y * dim + 1, dim - 2, dim - 2), Color(36 + 9 + 9, 36 + 9 + 9, 36 + 9 + 9, 255));
+            }
+            if (values[x][y]) {
+                let color_on;
+                if (x == _trix_panel.play_x) {
+                    color_on = uidraw.activating_face;
+                } else {
+                    color_on = uidraw.accent;
+                }
+                uidraw.rectangle(Rectangle(rect[_x] + x * dim + 1, rect[_y] + y * dim + 1, dim - 2, dim - 2), color_on);
+            }
+        }
+    }
+    
+    uidraw.rectangle_outline(uidraw.rectangle_dilate(Rectangle(rect[_x] + _trix_panel.play_x * dim, peek[_y], dim, dim * h), 3), Color(0, 0, 0, 255));
+    uidraw.push_linewidth(2);
+    uidraw.rectangle_outline(uidraw.rectangle_dilate(Rectangle(rect[_x] + _trix_panel.play_x * dim, peek[_y], dim, dim * h), 2), Color(128, 128, 128, 255));
+    uidraw.pop_linewidth();
+    //uidraw.rectangle(uidraw.rectangle_erode(Rectangle(peek[_x] + _trix_panel.play_x * dim, peek[_y], dim, dim * 16), 1), Color(255,255,255,255));    
+}
+
+function do_trix_grid(uiid, w, h, dim, values) {
+    draw_trix_grid(w, h, dim, values);
+    do_trix_grid_nodraw(uiid, w, h, dim, values);
+}
+
+function do_trix_grid_nodraw(uiid, w, h, dim, values) {
+
+    let state = ui.get_state(uiid);
+    if (!state) {
+        state = ui.set_state(uiid, {
+            'previous_drag_x': null,
+            'previous_drag_y': null,
+        });
+    };
+
+    const peek = ui.layout_peek();
+    ui.add_hotspot(uiid, Rectangle(peek[_x], peek[_y], dim * w, dim * h));
+    const ox = 0 | peek[_x];
+    const oy = 0 | peek[_y];
+
+    let x = 0 | (ui.driver.GetCursorX() - ox) / dim;
+    let y = 0 | (ui.driver.GetCursorY() - oy) / dim;
+
+    const cell_clicked = ui.state.item_went_down == uiid;
+    const cell_clicked_right = ui.state.item_went_down_right == uiid;
+
+    const cell_dragged = (
+        ui.state.item_held == uiid
+    ) && (
+            x >= 0 && x < w && y >= 0 && y < h
+        ) && (
+            state.previous_drag_x != x
+            || state.previous_drag_y != y
+        );
+
+    const cell_dragged_right = (
+        ui.state.item_held_right == uiid
+    ) && (
+            x >= 0 && x < w && y >= 0 && y < h
+        ) && (
+            state.previous_drag_x != x
+            || state.previous_drag_y != y
+        );
+
+    if (cell_dragged || cell_clicked) {
+        values[x][y] = 0 | _trix_panel.grid_edit_tool == 0;
+        state.previous_drag_x = x;
+        state.previous_drag_y = y;
+    }
+
+    if (cell_dragged_right || cell_clicked_right) {
+        values[x][y] = 0 | _trix_panel.grid_edit_tool == 1;
+        state.previous_drag_x = x;
+        state.previous_drag_y = y;
+    }
+
+    ui.layout_increment2(dim * w, dim * h);
 }
 
 function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
@@ -462,49 +543,31 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
             }
         }
         ui.group_buttons_end();
-        ui.layout_pop();*/
+        ui.layout_pop();*/        
+        
+        const grid_w = dim * 16;
+        const grid_w_left = 0 | grid_w/2;
+        const grid_w_right = grid_w - grid_w_left;
 
-        ui.label('drag to edit, right mouse to erase', Rectangle(0, 0, 100, 20));
+        ui.layout_push(_horizontal)        
+        ui.label('piano:', Rectangle(0, 0, grid_w_left, 24));
+        _ = ui.slider(uiid + '-piano-volume', Rectangle(0, 12, grid_w_right, 12), 0, 100, _trix_panel.piano_volume, '');
+        if (_[_changed]) {
+            _trix_panel.piano_volume = _[_value];
+            _trix_panel.piano_gain.gain.value = volume_to_gain(_[_value]);
+        }
+
+        ui.label('bass:', Rectangle(20, 0, grid_w_left, 24));
+        _ = ui.slider(uiid + '-bass-volume', Rectangle(20, 12, grid_w_right, 12), 0, 100, _trix_panel.bass_volume, '');
+        if (_[_changed]) {
+            _trix_panel.bass_volume = _[_value];
+            _trix_panel.bass_gain.gain.value = volume_to_gain(_[_value]);
+        }
+        ui.layout_pop();
 
         const bar_color = Color(255, 255, 255, 92);
         const peek = ui.layout_peek();
-        const horz = ui.layout_push(_horizontal);
-
-        /** pass grid width, height (in cells), cell dim (in pixels), values (array of columns) */
-        function draw_trix_grid(w, h, dim, values) {
-            const rect = ui.layout_translated(Rectangle(0, 0, dim * w, dim * h));
-            uidraw.rectangle(rect, uidraw.normal_back);
-
-            for (let x = 0; x < w; x++) {
-                for (let y = 0; y < h; y++) {
-                    if ((x >= 0 && x < 4) || (x >= 8 && x < 12)) {
-                        uidraw.rectangle(Rectangle(rect[_x] + x * dim + 1, rect[_y] + y * dim + 1, dim - 2, dim - 2), Color(36 + 18 + 9, 36 + 18 + 9, 36 + 18 + 9, 255));
-                    } else {
-                        uidraw.rectangle(Rectangle(rect[_x] + x * dim + 1, rect[_y] + y * dim + 1, dim - 2, dim - 2), Color(36 + 9 + 9, 36 + 9 + 9, 36 + 9 + 9, 255));
-                    }
-                    if (values[x][y]) {
-                        let color_on;
-                        if (x == _trix_panel.play_x) {
-                            color_on = uidraw.activating_face;
-                        } else {
-                            color_on = uidraw.accent;
-                        }
-                        uidraw.rectangle(Rectangle(rect[_x] + x * dim + 1, rect[_y] + y * dim + 1, dim - 2, dim - 2), color_on);
-                    }
-                }
-            }
-
-            uidraw.rectangle_outline(uidraw.rectangle_dilate(Rectangle(rect[_x] + _trix_panel.play_x * dim, peek[_y], dim, dim * h), 3), Color(0, 0, 0, 255));
-            uidraw.push_linewidth(2);
-            uidraw.rectangle_outline(uidraw.rectangle_dilate(Rectangle(rect[_x] + _trix_panel.play_x * dim, peek[_y], dim, dim * h), 2), Color(128, 128, 128, 255));
-            uidraw.pop_linewidth();
-            //uidraw.rectangle(uidraw.rectangle_erode(Rectangle(peek[_x] + _trix_panel.play_x * dim, peek[_y], dim, dim * 16), 1), Color(255,255,255,255));    
-        }
-
-        function do_trix_grid(uiid, w, h, dim, values) {
-            draw_trix_grid(w, h, dim, values);
-            do_trix_grid_nodraw(uiid, w, h, dim, values);
-        }
+        ui.layout_push(_horizontal);
 
         do_trix_grid(uiid + '-piano-grid', 16, 16, dim, _trix_panel.piano_grid);
 
@@ -512,67 +575,22 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
 
         // --
 
-        function do_trix_grid_nodraw(uiid, w, h, dim, values) {
-
-            let state = ui.get_state(uiid);
-            if (!state) {
-                state = ui.set_state(uiid, {
-                    'previous_drag_x': null,
-                    'previous_drag_y': null,
-                });
-            };
-
-            const peek = ui.layout_peek();
-            ui.add_hotspot(uiid, Rectangle(peek[_x], peek[_y], dim * w, dim * h));
-            const ox = 0 | peek[_x];
-            const oy = 0 | peek[_y];
-
-            let x = 0 | (ui.driver.GetCursorX() - ox) / dim;
-            let y = 0 | (ui.driver.GetCursorY() - oy) / dim;
-
-            const cell_clicked = ui.state.item_went_down == uiid;
-            const cell_clicked_right = ui.state.item_went_down_right == uiid;
-
-            const cell_dragged = (
-                ui.state.item_held == uiid
-            ) && (
-                    x >= 0 && x < w && y >= 0 && y < h
-                ) && (
-                    state.previous_drag_x != x
-                    || state.previous_drag_y != y
-                );
-
-            const cell_dragged_right = (
-                ui.state.item_held_right == uiid
-            ) && (
-                    x >= 0 && x < w && y >= 0 && y < h
-                ) && (
-                    state.previous_drag_x != x
-                    || state.previous_drag_y != y
-                );
-
-            if (cell_dragged || cell_clicked) {
-                values[x][y] = 0 | _trix_panel.grid_edit_tool == 0;
-                state.previous_drag_x = x;
-                state.previous_drag_y = y;
-            }
-
-            if (cell_dragged_right || cell_clicked_right) {
-                values[x][y] = 0 | _trix_panel.grid_edit_tool == 1;
-                state.previous_drag_x = x;
-                state.previous_drag_y = y;
-            }
-
-            ui.layout_increment2(dim * w, dim * h);
-        }
-
         // -- 
 
         do_trix_grid(uiid + '-bass-grid', 16, 16, dim, _trix_panel.bass_grid);
 
         ui.layout_pop(); // dual horizontal grids
 
-        ui.layout_increment2(0, 20);
+        ui.label('( edit cells with left and right mouse )', Rectangle(190, 0, 100, 20));
+
+        ui.layout_push(_horizontal);
+        ui.label('misc:', Rectangle(0, 0, 100, 24));
+        _ = ui.slider(uiid + '-misc-volume', Rectangle(60, 12, grid_w_right, 12), 0, 100, _trix_panel.misc_volume, '');
+        if (_[_changed]) {
+            _trix_panel.misc_volume = _[_value];
+            _trix_panel.misc_gain.gain.value = volume_to_gain(_[_value]);
+        }
+        ui.layout_pop();
 
         ui.layout_push(_horizontal);
         do_trix_grid(uiid + '-misc-grid', 16, 4, dim, _trix_panel.misc_grid);
@@ -602,7 +620,7 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
         ui.layout_pop(); // right half or misc-grid row
         ui.layout_pop(); // misc-grid row's container
 
-        ui.layout_increment2(0, 20);
+        ui.layout_increment2(0, 20);        
 
         // analyser graph        
         const graph_w = dim * 16 * 2 + 20;
@@ -610,6 +628,15 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
         sample_trix_analyser();
         uidraw.rectangle(ui.layout_translated(Rectangle(0, 0, graph_w, graph_h)), uidraw.normal_back);
         do_analyser_graph(uiid - '-analyser-graph', Rectangle(0, 0, graph_w, graph_h), _trix_panel.analyser_freqs, _trix_panel.analyser_times);
+
+        ui.label('advanced:', Rectangle(0,0,200,20));
+        ui.layout_push(_horizontal);
+        _ = ui.slider(uiid + '-schedule-notes-ahead-slider', Rectangle(0,0,200,20), 0, 8, _trix_panel.schedule_notes_ahead, '');
+        if (_[_changed]) {
+            _trix_panel.schedule_notes_ahead = _[_value];
+        }                
+        ui.label('schedule '+_trix_panel.schedule_notes_ahead+' notes ahead', Rectangle(4,0,200,20));
+        ui.layout_pop();
 
         //-----------------------------------------------------------------------------------------
 
@@ -622,24 +649,24 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
 
 function trix_play_column(x, time) {
     const scale = scales[_trix_panel.scale_index];
-    const dest = _trix_panel.gain;
+    //const dest = _trix_panel.gain;
 
     // all notes in col start play now
     for (let y = 0; y < 16; y++) {
         if (_trix_panel.piano_grid[x][y]) {                    
             const piano_rate = freq[scale[y]];
-            play_sample('piano.ogg', dest, time, piano_rate);
+            play_sample('piano.ogg', _trix_panel.piano_gain, time, piano_rate);
         }
         if (_trix_panel.bass_grid[x][y]) {
             const bass_rate = freq[scale[y]];
-            play_sample('bass.ogg', dest, time, bass_rate);
+            play_sample('bass.ogg', _trix_panel.bass_gain, time, bass_rate);
         }
     }
     const misc_keys = ['kick.ogg', 'snare.ogg', 'hat.ogg', 'ride.ogg'];
     for (let y = 0; y < 4; y++) {
         if (_trix_panel.misc_grid[x][y]) {
             const key = misc_keys[y];
-            play_sample(key, dest, time, 1);
+            play_sample(key, _trix_panel.misc_gain, time, 1);
         }
     }
 }
@@ -666,7 +693,7 @@ function trix_play() {
         // 2nd note: schedule = 1, play = 4, should schedule fifth note, but with 4 waits not the 0 or 1 it will do
         // so actual time isn't based on j, but on the delta between two x cursors
         // time needs to be... (x - play_x)        
-        const schedule_x2 = _trix_panel.play_x_long + 3;
+        const schedule_x2 = _trix_panel.play_x_long + _trix_panel.schedule_notes_ahead;
         while (_trix_panel.schedule_x <= schedule_x2) {
             const delta = _trix_panel.schedule_x - _trix_panel.play_x_long;
             const time_offset = delta * _trix_panel.wait; // 0 * wait = now, 1 * wait = next
@@ -726,18 +753,34 @@ function do_ui_audio() {
         if (AudioContext) {
             _tone_panel.context = new AudioContext();
             _tone_panel.gain1 = _tone_panel.context.createGain();
+            _tone_panel.analyser1 = _tone_panel.context.createAnalyser();
+            //_tone_panel.analyser1.smoothingTimeConstant = 0.8; // 0.8 default
+            _tone_panel.analyser1.fftSize = 512;    
+            _tone_panel.analyser1_times = new Uint8Array(_tone_panel.analyser1.frequencyBinCount);
+            _tone_panel.analyser1_freqs = new Uint8Array(_tone_panel.analyser1.frequencyBinCount);    
 
             _trix_panel.context = new AudioContext();
             _trix_panel.gain = _trix_panel.context.createGain();
             _trix_panel.gain.gain.value = volume_to_gain(_trix_panel.volume);
+            _trix_panel.piano_gain = _trix_panel.context.createGain();
+            _trix_panel.piano_gain.gain.value = volume_to_gain(_trix_panel.piano_volume);
+            _trix_panel.bass_gain = _trix_panel.context.createGain();
+            _trix_panel.bass_gain.gain.value = volume_to_gain(_trix_panel.bass_volume);
+            _trix_panel.misc_gain = _trix_panel.context.createGain();
+            _trix_panel.misc_gain.gain.value = volume_to_gain(_trix_panel.misc_volume);            
             _trix_panel.compressor = _trix_panel.context.createDynamicsCompressor();
 
             _trix_panel.analyser = _trix_panel.context.createAnalyser();
-            _trix_panel.analyser.smoothingTimeConstant = 0.8; // 0.8 default
-            _trix_panel.analyser.fftSize = 1024;
+            //_trix_panel.analyser.smoothingTimeConstant = 0.8; // 0.8 default
+            _trix_panel.analyser.fftSize = 512;
 
             _trix_panel.analyser_times = new Uint8Array(_trix_panel.analyser.frequencyBinCount);
             _trix_panel.analyser_freqs = new Uint8Array(_trix_panel.analyser.frequencyBinCount);
+
+            // connect individual grid gains to master gain
+            _trix_panel.piano_gain.connect(_trix_panel.gain);
+            _trix_panel.bass_gain.connect(_trix_panel.gain);
+            _trix_panel.misc_gain.connect(_trix_panel.gain);
 
             // RIGHT
             _trix_panel.gain.connect(_trix_panel.compressor);
