@@ -353,14 +353,16 @@ const _trix_panel = {
     play: 0 | false,
     volume: 0 | 5, // [0-100]
     piano_grid: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0]],        
-    bass_grid: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0]],    
-    misc_grid: [[0,1,0,0],[0,0,0,0],[0,0,1,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,1,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],
+    bass_grid: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0]],    
+    misc_grid: [[0,1,0,0],[0,0,0,0],[0,0,1,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,1,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],    
     piano_gain: null,
     bass_gain: null,    
     misc_gain: null,
     piano_volume: 0 | 50, // [0-100]
     bass_volume: 0 | 80, // [0-100]
     misc_volume: 0 | 80, // [0-100]
+    piano_convolver: null,
+    piano_convolver_enabled: 0 | true,
     time: 0,
     wait: 0,
     play_x: 0,
@@ -635,8 +637,17 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
         if (_[_changed]) {
             _trix_panel.schedule_notes_ahead = _[_value];
         }                
-        ui.label('schedule '+_trix_panel.schedule_notes_ahead+' notes ahead', Rectangle(4,0,200,20));
+        ui.label('schedule '+_trix_panel.schedule_notes_ahead+' notes ahead', Rectangle(4,0,200,20));        
         ui.layout_pop();
+        
+        ui.layout_push(_horizontal);
+        _ = ui.checkbox(uiid + '-piano-convolver-checkbox', Rectangle(0,0,20,20), _trix_panel.piano_convolver_enabled);
+        ui.label('piano reverb', Rectangle(4,0,100,20));
+        ui.layout_pop();
+
+        if (_[_changed]) {
+            _trix_panel.piano_convolver_enabled = _[_value];
+        }
 
         //-----------------------------------------------------------------------------------------
 
@@ -647,6 +658,29 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
     do_panel_end(uiid);
 }
 
+function load_convolver_sample() {
+    const impulseUrl = 'impulse.mp3';
+
+    ajaxRequest = new XMLHttpRequest();
+    ajaxRequest.open('GET', impulseUrl, true);
+    ajaxRequest.responseType = 'arraybuffer';
+  
+    ajaxRequest.onload = function() {
+      var impulseData = ajaxRequest.response;
+  
+      _trix_panel.context.decodeAudioData(impulseData, function(buffer) {
+          _trix_panel.piano_convolver.buffer = buffer;
+          _trix_panel.piano_convolver.loop = false;
+          _trix_panel.piano_convolver.normalize = true;
+        },
+  
+        function(e){"Error with decoding audio data" + e.err});
+  
+    }
+  
+    ajaxRequest.send();  
+}
+
 function trix_play_column(x, time) {
     const scale = scales[_trix_panel.scale_index];
     //const dest = _trix_panel.gain;
@@ -655,7 +689,13 @@ function trix_play_column(x, time) {
     for (let y = 0; y < 16; y++) {
         if (_trix_panel.piano_grid[x][y]) {                    
             const piano_rate = freq[scale[y]];
-            play_sample('piano.ogg', _trix_panel.piano_gain, time, piano_rate);
+            let dest;
+            if (_trix_panel.piano_convolver_enabled && _trix_panel.piano_convolver.buffer) {
+                dest = _trix_panel.piano_convolver;
+            } else {
+                dest = _trix_panel.piano_gain;
+            }
+            play_sample('piano.ogg', dest, time, piano_rate);
         }
         if (_trix_panel.bass_grid[x][y]) {
             const bass_rate = freq[scale[y]];
@@ -770,6 +810,9 @@ function do_ui_audio() {
             _trix_panel.misc_gain.gain.value = volume_to_gain(_trix_panel.misc_volume);            
             _trix_panel.compressor = _trix_panel.context.createDynamicsCompressor();
 
+            _trix_panel.piano_convolver = _trix_panel.context.createConvolver();
+            _trix_panel.piano_convolver.connect(_trix_panel.piano_gain);
+
             _trix_panel.analyser = _trix_panel.context.createAnalyser();
             //_trix_panel.analyser.smoothingTimeConstant = 0.8; // 0.8 default
             _trix_panel.analyser.fftSize = 512;
@@ -786,6 +829,8 @@ function do_ui_audio() {
             _trix_panel.gain.connect(_trix_panel.compressor);
             _trix_panel.compressor.connect(_trix_panel.analyser);
             _trix_panel.analyser.connect(_trix_panel.context.destination);
+
+            load_convolver_sample();
 
             const audio_files = ['piano.ogg', 'bass.ogg', 'kick.ogg', 'snare.ogg', 'hat.ogg', 'ride.ogg'];
             for (let i = 0; i < audio_files.length; i++) {
