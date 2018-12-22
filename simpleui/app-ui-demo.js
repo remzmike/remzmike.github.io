@@ -138,7 +138,7 @@ function do_sidepanel() {
         ui.group_buttons_begin();
         for(var i=0; i< app.desktops.length; i++) {
             const name = app.desktops[i];
-            const is_desktop_active = name == app.desktop;
+            const is_desktop_active = 0 | name == app.desktop;
             const button_text = name;
             _ = ui.checkbutton('sidepanel-desktop-button-' + i, button_text, Rectangle(0,0,100,24), is_desktop_active);
             if (_[_changed] && _[_value]) {
@@ -595,6 +595,8 @@ function random_anim_vector() {
     if (Math.random() < 0.5) {
         vecy = -vecy;
     }
+    m_v8.assert_smi(vecx);
+    m_v8.assert_smi(vecy);
     return Point(vecx, vecy);
 }
 
@@ -621,14 +623,6 @@ function do_background_anim() {
         const item = anim_items[i];
         const vec = anim_vectors[i];
 
-        let prev_index;
-        if (i == 0) {
-            prev_index = anim_items.length - 1;
-        } else {
-            prev_index = i - 1;
-        }
-        const prev = anim_items[prev_index];
-
         uidraw.line_to(item[_x], item[_y]);
 
         // update positions from vectors                
@@ -640,12 +634,16 @@ function do_background_anim() {
         const min_y = 0 | -canvas.height;
         const max_y = 0 | canvas.height * 2;
 
+        m_v8.assert_smi(item[_x]);
+        m_v8.assert_smi(item[_y]);       
+        m_v8.assert_smi(vec[_x]);       
+        m_v8.assert_smi(vec[_y]);       
         // reverse vectors when out of bounds
-        if (item[_x] < min_x || item[_x] > max_x) {
-            vec[_x] = 0 | -vec[_x];
+        if (item[_x] < min_x || item[_x] > max_x) {            
+            vec[_x] = 0 | vec[_x] * -1; // deopt attempt (- vs * -1)
         }
-        if (item[_y] < min_y || item[_y] > max_y) {
-            vec[_y] = 0 | -vec[_y];
+        if (item[_y] < min_y || item[_y] > max_y) {            
+            vec[_y] = 0 | vec[_y] * -1;
         }
     }
 
