@@ -142,7 +142,7 @@ function do_analyser_graph(uiid, local_rect, data1, data2, color1, color2) {
         ui.layout_increment2(w, h);
         return;
     }
-    
+
     uidraw.begin_path();
     uidraw.push_strokestyle(make_css_color(color1));
     let irange = data1.length;
@@ -184,37 +184,43 @@ function do_tone_panel(uiid, first_x, first_y, first_visible, first_expanded) {
     if (panel.visible && panel.expanded) {
 
         ui.layout_push(_horizontal);
-        _ = ui.slider(uiid + '-slider-volume', Rectangle(0, 0, 200, 20), 0, 100, _tone_panel.volume, '');
-        ui.label('volume', Rectangle(0, 0, 200, 20));
-        if (_[_changed]) {
-            _tone_panel.volume = _[_value];
-            reset_tone();
+        {
+            _ = ui.slider(uiid + '-slider-volume', Rectangle(0, 0, 200, 20), 0, 100, _tone_panel.volume, '');
+            ui.label('volume', Rectangle(0, 0, 200, 20));
+            if (_[_changed]) {
+                _tone_panel.volume = _[_value];
+                reset_tone();
+            }
         }
         ui.layout_pop();
 
         ui.layout_push(_horizontal);
-        _ = ui.slider(uiid + '-slider-throttle', Rectangle(0, 0, 200, 20), 0, 1000, _tone_panel.throttle, '');
-        ui.label('throttle', Rectangle(0, 0, 200, 20));
-        if (_[_changed]) {
-            _tone_panel.throttle = _[_value];
-            reset_tone();
+        {
+            _ = ui.slider(uiid + '-slider-throttle', Rectangle(0, 0, 200, 20), 0, 1000, _tone_panel.throttle, '');
+            ui.label('throttle', Rectangle(0, 0, 200, 20));
+            if (_[_changed]) {
+                _tone_panel.throttle = _[_value];
+                reset_tone();
+            }
         }
         ui.layout_pop();
 
         ui.layout_push(_horizontal, -1);
-        ui.group_buttons_begin();
-        for (let i = 0; i < _tone_panel.osc_types.length; i++) {
-            const iter_type = _tone_panel.osc_types[i];
-            const osc1_type = _tone_panel.osc_types[_tone_panel.osc1_type_index];
-            const is_checked = iter_type == osc1_type;
-            _ = ui.checkbutton(uiid + '-osc_type_button-' + iter_type, iter_type, Rectangle(0, 0, 80, 24), is_checked);
-            if (_[_changed] && _[_value]) {
-                _tone_panel.osc1_type_index = i;
-                // dont relay change for osc1 type change unless currently playing
-                _changed = 0 | _tone_panel.osc1_started;
+        {
+            ui.group_buttons_begin();
+            for (let i = 0; i < _tone_panel.osc_types.length; i++) {
+                const iter_type = _tone_panel.osc_types[i];
+                const osc1_type = _tone_panel.osc_types[_tone_panel.osc1_type_index];
+                const is_checked = iter_type == osc1_type;
+                _ = ui.checkbutton(uiid + '-osc_type_button-' + iter_type, iter_type, Rectangle(0, 0, 80, 24), is_checked);
+                if (_[_changed] && _[_value]) {
+                    _tone_panel.osc1_type_index = i;
+                    // dont relay change for osc1 type change unless currently playing
+                    _changed = 0 | _tone_panel.osc1_started;
+                }
             }
+            ui.group_buttons_end();
         }
-        ui.group_buttons_end();
         ui.layout_pop();
 
         _ = do_slider2d(uiid + '-slider2d', Rectangle(0, 0, 400, 400), 0, _tone_panel.freq_range, _tone_panel.tone_point);
@@ -352,17 +358,50 @@ const _trix_panel = {
     analyser_freqs: null,
     play: 0 | false,
     volume: 0 | 5, // [0-100]
-    piano_grid: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],        
-    bass_grid: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0]],    
-    misc_grid: [[0,1,0,0],[0,0,0,0],[0,0,1,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,1,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],    
-    piano_gain: null,
-    bass_gain: null,    
-    misc_gain: null,
-    piano_volume: 0 | 50, // [0-100]
-    bass_volume: 0 | 80, // [0-100]
+    //
+    biquad_types: ['lowpass','highpass','bandpass','lowshelf','highshelf','peaking','notch','allpass'],
+    shaper_oversample_types: ['none', '2x', '4x'],
+    //
+    piano_grid: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+    bass_grid: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+    misc_grid: [[0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
+    //
+    piano: {
+        dest: null,
+        volume: 0 | 50, // [0-100],
+        detune: 0,    
+        gain: null,        
+        convolver: null,        
+        convolver_enabled: 0 | true,
+        biquad: null,
+        biquad_type_index: 0,
+        biquad_enabled: 0 | true,
+        shaper: null,
+        shaper_oversample_index: 2,
+        shaper_enabled: 0 | true,
+        panner: null,        
+    },
+    //
+    bass: {
+        dest: null,
+        volume: 0 | 80, // [0-100],
+        detune: 0,    
+        gain: null,        
+        convolver: null,        
+        convolver_enabled: 0 | false,
+        biquad: null,
+        biquad_type_index: 0,
+        biquad_enabled: 0 | false,
+        shaper: null,
+        shaper_oversample_index: 0,
+        shaper_enabled: 0 | false,
+        panner: null,        
+    },
+    //    
+    misc_dest: null,
     misc_volume: 0 | 80, // [0-100]
-    piano_convolver: null,
-    piano_convolver_enabled: 0 | true,
+    misc_gain: null,    
+    //
     time: 0,
     wait: 0,
     play_x: 0,
@@ -416,7 +455,7 @@ function draw_trix_grid(w, h, dim, values) {
             }
         }
     }
-    
+
     uidraw.rectangle_outline(uidraw.rectangle_dilate(Rectangle(rect[_x] + _trix_panel.play_x * dim, peek[_y], dim, dim * h), 3), Color(0, 0, 0, 255));
     uidraw.push_linewidth(2);
     uidraw.rectangle_outline(uidraw.rectangle_dilate(Rectangle(rect[_x] + _trix_panel.play_x * dim, peek[_y], dim, dim * h), 2), Color(128, 128, 128, 255));
@@ -500,39 +539,45 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
             ui.label('schedule_x: ' + _trix_panel.schedule_x, Rectangle(0, 0, 200, 20));
         }
 
-        ui.layout_push(_horizontal); // play/pause/volume row
-        ui.layout_push(_horizontal, -1);
-        ui.group_buttons_begin();
-        const buttons = ['pause', 'play'];
-        for (var i = 0; i < buttons.length; i++) {
-            const is_current = (i == 1 && _trix_panel.play) || (i == 0 && !_trix_panel.play);
-            const button_text = buttons[i];
-            _ = ui.checkbutton(uiid + '-playpause-buttons-' + i, button_text, Rectangle(0, 0, 100, 24), is_current, 28, 2);
-            if (_[_changed] && _[_value]) {
-                if (i == 0) {
-                    // reset playahead
-                    _trix_panel.schedule_x = _trix_panel.play_x;
-                    _trix_panel.play_x_long = _trix_panel.play_x;
-                    _trix_panel.play = 0 | false;
-                } else {
-                    _trix_panel.play = 0 | true;
+        ui.layout_push(_horizontal); // play/pause/volume row      
+        {
+            ui.layout_push(_horizontal, -1);
+            {
+                ui.group_buttons_begin();
+                const buttons = ['pause', 'play'];
+                for (var i = 0; i < buttons.length; i++) {
+                    const is_current = (i == 1 && _trix_panel.play) || (i == 0 && !_trix_panel.play);
+                    const button_text = buttons[i];
+                    _ = ui.checkbutton(uiid + '-playpause-buttons-' + i, button_text, Rectangle(0, 0, 100, 24), is_current, 28, 2);
+                    if (_[_changed] && _[_value]) {
+                        if (i == 0) {
+                            // reset playahead
+                            _trix_panel.schedule_x = _trix_panel.play_x;
+                            _trix_panel.play_x_long = _trix_panel.play_x;
+                            _trix_panel.play = 0 | false;
+                        } else {
+                            _trix_panel.play = 0 | true;
+                        }
+                    }
+                }
+                ui.group_buttons_end();
+            }
+            ui.layout_pop();
+
+            ui.layout_increment2(140, 0);
+
+            ui.layout_push(_horizontal);
+            {
+                _ = ui.slider(uiid + '-slider-volume', Rectangle(0, 0, 200, 24), 0, 100, _trix_panel.volume, '');
+                ui.label('volume', Rectangle(4, 0, 100, 20));
+                if (_[_changed]) {
+                    _trix_panel.volume = _[_value];
+                    _trix_panel.gain.gain.value = volume_to_gain(_[_value]);
                 }
             }
+            ui.layout_pop();
         }
-        ui.group_buttons_end();
-        ui.layout_pop();
-
-        ui.layout_increment2(140, 0);
-
-        ui.layout_push(_horizontal);
-        _ = ui.slider(uiid + '-slider-volume', Rectangle(0, 0, 200, 24), 0, 100, _trix_panel.volume, '');
-        ui.label('volume', Rectangle(4, 0, 100, 20));
-        if (_[_changed]) {
-            _trix_panel.volume = _[_value];
-            _trix_panel.gain.gain.value = volume_to_gain(_[_value]);
-        }
-        ui.layout_pop();
-        ui.layout_pop();
+        ui.layout_pop(); // play/pause/volume row      
 
         /*ui.layout_push(_horizontal, -1);
         ui.group_buttons_begin();
@@ -545,84 +590,86 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
             }
         }
         ui.group_buttons_end();
-        ui.layout_pop();*/        
-        
+        ui.layout_pop();*/
+
         const grid_w = dim * 16;
-        const grid_w_left = 0 | grid_w/2;
+        const grid_w_left = 0 | grid_w / 2;
         const grid_w_right = grid_w - grid_w_left;
 
-        ui.layout_push(_horizontal)        
-        ui.label('piano:', Rectangle(0, 0, grid_w_left, 24));
-        _ = ui.slider(uiid + '-piano-volume', Rectangle(0, 12, grid_w_right, 12), 0, 100, _trix_panel.piano_volume, '');
-        if (_[_changed]) {
-            _trix_panel.piano_volume = _[_value];
-            _trix_panel.piano_gain.gain.value = volume_to_gain(_[_value]);
-        }
+        ui.layout_push(_horizontal)
+        {
+            ui.label('piano:', Rectangle(0, 0, grid_w_left, 24));
+            _ = ui.slider(uiid + '-piano-volume', Rectangle(0, 12, grid_w_right, 12), 0, 100, _trix_panel.piano.volume, '');
+            if (_[_changed]) {
+                _trix_panel.piano.volume = _[_value];
+                _trix_panel.piano.gain.gain.value = volume_to_gain(_[_value]);
+            }
 
-        ui.label('bass:', Rectangle(20, 0, grid_w_left, 24));
-        _ = ui.slider(uiid + '-bass-volume', Rectangle(20, 12, grid_w_right, 12), 0, 100, _trix_panel.bass_volume, '');
-        if (_[_changed]) {
-            _trix_panel.bass_volume = _[_value];
-            _trix_panel.bass_gain.gain.value = volume_to_gain(_[_value]);
+            ui.label('bass:', Rectangle(20, 0, grid_w_left, 24));
+            _ = ui.slider(uiid + '-bass-volume', Rectangle(20, 12, grid_w_right, 12), 0, 100, _trix_panel.bass.volume, '');
+            if (_[_changed]) {
+                _trix_panel.bass.volume = _[_value];
+                _trix_panel.bass.gain.gain.value = volume_to_gain(_[_value]);
+            }
         }
         ui.layout_pop();
 
-        const bar_color = Color(255, 255, 255, 92);
-        const peek = ui.layout_peek();
         ui.layout_push(_horizontal);
-
-        do_trix_grid(uiid + '-piano-grid', 16, 16, dim, _trix_panel.piano_grid);
-
-        ui.layout_increment2(20, 0);
-
-        // --
-
-        // -- 
-
-        do_trix_grid(uiid + '-bass-grid', 16, 16, dim, _trix_panel.bass_grid);
-
-        ui.layout_pop(); // dual horizontal grids
+        {
+            do_trix_grid(uiid + '-piano-grid', 16, 16, dim, _trix_panel.piano_grid);
+            ui.layout_increment2(20, 0);
+            do_trix_grid(uiid + '-bass-grid', 16, 16, dim, _trix_panel.bass_grid);
+        }
+        ui.layout_pop();
 
         ui.label('( edit cells with left and right mouse drag )', Rectangle(173, 0, 100, 20));
 
         ui.layout_push(_horizontal);
-        ui.label('misc:', Rectangle(0, 0, 100, 24));
-        _ = ui.slider(uiid + '-misc-volume', Rectangle(60, 12, grid_w_right, 12), 0, 100, _trix_panel.misc_volume, '');
-        if (_[_changed]) {
-            _trix_panel.misc_volume = _[_value];
-            _trix_panel.misc_gain.gain.value = volume_to_gain(_[_value]);
-        }
-        ui.layout_pop();
-
-        ui.layout_push(_horizontal);
-        do_trix_grid(uiid + '-misc-grid', 16, 4, dim, _trix_panel.misc_grid);
-
-        ui.layout_increment2(20, 0);
-
-        ui.layout_push(_vertical, 0);
-        ui.label('tempo', Rectangle(0, 0, 200, dim));
-        _ = ui.slider(uiid + '-slider-tempo', Rectangle(0, 0, 200, 20), 0, _trix_panel.tempo.length - 1, _trix_panel.tempo_index, '');
-        if (_[_changed]) {
-            _trix_panel.tempo_index = _[_value];
-            _trix_panel.wait = _trix_panel.tempo[_trix_panel.tempo_index];
-        }
-        ui.label('scale', Rectangle(0, 0, 200, dim));
-        ui.layout_push(_horizontal, -1);
-        ui.group_buttons_begin();
-        for (var i = 0; i < scales.length; i++) {
-            const is_current = i == _trix_panel.scale_index;
-            const button_text = i + '';
-            _ = ui.checkbutton(uiid + '-scale-button-' + i, button_text, Rectangle(0, 0, 40, dim), is_current, 14, 0);
-            if (_[_changed] && _[_value]) {
-                _trix_panel.scale_index = i;
+        {
+            ui.label('misc:', Rectangle(0, 0, 100, 24));
+            _ = ui.slider(uiid + '-misc-volume', Rectangle(60, 12, grid_w_right, 12), 0, 100, _trix_panel.misc_volume, '');
+            if (_[_changed]) {
+                _trix_panel.misc_volume = _[_value];
+                _trix_panel.misc_gain.gain.value = volume_to_gain(_[_value]);
             }
         }
-        ui.group_buttons_end();
         ui.layout_pop();
-        ui.layout_pop(); // right half or misc-grid row
-        ui.layout_pop(); // misc-grid row's container
 
-        ui.layout_increment2(0, 20);        
+        ui.layout_push(_horizontal); // misc-grid row's container
+        {
+            do_trix_grid(uiid + '-misc-grid', 16, 4, dim, _trix_panel.misc_grid);
+
+            ui.layout_increment2(20, 0);
+
+            ui.layout_push(_vertical, 0);
+            {
+                ui.label('tempo', Rectangle(0, 0, 200, dim));
+                _ = ui.slider(uiid + '-slider-tempo', Rectangle(0, 0, 200, 20), 0, _trix_panel.tempo.length - 1, _trix_panel.tempo_index, '');
+                if (_[_changed]) {
+                    _trix_panel.tempo_index = _[_value];
+                    _trix_panel.wait = _trix_panel.tempo[_trix_panel.tempo_index];
+                }
+                ui.label('scale', Rectangle(0, 0, 200, dim));
+                ui.layout_push(_horizontal, -1);
+                {
+                    ui.group_buttons_begin();
+                    for (var i = 0; i < scales.length; i++) {
+                        const is_current = i == _trix_panel.scale_index;
+                        const button_text = i + '';
+                        _ = ui.checkbutton(uiid + '-scale-button-' + i, button_text, Rectangle(0, 0, 40, dim), is_current, 14, 0);
+                        if (_[_changed] && _[_value]) {
+                            _trix_panel.scale_index = i;
+                        }
+                    }
+                    ui.group_buttons_end();
+                }
+                ui.layout_pop();
+            }
+            ui.layout_pop(); // right half or misc-grid row
+        }
+        ui.layout_pop();
+
+        ui.layout_increment2(0, 20);
 
         // analyser graph        
         const graph_w = dim * 16 * 2 + 20;
@@ -631,23 +678,16 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
         uidraw.rectangle(ui.layout_translated(Rectangle(0, 0, graph_w, graph_h)), uidraw.normal_back);
         do_analyser_graph(uiid - '-analyser-graph', Rectangle(0, 0, graph_w, graph_h), _trix_panel.analyser_freqs, _trix_panel.analyser_times);
 
-        ui.label('advanced:', Rectangle(0,0,200,20));
+        ui.label('advanced:', Rectangle(0, 0, 200, 20));
         ui.layout_push(_horizontal);
-        _ = ui.slider(uiid + '-schedule-notes-ahead-slider', Rectangle(0,0,200,20), 0, 8, _trix_panel.schedule_notes_ahead, '');
-        if (_[_changed]) {
-            _trix_panel.schedule_notes_ahead = _[_value];
-        }                
-        ui.label('schedule '+_trix_panel.schedule_notes_ahead+' notes ahead', Rectangle(4,0,200,20));        
-        ui.layout_pop();
-        
-        ui.layout_push(_horizontal);
-        _ = ui.checkbox(uiid + '-piano-convolver-checkbox', Rectangle(0,0,20,20), _trix_panel.piano_convolver_enabled);
-        ui.label('piano reverb', Rectangle(4,0,100,20));
-        ui.layout_pop();
-
-        if (_[_changed]) {
-            _trix_panel.piano_convolver_enabled = _[_value];
+        {
+            _ = ui.slider(uiid + '-schedule-notes-ahead-slider', Rectangle(0, 0, 200, 20), 0, 8, _trix_panel.schedule_notes_ahead, '');
+            if (_[_changed]) {
+                _trix_panel.schedule_notes_ahead = _[_value];
+            }
+            ui.label('schedule ' + _trix_panel.schedule_notes_ahead + ' notes ahead', Rectangle(4, 0, 200, 20));
         }
+        ui.layout_pop();
 
         //-----------------------------------------------------------------------------------------
 
@@ -664,21 +704,23 @@ function load_convolver_sample() {
     ajaxRequest = new XMLHttpRequest();
     ajaxRequest.open('GET', impulseUrl, true);
     ajaxRequest.responseType = 'arraybuffer';
-  
-    ajaxRequest.onload = function() {
-      var impulseData = ajaxRequest.response;
-  
-      _trix_panel.context.decodeAudioData(impulseData, function(buffer) {
-          _trix_panel.piano_convolver.buffer = buffer;
-          _trix_panel.piano_convolver.loop = false;
-          _trix_panel.piano_convolver.normalize = true;
+
+    ajaxRequest.onload = function () {
+        var impulseData = ajaxRequest.response;
+        _trix_panel.context.decodeAudioData(impulseData, function (buffer) {
+            _trix_panel.piano.convolver.buffer = buffer;
+            _trix_panel.piano.convolver.loop = false;
+            _trix_panel.piano.convolver.normalize = true;
+            connect_instrument('piano');
+            _trix_panel.bass.convolver.buffer = buffer;
+            _trix_panel.bass.convolver.loop = false;
+            _trix_panel.bass.convolver.normalize = true;
+            connect_instrument('bass');
         },
-  
-        function(e){"Error with decoding audio data" + e.err});
-  
+        function (e) { "Error decoding audio data" + e.err });
     }
-  
-    ajaxRequest.send();  
+
+    ajaxRequest.send();
 }
 
 function trix_play_column(x, time) {
@@ -687,26 +729,20 @@ function trix_play_column(x, time) {
 
     // all notes in col start play now
     for (let y = 0; y < 16; y++) {
-        if (_trix_panel.piano_grid[x][y]) {                    
+        if (_trix_panel.piano_grid[x][y]) {
             const piano_rate = freq[scale[y]];
-            let dest;
-            if (_trix_panel.piano_convolver_enabled && _trix_panel.piano_convolver.buffer) {
-                dest = _trix_panel.piano_convolver;
-            } else {
-                dest = _trix_panel.piano_gain;
-            }
-            play_sample('piano.ogg', dest, time, piano_rate);
+            play_sample('piano.ogg', _trix_panel.piano.dest, time, piano_rate, _trix_panel.piano.detune * 100);
         }
         if (_trix_panel.bass_grid[x][y]) {
             const bass_rate = freq[scale[y]];
-            play_sample('bass.ogg', _trix_panel.bass_gain, time, bass_rate);
+            play_sample('bass.ogg', _trix_panel.bass.dest, time, bass_rate);
         }
     }
     const misc_keys = ['kick.ogg', 'snare.ogg', 'hat.ogg', 'ride.ogg'];
     for (let y = 0; y < 4; y++) {
         if (_trix_panel.misc_grid[x][y]) {
             const key = misc_keys[y];
-            play_sample(key, _trix_panel.misc_gain, time, 1);
+            play_sample(key, _trix_panel.misc_dest, time, 1);
         }
     }
 }
@@ -744,7 +780,7 @@ function trix_play() {
 
         /*if (_trix_panel.schedule_x == 16) {
             _trix_panel.schedule_x = 0;
-        } */           
+        } */
         //_trix_panel.schedule_x = _trix_panel.schedule_x % 16;
 
         _trix_panel.play_x += 1;
@@ -768,67 +804,278 @@ function fetch_audio(url) {
         });
 }
 
-function play_sample(key, output_node, time, rate) {
+function play_sample(key, output_node, time, rate, detune) {
+    detune = detune || 0;
     //console.assert(_fetched_audio[key]);
     //console.log(key, time);
     const source = _trix_panel.context.createBufferSource();
     source.buffer = _fetched_audio[key];
     source.playbackRate.value = rate;
+    source.detune.value = detune;
     source.connect(output_node);
     source.start(time);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+function connect_instrument(name) {
+    /*
+    piano_shaper
+    piano_biquad
+    piano_panner
+    piano_convolver
+    piano_gain    
+    > master gain > compressor > analyser > (out)    
+    */
+
+    const o = _trix_panel[name];
+
+    //const keys = ['piano_convolver', 'piano_shaper', 'piano_biquad', 'piano_panner', 'piano_gain'];
+    //const keys = ['convolver', 'shaper', 'biquad', 'gain'];
+    const keys = ['convolver', 'biquad', 'gain'];
+
+    for (var i=0;i<keys.length;i++) {
+        const key = keys[i];
+        o[key].disconnect();
+    }
+
+    const use_convolver = o.convolver_enabled && o.convolver.buffer;
+    const use_biquad = o.biquad_enabled;
+    const use_shaper = o.shaper_enabled;
+
+    //console.log('connect_instrument', name);
+
+    let prev_key = null;
+    for (var i=0;i<keys.length;i++) {
+        const key = keys[i];
+        let do_connect = false;
+        if (key == 'convolver') {
+            //console.log(name, 'use_convolver', use_convolver);
+            do_connect = use_convolver;
+        } else if (key == 'biquad') {             
+            //console.log(name, 'use_biquad', use_biquad);
+            do_connect = use_biquad;
+        } else if (key == 'shaper') {             
+            //console.log(name, 'use_shaper', use_shaper);
+            do_connect = use_shaper;
+        } else {
+            do_connect = true;
+        }
+        if (do_connect) { 
+            if (prev_key == null) {
+                // first connection is sample destination
+                o.dest = o[key];
+            } else {
+                // subsequent connects
+                o[prev_key].connect(o[key]);
+            }            
+            prev_key = key;
+        }
+    }
+
+    // connect back to system
+    const end_key = keys[keys.length-1];
+    o[end_key].connect(_trix_panel.gain);
+}
+
+function connect_misc() {
+    _trix_panel.misc_gain.connect(_trix_panel.gain);
+    _trix_panel.misc_dest = _trix_panel.misc_gain;
+}
+
+function do_instrument_panel(uiid, first_x, first_y, first_visible, first_expanded, name) {    
+    const o = _trix_panel[name];
+    let _;
+    // this uiid is for panel_begin (probably need to rename functions like this (run_instrument_panel or w/e idk))
+    let panel = do_panel_begin(uiid, first_x, first_y, first_visible, first_expanded);    
+    if (panel.visible && panel.expanded) {
+
+        const grid_w = 20 * 16;
+        ui.layout_push(_horizontal);
+        {
+            _ = ui.checkbutton(uiid + '-' + name + '-convolver-checkbox', 'reverb', Rectangle(0, 0, 100, 24), o.convolver_enabled);
+            if (_[_changed]) {
+                o.convolver_enabled = _[_value];
+                connect_instrument(name);
+            }
+            _ = ui.checkbutton(uiid + '-' + name + '-biquad-checkbox', 'biquad', Rectangle(0, 0, 100, 24), o.biquad_enabled);
+            if (_[_changed]) {
+                o.biquad_enabled = _[_value];
+                connect_instrument(name);
+            }
+            _ = ui.checkbutton(uiid + '-' + name + '-shaper-checkbox', 'shaper', Rectangle(0, 0, 100, 24), o.shaper_enabled);
+            if (_[_changed]) {
+                o.shaper_enabled = _[_value];
+                connect_instrument(name);
+            }
+        }
+        ui.layout_pop();            
+
+        ui.layout_increment2(0, 12);
+        ui.label('source', Rectangle(0,0,100,20));
+        ui.hline(300, 1, uidraw.normal_face);
+
+        ui.layout_push(_horizontal);        
+        ui.label('detune', Rectangle(0,0,100,20));
+        _ = ui.slider(uiid + '-' + name + '-detune', Rectangle(0, 0, 200, 20), -12, 12, o.detune, '');
+        if (_[_changed]) {
+            o.detune = _[_value];
+        }
+        ui.label(o.detune * 100 + '', Rectangle(4,0,100,20));
+        ui.layout_pop();
+
+        ui.layout_push(_horizontal);        
+        ui.label('volume', Rectangle(0,0,100,20));
+        _ = ui.slider(uiid + '-' + name + '-volume', Rectangle(0, 0, 200, 20), 0, 100, o.volume, '');
+        if (_[_changed]) {
+            o.volume = _[_value];
+            o.gain.gain.value = volume_to_gain(_[_value]);
+        }
+        ui.label(o.volume + '', Rectangle(4,0,100,20));
+        ui.layout_pop();
+
+        ui.layout_increment2(0, 12);
+        ui.label('biquad filter', Rectangle(0,0,100,20));
+        ui.hline(300, 1, uidraw.normal_face);
+
+        ui.layout_push(_horizontal);
+        ui.label('type', Rectangle(0,0,100,20));
+        _ = ui.slider(uiid + '-biquad-type-index', Rectangle(0,0,200,20), 0, _trix_panel.biquad_types.length-1, o.biquad_type_index, '');
+        if (_[_changed]) { o.biquad_type_index = _[_value]; };
+        ui.label(_trix_panel.biquad_types[o.biquad_type_index], Rectangle(4,0,100,20));
+        ui.layout_pop();
+
+        ui.layout_push(_horizontal);
+        ui.label('freq', Rectangle(0,0,100,20));
+        _ = ui.slider(uiid + '-biquad-frequency', Rectangle(0,0,200,20), 0, 8000, o.biquad.frequency.value, '');
+        if (_[_changed]) { o.biquad.frequency.value = _[_value]; };
+        ui.label(o.biquad.frequency.value + '', Rectangle(4,0,100,20));
+        ui.layout_pop();            
+
+        ui.layout_push(_horizontal);
+        ui.label('detune', Rectangle(0,0,100,20));
+        _ = ui.slider(uiid + '-biquad-detune', Rectangle(0,0,200,20), -1200, 1200, o.biquad.detune.value, '');
+        if (_[_changed]) { o.biquad.detune.value = _[_value]; };
+        ui.label(o.biquad.detune.value + '', Rectangle(4,0,100,20));
+        ui.layout_pop();            
+
+        ui.layout_push(_horizontal);
+        ui.label('q factor', Rectangle(0,0,100,20));
+        _ = ui.slider(uiid + '-biquad-qfactor', Rectangle(0,0,200,20), -100, 100, o.biquad.Q.value, '');
+        if (_[_changed]) { o.biquad.Q.value = _[_value]; };
+        ui.label(o.biquad.Q.value + '', Rectangle(4,0,100,20));
+        ui.layout_pop();
+
+        ui.layout_push(_horizontal);
+        ui.label('gain', Rectangle(0,0,100,20));
+        _ = ui.slider(uiid + '-biquad-gain', Rectangle(0,0,200,20), -100, 100, o.biquad.gain.value, '');
+        if (_[_changed]) { o.biquad.gain.value = _[_value]; };
+        ui.label(o.biquad.gain.value + '', Rectangle(4,0,100,20));
+        ui.layout_pop();
+
+        //
+        ui.layout_increment2(0, 12);
+        ui.label('shaper', Rectangle(0,0,100,20));
+        ui.hline(300, 1, uidraw.normal_face);
+
+        ui.layout_push(_horizontal);
+        ui.label('oversample', Rectangle(0,0,100,20));
+        _ = ui.slider(uiid + '-shaper-oversample-index', Rectangle(0,0,200,20), 0, _trix_panel.shaper_oversample_types.length-1, o.shaper_oversample_index, '');
+        if (_[_changed]) { o.shaper_oversample_index = _[_value]; };
+        ui.label(_trix_panel.shaper_oversample_types[o.shaper_oversample_index], Rectangle(4,0,100,20));
+        ui.layout_pop();
+
+    }
+    do_panel_end(uiid);
+}
+
+function makeDistortionCurve(amount) { // copied
+    var k = typeof amount === 'number' ? amount : 50,
+        n_samples = 44100,
+        curve = new Float32Array(n_samples),
+        deg = Math.PI / 180,
+        i = 0,
+        x;
+    for ( ; i < n_samples; ++i ) {
+        x = i * 2 / n_samples - 1;
+        curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
+    }
+    return curve;
+};
+
 function do_ui_audio() {
-    const row_x0 = 240;
-    const row_y0 = 90;
+    const row_x0 = 222;
+    const row_y0 = 47;
 
     const expanded = !is_touch_device();
 
     if (_tone_panel.context) {
-        do_trix_panel('trix panel', row_x0, row_y0, true, expanded);
-        do_tone_panel('tone panel', row_x0 + 727, row_y0, true, true && expanded);
+        do_trix_panel('trix panel', row_x0, row_y0, true, expanded);        
+        do_instrument_panel('edit piano', row_x0 + 727, row_y0, true, expanded, 'piano');
+        do_instrument_panel('edit bass', row_x0 + 727, row_y0 + 403, true, expanded, 'bass');
+        do_tone_panel('tone panel', row_x0 + 727 + 467, row_y0, true, true && expanded);
     } else {
         if (AudioContext) {
             _tone_panel.context = new AudioContext();
             _tone_panel.gain1 = _tone_panel.context.createGain();
             _tone_panel.analyser1 = _tone_panel.context.createAnalyser();
-            //_tone_panel.analyser1.smoothingTimeConstant = 0.8; // 0.8 default
-            _tone_panel.analyser1.fftSize = 512;    
+            _tone_panel.analyser1.fftSize = 2 ** 9;
             _tone_panel.analyser1_times = new Uint8Array(_tone_panel.analyser1.frequencyBinCount);
-            _tone_panel.analyser1_freqs = new Uint8Array(_tone_panel.analyser1.frequencyBinCount);    
+            _tone_panel.analyser1_freqs = new Uint8Array(_tone_panel.analyser1.frequencyBinCount);
 
+            // standard
             _trix_panel.context = new AudioContext();
             _trix_panel.gain = _trix_panel.context.createGain();
             _trix_panel.gain.gain.value = volume_to_gain(_trix_panel.volume);
-            _trix_panel.piano_gain = _trix_panel.context.createGain();
-            _trix_panel.piano_gain.gain.value = volume_to_gain(_trix_panel.piano_volume);
-            _trix_panel.bass_gain = _trix_panel.context.createGain();
-            _trix_panel.bass_gain.gain.value = volume_to_gain(_trix_panel.bass_volume);
-            _trix_panel.misc_gain = _trix_panel.context.createGain();
-            _trix_panel.misc_gain.gain.value = volume_to_gain(_trix_panel.misc_volume);            
             _trix_panel.compressor = _trix_panel.context.createDynamicsCompressor();
-
-            _trix_panel.piano_convolver = _trix_panel.context.createConvolver();
-            _trix_panel.piano_convolver.connect(_trix_panel.piano_gain);
-
             _trix_panel.analyser = _trix_panel.context.createAnalyser();
-            //_trix_panel.analyser.smoothingTimeConstant = 0.8; // 0.8 default
-            _trix_panel.analyser.fftSize = 512;
-
+            _trix_panel.analyser.fftSize = 2 ** 9;
             _trix_panel.analyser_times = new Uint8Array(_trix_panel.analyser.frequencyBinCount);
             _trix_panel.analyser_freqs = new Uint8Array(_trix_panel.analyser.frequencyBinCount);
 
-            // connect individual grid gains to master gain
-            _trix_panel.piano_gain.connect(_trix_panel.gain);
-            _trix_panel.bass_gain.connect(_trix_panel.gain);
-            _trix_panel.misc_gain.connect(_trix_panel.gain);
+            // piano init
+            _trix_panel.piano.gain = _trix_panel.context.createGain();
+            _trix_panel.piano.gain.gain.value = volume_to_gain(_trix_panel.piano.volume);
+            _trix_panel.piano.convolver = _trix_panel.context.createConvolver();
+            _trix_panel.piano.biquad = _trix_panel.context.createBiquadFilter();
+            _trix_panel.piano.biquad.type = _trix_panel.biquad_types[_trix_panel.piano.biquad_type_index];                        
+            _trix_panel.piano.shaper = _trix_panel.context.createWaveShaper();
+            _trix_panel.piano.shaper.curve = makeDistortionCurve(400);
+            _trix_panel.piano.shaper.oversample = '4x';            
+            _trix_panel.piano.panner = _trix_panel.context.createStereoPanner();
 
-            // RIGHT            
+            // bass init
+            _trix_panel.bass.gain = _trix_panel.context.createGain();
+            _trix_panel.bass.gain.gain.value = volume_to_gain(_trix_panel.bass.volume);
+            _trix_panel.bass.convolver = _trix_panel.context.createConvolver();
+            _trix_panel.bass.biquad = _trix_panel.context.createBiquadFilter();
+            _trix_panel.bass.biquad.type = _trix_panel.biquad_types[_trix_panel.bass.biquad_type_index];                        
+            _trix_panel.bass.shaper = _trix_panel.context.createWaveShaper();
+            _trix_panel.bass.shaper.curve = makeDistortionCurve(400);
+            _trix_panel.bass.shaper.oversample = '4x';            
+            _trix_panel.bass.panner = _trix_panel.context.createStereoPanner();
+
+            // misc init
+            _trix_panel.misc_gain = _trix_panel.context.createGain();
+            _trix_panel.misc_gain.gain.value = volume_to_gain(_trix_panel.misc_volume);
+
+            // hardcoded demo default
+            _trix_panel.piano.biquad_type_index = 6;
+            _trix_panel.piano.biquad.frequency.value = 3600;
+            _trix_panel.piano.biquad.detune.value = 800;
+            _trix_panel.piano.biquad.Q.value = 8;
+            _trix_panel.piano.detune = 12;
+
+            connect_instrument('piano');
+            connect_instrument('bass');
+            connect_misc();
+
+            // end           
             _trix_panel.gain.connect(_trix_panel.compressor);
             _trix_panel.compressor.connect(_trix_panel.analyser);
-            _trix_panel.analyser.connect(_trix_panel.context.destination);            
+            _trix_panel.analyser.connect(_trix_panel.context.destination);
+
+            // later: a 2nd analyser before compressor, drawn in red (freqs only), to show how much compressor compressed
 
             load_convolver_sample();
 

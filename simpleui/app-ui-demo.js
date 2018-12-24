@@ -124,7 +124,7 @@ function do_sidepanel() {
     //let vert1 = 
     ui.layout_push(_vertical, pad, pad, pad);
     {
-        ui.label('simpleui v0.4', Rectangle(0, 0, 100, 20));
+        ui.label('simpleui v0.4.1', Rectangle(0, 0, 100, 20));
 
         // reload
         _ = ui.button('sidepanel-reload-button', 'reload', Rectangle(0, 0, 100, 24));
@@ -419,7 +419,7 @@ function do_gradient_panel(uiid, first_x, first_y, first_visible, first_expanded
 }
 
 function do_gridfont_panel(uiid, first_x, first_y, first_visible, first_expanded) {
-    let inner_uiid = uiid + 'i';
+    
 
     let state = ui.get_state(uiid);
     if (!state) {
@@ -430,7 +430,10 @@ function do_gridfont_panel(uiid, first_x, first_y, first_visible, first_expanded
         });
     };
 
-    let panel = do_panel_begin(inner_uiid, first_x, first_y, first_visible, first_expanded);
+    // cannot shared panel uiid here since do_gridfont_panel has state (above) (keyed by uiid)
+    let panel_uiid = uiid + 'i';
+
+    let panel = do_panel_begin(panel_uiid, first_x, first_y, first_visible, first_expanded);
 
     if (panel.visible && panel.expanded) {
 
@@ -476,10 +479,9 @@ function do_gridfont_panel(uiid, first_x, first_y, first_visible, first_expanded
             state.reset = 0 | 1;
         }
 
-        let layout = ui.layout_peek();
         ui.layout_increment2(780, 10 * 7 * 3 + 40);
     }
-    do_panel_end(inner_uiid);
+    do_panel_end(panel_uiid);
 }
 
 let _linestar_segments = 13;
@@ -557,12 +559,11 @@ function do_linestar_panel(uiid, first_x, first_y, first_visible, first_expanded
 function do_scrolltest_panel(uiid, first_x, first_y, first_visible, first_expanded) {
 
     let panel = do_panel_begin(uiid, first_x, first_y, first_visible, first_expanded);
-
     if (panel.visible && panel.expanded) {
 
-        // todo: design so that when i remove the scroll widget, the contained widgets will just render as usual
-        let scroll_uiid = 'scrolltest';
-        let scroll = do_scroll_begin(scroll_uiid, Rectangle(panel.rect[_x], panel.rect[_y], 200, 200), 20, 10000);
+        // todo: design so that when i remove the scroll widget, the contained widgets will just render as usual (no glue)
+        let scroll_uiid = uiid + '-scroll';
+        let scroll = do_scroll_begin(scroll_uiid, Rectangle(0, 0, 200, 200), 20, 10000);
 
         // todo:
         // maybe an opt-in api for widgets to call to see if they are... "in view"
@@ -573,14 +574,13 @@ function do_scrolltest_panel(uiid, first_x, first_y, first_visible, first_expand
         // }
         for (let i = scroll.first_visible_index; i < scroll.last_visible_index; i++) {
             do_scroll_item_begin(scroll_uiid, i);
-            const _ = ui.button('scroll-experiment-button-' + i, 'button #' + i, Rectangle(0, 0, 200, 20));
+            const _ = ui.button(uiid + '-button-' + i, 'button #' + i, Rectangle(0, 0, 200, 20));
             if (_[_clicked]) console.log('clicked #' + i);
             do_scroll_item_end(scroll_uiid);
         }
 
         do_scroll_end(scroll_uiid);
     }
-
     do_panel_end(uiid);
     return panel;
 }
@@ -668,8 +668,8 @@ function do_background_anim() {
 function do_ui_demo() {
     let expanded = !is_touch_device();
 
-    const row_x0 = 240;
-    const row_y0 = 90;
+    const row_x0 = 222;
+    const row_y0 = 47;
     do_linestar_panel('linestar panel', row_x0, row_y0, true, expanded);
 
     const row_x1 = row_x0 + 465;
@@ -678,6 +678,6 @@ function do_ui_demo() {
     const row_x2 = row_x1 + 666;
     do_gradient_panel('gradient panel', row_x2, row_y0, true, expanded);
 
-    do_gridfont_panel('gridfont panel ', row_x1, 547 + 27, true, expanded);
-    do_scrolltest_panel('scroll test panel', 1579, 486 + 25, true, expanded);
+    do_gridfont_panel('gridfont panel ', row_x1, 547 + 27 - 40 - 3, true, expanded);
+    do_scrolltest_panel('scroll test panel', 1579 - 30 - 12, 486 + 25 - 42, true, expanded);
 }
