@@ -350,14 +350,15 @@ scales[4] = [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
 // this pattern is called "can you guys soul slide"
 const _trix_panel = {
     initialized: 0 | false,
+    volume: 0 | 15, // [0-100]
     context: null,
     compressor: null,
     gain: null,
     analyser: null,
     analyser_times: null,
     analyser_freqs: null,
-    play: 0 | false,
-    volume: 0 | 5, // [0-100]
+    play_node: null, // this will point to wherever the end of our audio graph begins (the node samples will play on)
+    play: 0 | false,    
     //
     biquad_types: ['lowpass', 'highpass', 'bandpass', 'lowshelf', 'highshelf', 'peaking', 'notch', 'allpass'],
     shaper_oversample_types: ['none', '2x', '4x'],
@@ -367,7 +368,7 @@ const _trix_panel = {
     misc_grid: [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
     //
     instrument_names: ['piano', 'bass'],
-    selected_instrument_index: 0,
+    selected_instrument_index: 0,    
     piano: {
         dest: null,
         volume: 0 | 50, // [0-100],
@@ -425,7 +426,44 @@ for (let i = 0; i < 16; i++) {
 }
 _trix_panel.wait = _trix_panel.tempo[_trix_panel.tempo_index];
 
-function volume_to_gain(volume) {
+/*
+> dbfs_to_gain(100)
+100000
+> dbfs_to_gain(0)
+1
+> dbfs_to_gain(0)
+1
+> dbfs_to_gain(-50)
+0.0031622776601683794
+> dbfs_to_gain(-100)
+0.00001
+*/
+function dbfs_to_gain(dbfs) {
+    return Math.pow(10, dbfs / 20);
+}
+
+/*
+> volume_to_gain(0)
+0.00001
+> volume_to_gain(100)
+1
+*/
+// todo: nolive: asdfasdfasdf... hjalp
+function volume_to_gain(volume) {    
+    if (volume == 0) { // i guess
+        return 0;
+    }
+
+    // gain of 1 is ridiculously loud, idk
+    let gain = (Math.exp( volume/100 ) - 1) / (Math.E - 1);
+    gain = gain / 4;
+    return gain;
+    
+    //const actual = dbfs_to_gain(-(100-volume));
+    //return actual;
+}
+
+function volume_to_gain_OLD(volume) {
     const volume_float = volume / 100;
     // > (Math.exp(0.01)-1)/(Math.E-1)
     // 0.005848963143130564
@@ -625,8 +663,6 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
         }
         ui.layout_pop();
 
-        ui.label('( edit cells with left and right mouse drag )', Rectangle(173, 0, 100, 20));
-
         ui.layout_push(_horizontal);
         {
             ui.label('misc:', Rectangle(0, 0, 100, 24));
@@ -671,6 +707,8 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
             ui.layout_pop(); // right half or misc-grid row
         }
         ui.layout_pop();
+
+        ui.label('( edit cells with left and right mouse drag )', Rectangle(0, 0, 100, 20));
 
         ui.layout_increment2(0, 20);
 
@@ -747,7 +785,6 @@ function load_convolver_sample() {
 
 function trix_play_column(x, time) {
     const scale = scales[_trix_panel.scale_index];
-    //const dest = _trix_panel.gain;
 
     // all notes in col start play now
     for (let y = 0; y < 16; y++) {
@@ -847,7 +884,7 @@ function connect_instrument(name) {
     piano_panner
     piano_convolver
     piano_gain    
-    > master gain > compressor > analyser > (out)    
+    > compressor > master gain > analyser > (out)    
     */
 
     const o = _trix_panel[name];
@@ -898,11 +935,11 @@ function connect_instrument(name) {
 
     // connect back to system
     const end_key = keys[keys.length - 1];
-    o[end_key].connect(_trix_panel.gain);
+    o[end_key].connect(_trix_panel.play_node);
 }
 
 function connect_misc() {
-    _trix_panel.misc_gain.connect(_trix_panel.gain);
+    _trix_panel.misc_gain.connect(_trix_panel.play_node);
     _trix_panel.misc_dest = _trix_panel.misc_gain;
 }
 
@@ -1243,14 +1280,22 @@ function do_ui_audio() {
             _trix_panel.misc_gain = _trix_panel.context.createGain();
             _trix_panel.misc_gain.gain.value = volume_to_gain(_trix_panel.misc_volume);
 
-            load_preset_a();
-
-            // end           
-            _trix_panel.gain.connect(_trix_panel.compressor);
-            _trix_panel.compressor.connect(_trix_panel.analyser);
+            // end (should start on play_node)
+            // v <= 0.4.1:
+            //_trix_panel.gain.connect(_trix_panel.compressor);
+            //_trix_panel.compressor.connect(_trix_panel.analyser);
+            // v > 0.4.1:            
+            // https://www.softube.com/index.php?id=eq_before_compressor
+            // " Placing an EQ before a compressor can have the effect of exaggerating the applied EQ, due to a phenomenon similar to the psychoacoustic effect known as "frequency masking". "
+            // ( gain will give similar problem as eq )
+            _trix_panel.play_node = _trix_panel.compressor;
+            _trix_panel.compressor.connect(_trix_panel.gain);
+            _trix_panel.gain.connect(_trix_panel.analyser);
             _trix_panel.analyser.connect(_trix_panel.context.destination);
 
-            // later: a 2nd analyser before compressor, drawn in red (freqs only), to show how much compressor compressed
+            // later: a 2nd analyser before compressor, drawn in red (freqs only), to show pre-compress
+
+            load_preset_a();
 
             load_convolver_sample();
 
