@@ -892,7 +892,14 @@ function connect_instrument(name) {
     //const keys = ['piano_convolver', 'piano_shaper', 'piano_biquad', 'piano_panner', 'piano_gain'];
     //const keys = ['convolver', 'shaper', 'biquad', 'gain'];
     //const keys = ['shaper', 'convolver', 'biquad', 'gain'];
-    const keys = ['shaper', 'biquad', 'convolver', 'gain'];
+    
+    // this is good
+    // const keys = ['shaper', 'biquad', 'convolver', 'gain'];
+    // but i wanna try moving convolver
+    // convolver before biquad sounds good
+    //const keys = ['shaper', 'convolver', 'biquad', 'gain'];
+    // i like convolver first and i think it makes more sense    
+    const keys = ['convolver', 'shaper', 'biquad', 'gain']; // v >0.4.1
 
     for (var i = 0; i < keys.length; i++) {
         const key = keys[i];
@@ -1084,14 +1091,14 @@ function do_instrument_edit(instrument_index) {
             o.convolver_enabled = _[_value];
             connect_instrument(name);
         }
-        _ = ui.checkbutton(uiid + '-' + name + '-biquad-checkbox', 'biquad', Rectangle(0, 0, 100, 24), o.biquad_enabled);
-        if (_[_changed]) {
-            o.biquad_enabled = _[_value];
-            connect_instrument(name);
-        }
         _ = ui.checkbutton(uiid + '-' + name + '-shaper-checkbox', 'shaper', Rectangle(0, 0, 100, 24), o.shaper_enabled);
         if (_[_changed]) {
             o.shaper_enabled = _[_value];
+            connect_instrument(name);
+        }
+        _ = ui.checkbutton(uiid + '-' + name + '-biquad-checkbox', 'biquad', Rectangle(0, 0, 100, 24), o.biquad_enabled);
+        if (_[_changed]) {
+            o.biquad_enabled = _[_value];
             connect_instrument(name);
         }
     }
