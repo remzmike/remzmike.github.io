@@ -1314,7 +1314,7 @@ function do_ui_audio() {
 
             // later: a 2nd analyser before compressor, drawn in red (freqs only), to show pre-compress
 
-            load_preset_a();
+            load_preset_d();
 
             load_convolver_sample();
 
