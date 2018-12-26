@@ -471,19 +471,43 @@ function volume_to_gain_OLD(volume) {
     return gain;
 }
 
+const _trix_grid_color1 = Color(36 + 18 + 9, 36 + 18 + 9, 36 + 18 + 9, 255);
+const _trix_grid_color2 = Color(36 + 9 + 9, 36 + 9 + 9, 36 + 9 + 9, 255);
+const _trix_grid_line_color = ui.make_css_color(uidraw.normal_back);
+
 /** pass grid width, height (in cells), cell dim (in pixels), values (array of columns) */
 function draw_trix_grid(w, h, dim, values) {
     const peek = ui.layout_peek();
     const rect = ui.layout_translated(Rectangle(0, 0, dim * w, dim * h));
-    uidraw.rectangle(rect, uidraw.normal_back);
+    //uidraw.rectangle(rect, uidraw.normal_back);
+
+    // alternating background
+    uidraw.rectangle(rect, _trix_grid_color1);
+    uidraw.rectangle(Rectangle(0 | rect[_x] + rect[_w]*(1/4),rect[_y],0 | rect[_w] / 4, rect[_h]), _trix_grid_color2);
+    uidraw.rectangle(Rectangle(0 | rect[_x] + rect[_w]*(3/4),rect[_y],0 | rect[_w] / 4, rect[_h]), _trix_grid_color2);
+
+    // main grid lines
+    
+    uidraw.push_strokestyle(_trix_grid_line_color);
+    uidraw.push_linewidth(2);
+    uidraw.begin_path();    
+    for (let x = 1; x < w; x++) {
+        uidraw.move_to(rect[_x] + x * dim, rect[_y]);
+        uidraw.line_to(rect[_x] + x * dim, rect[_y] + rect[_h]);
+    }
+    for (let y = 1; y < h; y++) {
+        uidraw.move_to(rect[_x], rect[_y] + y * dim);
+        uidraw.line_to(rect[_x] + rect[_w], rect[_y] + y * dim);
+    }    
+    uidraw.stroke();
+    uidraw.pop_linewidth();
+    uidraw.pop_strokestyle();    
+
+    // main outline
+    uidraw.rectangle_outline(rect, _trix_grid_line_color);
 
     for (let x = 0; x < w; x++) {
         for (let y = 0; y < h; y++) {
-            if ((x >= 0 && x < 4) || (x >= 8 && x < 12)) {
-                uidraw.rectangle(Rectangle(rect[_x] + x * dim + 1, rect[_y] + y * dim + 1, dim - 2, dim - 2), Color(36 + 18 + 9, 36 + 18 + 9, 36 + 18 + 9, 255));
-            } else {
-                uidraw.rectangle(Rectangle(rect[_x] + x * dim + 1, rect[_y] + y * dim + 1, dim - 2, dim - 2), Color(36 + 9 + 9, 36 + 9 + 9, 36 + 9 + 9, 255));
-            }
             if (values[x][y]) {
                 let color_on;
                 if (x == _trix_panel.play_x) {
@@ -1314,7 +1338,7 @@ function do_ui_audio() {
 
             // later: a 2nd analyser before compressor, drawn in red (freqs only), to show pre-compress
 
-            load_preset_d();
+            load_preset_a();
 
             load_convolver_sample();
 
@@ -1429,7 +1453,7 @@ function load_preset_d() {
 
     const _piano = {"volume":39,"detune":0,"convolver_enabled":0,"biquad_type_index":4,"biquad_enabled":1,"shaper_oversample_index":0,"shaper_enabled":0};
     Object.assign(_trix_panel.piano, _piano);
-    const _bass = {"volume":80,"detune":0,"convolver_enabled":0,"biquad_type_index":0,"biquad_enabled":0,"shaper_oversample_index":0,"shaper_enabled":0}
+    const _bass = {"volume":100,"detune":0,"convolver_enabled":0,"biquad_type_index":0,"biquad_enabled":0,"shaper_oversample_index":0,"shaper_enabled":0}
     Object.assign(_trix_panel.bass, _bass);
 
     instrument_set_volume(_trix_panel.piano, _trix_panel.piano.volume);
