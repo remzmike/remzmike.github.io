@@ -124,7 +124,7 @@ function do_sidepanel() {
     //let vert1 = 
     ui.layout_push(_vertical, pad, pad, pad);
     {
-        ui.label('simpleui v0.4.1', Rectangle(0, 0, 100, 20));
+        ui.label('simpleui v0.4.2', Rectangle(0, 0, 100, 20));
 
         // reload
         _ = ui.button('sidepanel-reload-button', 'reload', Rectangle(0, 0, 100, 24));

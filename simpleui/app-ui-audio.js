@@ -491,7 +491,7 @@ function draw_trix_grid(w, h, dim, values) {
                 } else {
                     color_on = uidraw.accent;
                 }
-                uidraw.rectangle(Rectangle(rect[_x] + x * dim + 1, rect[_y] + y * dim + 1, dim - 2, dim - 2), color_on);
+                uidraw.rectangle3d(Rectangle(rect[_x] + x * dim + 1, rect[_y] + y * dim + 1, dim - 2, dim - 2), color_on);
             }
         }
     }
@@ -560,6 +560,29 @@ function do_trix_grid_nodraw(uiid, w, h, dim, values) {
     }
 
     ui.layout_increment2(dim * w, dim * h);
+}
+
+function do_preset_buttons(uiid) {
+    ui.layout_push(_horizontal);
+    {
+        ui.label('load preset:', Rectangle(0, 0, 100, 24));
+        
+        _ = ui.button(uiid + 'button-a', 'a', Rectangle(0,0,40,24))
+        if (_[_clicked]) {
+            load_preset_a();
+        }
+        
+        _ = ui.button(uiid + 'button-b', 'b', Rectangle(0,0,40,24))
+        if (_[_clicked]) {
+            load_preset_b();
+        }
+
+        _ = ui.button(uiid + 'button-c', 'c', Rectangle(0,0,40,24))
+        if (_[_clicked]) {
+            load_preset_c();
+        }
+    }
+    ui.layout_pop();
 }
 
 function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
@@ -721,21 +744,7 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
 
         ui.layout_increment2(0, 20);
 
-        ui.layout_push(_horizontal);
-        {
-            ui.label('load preset:', Rectangle(0, 0, 100, 24));
-            
-            _ = ui.button(uiid + 'button-a', 'a', Rectangle(0,0,40,24))
-            if (_[_clicked]) {
-                load_preset_a();
-            }
-            
-            _ = ui.button(uiid + 'button-b', 'b', Rectangle(0,0,40,24))
-            if (_[_clicked]) {
-                load_preset_b();
-            }
-        }
-        ui.layout_pop();
+        do_preset_buttons();
 
         ui.layout_increment2(0, 4);
 
@@ -1188,8 +1197,6 @@ function do_instrument_edit(instrument_index) {
 
 function do_instrument_panel(uiid, first_x, first_y, first_visible, first_expanded) {
 
-    const dim = 20;
-
     // this uiid is for panel_begin (probably need to rename functions like this (run_instrument_panel or w/e idk))
     let panel = do_panel_begin(uiid, first_x, first_y, first_visible, first_expanded);
     if (panel.visible && panel.expanded) {
@@ -1239,7 +1246,7 @@ function do_ui_audio() {
     if (_tone_panel.context) {
         do_trix_panel('trix panel', row_x0, row_y0, true, expanded);
         do_instrument_panel('instrument panel', row_x0 + 727, row_y0, true, expanded);
-        do_tone_panel('tone panel', row_x0 + 727 + 467, row_y0, true, true && expanded);
+        do_tone_panel('tone panel', row_x0 + 727 + 467, row_y0, true, false && expanded);
     } else {
         if (AudioContext) {
             _tone_panel.context = new AudioContext();
@@ -1334,7 +1341,7 @@ function load_preset_a() { // 'canyouguyssoulslide'
 
     // bass biquad not used
 
-    const _piano = {"volume":50,"detune":12,"convolver_enabled":1,"biquad_type_index":4,"biquad_enabled":1,"shaper_oversample_index":2,"shaper_enabled":0};
+    const _piano = {"volume":50,"detune":0,"convolver_enabled":1,"biquad_type_index":4,"biquad_enabled":1,"shaper_oversample_index":2,"shaper_enabled":0};
     Object.assign(_trix_panel.piano, _piano);
     const _bass = {"volume":80,"detune":0,"convolver_enabled":0,"biquad_type_index":0,"biquad_enabled":0,"shaper_oversample_index":0,"shaper_enabled":0};
     Object.assign(_trix_panel.bass, _bass);
@@ -1364,7 +1371,7 @@ function load_preset_b() { // 'idontknowhowtocode'
 
     const _piano = { "volume": 20, "detune": 12, "convolver_enabled": 1, "biquad_type_index": 3, "biquad_enabled": 1, "shaper_oversample_index": 2, "shaper_enabled": 1 };
     Object.assign(_trix_panel.piano, _piano);
-    const _bass = { "volume": 50, "detune": 0, "convolver_enabled": 1, "biquad_type_index": 0, "biquad_enabled": 0, "shaper_oversample_index": 0, "shaper_enabled": 0 };
+    const _bass = { "volume": 70, "detune": 0, "convolver_enabled": 1, "biquad_type_index": 0, "biquad_enabled": 0, "shaper_oversample_index": 0, "shaper_enabled": 0 };
     Object.assign(_trix_panel.bass, _bass);
 
     instrument_set_volume(_trix_panel.piano, _trix_panel.piano.volume);
@@ -1373,4 +1380,36 @@ function load_preset_b() { // 'idontknowhowtocode'
     instrument_set_biquad_type(_trix_panel.bass, _trix_panel.bass.biquad_type_index);
 
     reconnect_instruments();
+}
+
+function load_preset_c() {
+    _trix_panel.piano_grid = [[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0]]    
+    _trix_panel.bass_grid = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+    _trix_panel.misc_grid = [[0,1,0,0],[0,0,0,0],[0,0,1,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[1,0,0,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,1,0],[0,0,0,0],[0,1,0,0],[0,0,0,0],[1,0,0,0],[0,0,0,0]];
+
+    _trix_panel.piano.biquad.frequency.value = 1000;
+    _trix_panel.piano.biquad.detune.value = -444;
+    _trix_panel.piano.biquad.gain.value = 4;
+    _trix_panel.piano.biquad.Q.value = 0;
+
+    _trix_panel.bass.biquad.frequency.value = 350;
+    _trix_panel.bass.biquad.detune.value = 0;
+    _trix_panel.bass.biquad.gain.value = 8;
+    _trix_panel.bass.biquad.Q.value = 1;
+
+    const _piano = {"volume":100,"detune":0,"convolver_enabled":0,"biquad_type_index":4,"biquad_enabled":0,"shaper_oversample_index":2,"shaper_enabled":1};
+    Object.assign(_trix_panel.piano, _piano);
+    const _bass = {"volume":80,"detune":0,"convolver_enabled":0,"biquad_type_index":3,"biquad_enabled":1,"shaper_oversample_index":0,"shaper_enabled":0}
+    Object.assign(_trix_panel.bass, _bass);
+
+    instrument_set_volume(_trix_panel.piano, _trix_panel.piano.volume);
+    instrument_set_biquad_type(_trix_panel.piano, _trix_panel.piano.biquad_type_index);
+    instrument_set_volume(_trix_panel.bass, _trix_panel.bass.volume);
+    instrument_set_biquad_type(_trix_panel.bass, _trix_panel.bass.biquad_type_index);
+
+    reconnect_instruments();    
+}
+
+function extract_instruments() {
+
 }
