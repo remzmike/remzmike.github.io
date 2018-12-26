@@ -61,12 +61,12 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
         const GetCursorX = ui.driver.GetCursorX;
         const GetCursorY = ui.driver.GetCursorY;
                 
-        let initial_desktop = 'demo'
+        let initial_desktop = 'demo'; // nolive: 'audio'
         const qs = window.location.search;
         if (qs == '?audio') {
             initial_desktop = 'audio';
         }
-        
+
         const app = {
             main_loop_time: 0,
             main_proc_time: 0,
@@ -74,7 +74,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             canvas_size_hack: 20,
             panel_layout_padding: 2,
             window_active: 0 | true,
-            desktop: 'demo',
+            desktop: initial_desktop, 
             desktops: ['demo', 'audio']
         };
     </script>
