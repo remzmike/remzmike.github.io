@@ -1364,7 +1364,7 @@ function load_preset_a() { // 'canyouguyssoulslide'
     _trix_panel.misc_grid = [[0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
     
     _trix_panel.piano.biquad.frequency.value = 1000;
-    _trix_panel.piano.biquad.detune.value = -444;
+    _trix_panel.piano.biquad.detune.value = 0;
     _trix_panel.piano.biquad.gain.value = 10;
     _trix_panel.piano.biquad.Q.value = 10;
 
