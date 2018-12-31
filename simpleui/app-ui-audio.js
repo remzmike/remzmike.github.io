@@ -588,9 +588,7 @@ function do_trix_grid_nodraw(uiid, w, h, dim, values) {
 
 function do_preset_buttons(uiid) {
     ui.layout_push(_horizontal);
-    {
-        ui.label('load preset:', Rectangle(0, 0, 100, 24));
-        
+    {       
         _ = ui.button(uiid + 'button-a', 'a', Rectangle(0,0,40,24))
         if (_[_clicked]) {
             load_preset_a();
@@ -610,6 +608,8 @@ function do_preset_buttons(uiid) {
         if (_[_clicked]) {
             load_preset_d();
         }
+        ui.label('load preset', Rectangle(4, 0, 100, 24));
+
     }
     ui.layout_pop();
 }
@@ -630,6 +630,11 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
             ui.label('play_x_long: ' + _trix_panel.play_x_long, Rectangle(0, 0, 200, 20));
             ui.label('schedule_x: ' + _trix_panel.schedule_x, Rectangle(0, 0, 200, 20));
         }
+
+
+        do_preset_buttons();
+
+        ui.layout_increment2(0, 4);
 
         ui.layout_push(_horizontal); // play/pause/volume row      
         {
@@ -772,10 +777,6 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
         do_analyser_graph(uiid - '-analyser-graph', Rectangle(0, 0, graph_w, graph_h), _trix_panel.analyser_freqs, _trix_panel.analyser_times);
 
         ui.layout_increment2(0, 20);
-
-        do_preset_buttons();
-
-        ui.layout_increment2(0, 4);
 
         ui.layout_push(_horizontal);
         {
