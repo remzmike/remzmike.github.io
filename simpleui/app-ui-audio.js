@@ -631,7 +631,6 @@ function do_trix_panel(uiid, first_x, first_y, first_visible, first_expanded) {
             ui.label('schedule_x: ' + _trix_panel.schedule_x, Rectangle(0, 0, 200, 20));
         }
 
-
         do_preset_buttons();
 
         ui.layout_increment2(0, 4);
