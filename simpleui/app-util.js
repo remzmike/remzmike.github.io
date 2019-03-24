@@ -26,7 +26,7 @@ function is_touch_device() {
 }
 
 function randomize_color(color) {
-    let a = [_r, _g, _b];
+    let a = [0, 1, 2];
     for (let i = 0; i < a.length; i++) {
         let k = a[i];
         let v = 50 + Math.round(Math.random() * 150);
