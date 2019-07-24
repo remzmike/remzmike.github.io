@@ -4,11 +4,20 @@ gmail: remzmike
 
 Over 20 years of programming freedom. Remote work is my default.
 
-I am a good programmer who wants to write code and design systems. I like straightforward. I don't mind minimal. I usually have some ideas. I am not a salesman. I am a real programmer. Show me the code.
+I want to write code and design systems. I like straightforward and iterative.
+I am not a salesman. I am a serious programmer. Show me the code.
 
-Review sample code and exercises @ https://remzmike.github.io/
+Please review my code and exercises at https://remzmike.github.io/
 
-**March 13, 2017 – Present**
+**March 13, 2019 – Present**
+Senior Software Developer at Assurance America in Sandy Springs, Georgia
+
+Contracted to help finish porting a large Silverlight application to Angular.
+
+* Front-end using Angular 7, Typescript, Angular Redux, RxJS
+* Back-end using C#, .NET, .NET Standard, MSSQL
+
+**March 13, 2017 – March 8, 2019**
 Senior Software Developer at Momentum Telecom in Kennesaw, Georgia
 
 Modifications to legacy ASP&#46;NET Webforms application.
@@ -51,6 +60,8 @@ Self Employed, Acworth, Georgia
     * Lossless encoding of 32-bit image data into SWF in C#
     * Modifications to the Lua programming language and bytecode loader in C
     * Embedded Lua in .NET, Python, Delphi, and Java environments
+    * Desktop application for printing UPS labels in Python Tcl/Tk
+    * Python module for generating interactive stock charts
 * One year contract for ControlScan Inc
     * Updated Python REST API services to support PCI 3.0
     * Automated and documented Linux setup and deployment process
@@ -94,7 +105,7 @@ Full-stack Microsoft developer for CreditCommander, a web-based credit and backg
 **July 4, 2001 – July 4, 2005**
 Self Employed at Efflare Systems, Saint Paul, Minnesota
 
-* Created and maintained all software products
+* Completely created and maintained all software products
 * Technologies used: Java, C#, Delphi, C, Javascript and Lua
 * Created and maintained all product documentation for end users
     * Wrote sample documentation code
