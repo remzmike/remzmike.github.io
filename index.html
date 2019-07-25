@@ -30,9 +30,9 @@
     <meta property="og:description" content="">
     <meta property="fb:admins" content="whateverdood"/>
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="/"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/"/>
     <meta property="fb:app_id" content="589495744558280"/>
-    <meta property="og:image" content="/assets/open-graph-logo.png"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/assets/open-graph-logo.png"/>
     <meta property="og:image:width" content="200" />
     <meta property="og:image:height" content="200" />
 
@@ -109,7 +109,7 @@
       document.head.appendChild(hypothesis);"><a class="sidebar-nav-item">Annotate me</a></span>
     -->
 
-<!--     <a class="sidebar-nav-item" href="https://via.hypothes.is///" data-proofer-ignore>Annotate me</a> -->
+<!--     <a class="sidebar-nav-item" href="https://via.hypothes.is/http://0.0.0.0:4000//" data-proofer-ignore>Annotate me</a> -->
 <!--  -->
     <!-- <script src="https://hypothes.is/embed.js" async></script> -->
 
@@ -204,13 +204,6 @@
         }
     </style>
            
-    <p style='text-align: center; font-variant: small-caps; text-transform: lowercase; line-height: 1rem;'>
-        <span>
-            <!-- kerning on other font not good in small caps -->
-            <a style="font-size: 1.5rem; font-family:'Times New Roman', Times, serif" href="mk-resume.html">resume</a>            
-        </span>
-    </p>
-    
     
         <a class="bar-link" href="https://github.com/remzmike">
         <div class="flexbar">
@@ -219,7 +212,7 @@
                 <div style="margin-top: 0.25rem; border-bottom:1px solid #ddd;">
                     personal github<!--<a href="https://github.com/remzmike">personal github</a>-->
                 </div>
-                <div style="color:black;">
+                <div style="color:#888; font-size: 16px;">
                     some uploads from my laptop
                 </div>
             </div>
@@ -231,9 +224,9 @@
             <div class="thumbnail" style="background-image: url(thumb-simpleui.png);"></div>
             <div style="width:auto;">
                 <div style="margin-top: 0.25rem; border-bottom:1px solid #ddd;">
-                    simpleui<!--<a href="/simpleui">simpleui</a>-->
+                    simpleui demo<!--<a href="/simpleui">simpleui demo</a>-->
                 </div>
-                <div style="color:black;">
+                <div style="color:#888; font-size: 16px;">
                     straightforward immediate mode ui
                 </div>
             </div>
@@ -245,10 +238,10 @@
             <div class="thumbnail" style="background-image: url(thumb-mash.png);"></div>
             <div style="width:auto;">
                 <div style="margin-top: 0.25rem; border-bottom:1px solid #ddd;">
-                    screens & snippets<!--<a href="/mash">screens & snippets</a>-->
+                    screenshots & snippets<!--<a href="/mash">screenshots & snippets</a>-->
                 </div>
-                <div style="color:black;">
-                    programming experiments
+                <div style="color:#888; font-size: 16px;">
+                    programming experiments, side projects
                 </div>
             </div>
         </div>
@@ -265,120 +258,39 @@
         <a href="https://stackoverflow.com/users/159022/rz-mk">stackoverflow</a>
     </div>-->
 
-    <!-- i cannot be these things anymore since i gave up my craft
-    <div style="display: flex; flex-wrap: wrap; align-items: stretch; margin-top: 1rem;">
-        <span style="flex: 1 1 auto;">
-            <ul style="list-style-position: inside; margin: 0; padding: 0; padding-right: 1rem;">
-                <li>Web development since 1994</li>
-                <li>Linux user since 1996</li>
-                <li>Desktop developer since 1997</li>
-                <li>Java developer 1997-2001+</li>
-                <li>SQL developer since 1999</li>
-                <li>Javascript developer since 1999</li>
-            </ul>
-        </span>
-        <span style="flex: 1 1 auto;">
-            <ul style="list-style-position: inside; margin: 0; padding: 0; padding-right: 0rem;">
-                <li>Windows user since 2000</li>
-                <li>Python developer since 2000</li>                    
-                <li>C# developer since 2001</li>
-                <li>Microsoft web since 2001</li>
-                <li>Python web since 2004</li>
-                <li>Delphi developer until 2005</li>
-            </ul>
-        </span>
-    </div>    
-    -->
 
     <br>
-        <style>
-        .schedule-call {            
-            text-decoration: none;
-            color: #004A56;
-        }        
-        .schedule-call p {
-            border:1px solid #eee;
-            border-radius:4px;            
-            padding:16px;
-            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f6f8f9+0,e5ebee+50,f5f7f9+100 */            
-            background: 'rgb(246,248,249)'; /* Old browsers */
-            background: -moz-linear-gradient(top, rgba(246,248,249,1) 0%, rgba(229,235,238,1) 50%, rgba(245,247,249,1) 100%); /* FF3.6-15 */
-            background: -webkit-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(245,247,249,1) 100%); /* Chrome10-25,Safari5.1-6 */
-            background: linear-gradient(to bottom, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(245,247,249,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
-        }
-        .schedule-call p:hover {
-            border:1px solid #004A56;
-        }
-        .schedule-call p svg {
-            vertical-align: text-bottom;
-            margin-bottom:-8px;
-        }
-        .schedule-call p span {
-            padding-left:1rem;
-            font-size:1.2rem;
-            _font-variant-caps: small-caps;
-        }   
-        .schedule-call-disclaimer {
-            font-size:0.8rem;
-        } 
-    </style>
+    <!--% include schedule-call.html %-->
 
-    <div class="schedule-call-disclaimer">
+    <ul>
+        <li><a href="https://calendly.com/remzmike/meeting/">schedule a phone call</a></li>
+        <li><a href="mk-resume.html">download my resume</a></li>
+    </ul>    
 
-        <p><b>RECRUITERS</b>: I receive more scheduled calls than I am <b>currently</b> able to answer.</p>
+    <ul>
+        <li>
+            Posts:
+            <ul>
+                                                
+                <li><a href="/texts/2017-01-17-self-employment/">
+                    2017-01-17 &ndash; Self Employment
+                </a></li>
+                                                
+                <li><a href="/texts/2018-09-12-clean-vs-good-code-casey-muratori/">
+                    2018-09-12 &ndash; Clean code vs good code
+                </a></li>
+            
+            </ul>
+        </li>
+    </ul>
 
-        <p>I am <b>currently</b> extremely busy.</p>
+    <ul>
+        <li>
+            Languages I have used professionally over 20 years:<br>
+            <img src="languages2019.png" width=720 height=432>            
+        </li>
+    <ul>
 
-        <p>This is what I want:</p>
-
-        <ul>
-            <li>remote options, flex hours, and a reasonable commute from nw atl otp</li>
-            <li>quiet, efficient, comfortable working office</li>
-            <li>writing new code with significant freedom</li>
-        </ul>
-
-        <p>I try to write straightforward code.</p>
-
-        <p>Recruiters, I do not care how glamorous the work is from the perspective of outsiders.</p>
-
-        <p>I only care about using my significant skills and experience to do one of the things I am best at.</p>
-
-        <p>I have zero interest in exploitation. I care about complex unchecked systems screwing people over.</p>
-
-        <p>Now, if you still want to schedule a call with me, then you can do it here...</p>
-
-    </div>
-  
-    <a href="https://calendly.com/remzmike/meeting/" class="schedule-call">
-        <p>
-            <svg style="margin:0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 485.213 485.212" style="enable-background:new 0 0 485.213 485.212;" xml:space="preserve"><g>    <path d="M242.607,0C108.629,0,0.001,108.628,0.001,242.606c0,133.976,108.628,242.606,242.606,242.606   c133.978,0,242.604-108.631,242.604-242.606C485.212,108.628,376.585,0,242.607,0z M370.719,353.989l-19.425,19.429   c-3.468,3.463-13.623,5.624-13.949,5.624c-61.452,0.536-120.621-23.602-164.095-67.08c-43.593-43.618-67.759-102.998-67.11-164.657   c0-0.028,2.224-9.892,5.689-13.324l19.424-19.427c7.108-7.141,20.762-10.368,30.327-7.168l4.086,1.363   c9.537,3.197,19.55,13.742,22.185,23.457l9.771,35.862c2.635,9.743-0.919,23.604-8.025,30.712l-12.97,12.972   c12.734,47.142,49.723,84.138,96.873,96.903l12.965-12.975c7.141-7.141,20.997-10.692,30.719-8.061l35.857,9.806   c9.717,2.67,20.26,12.62,23.456,22.154l1.363,4.145C381.028,333.262,377.826,346.913,370.719,353.989z" fill="#004A56"/></g></svg><!--
-            --><span>schedule a phone call</span>
-        </p>
-    </a>
-
-</div>
-
-<hr>
-
-<div class="toc">
-    <!--<p style='font-variant: small-caps; text-transform: lowercase;'>
-        <span style='font-weight: bold;'>texts</span>
-    </p>-->
-        
-    
-    
-        <a href="/texts/2017-01-17-self-employment/">
-            2017-01-17 &ndash; Self Employment
-        </a><br>
-
-    
-    
-        <a href="/texts/2018-09-12-clean-vs-good-code-casey-muratori/">
-            2018-09-12 &ndash; Clean code vs good code
-        </a><br>
-
-    
 </div>
 
 

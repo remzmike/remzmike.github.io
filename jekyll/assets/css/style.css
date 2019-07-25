@@ -40,7 +40,7 @@ body {
   overflow-x: hidden; }
 
 html {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-family: "Roboto Slab", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 16px;
   line-height: 1.5; }
 
@@ -206,11 +206,11 @@ tbody tr:nth-child(odd) th {
  *
  */
 .masthead {
-  margin-bottom: 3rem;
+  margin-bottom: 0rem;
   text-align: center;
   padding-top: 26px;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #eee; }
+  border-bottom: 0px solid #eee; }
 
 .masthead-title {
   margin-top: 0;
@@ -222,15 +222,15 @@ tbody tr:nth-child(odd) th {
   color: #841212; }
 
 .masthead-title small {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-family: "Roboto Slab", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: .88rem;
   font-weight: 300;
   color: #454545;
   letter-spacing: .05rem;
-  font-family: sans-serif; }
+  font-family: serif; }
 
 h3.masthead-title {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-family: "Roboto Slab", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 1.8rem;
   margin-top: 2px; }
 

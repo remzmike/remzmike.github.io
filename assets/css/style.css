@@ -40,7 +40,7 @@ body {
   overflow-x: hidden; }
 
 html {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-family: "Roboto Slab", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 16px;
   line-height: 1.5; }
 
@@ -97,7 +97,7 @@ a:focus {
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: sans-serif;
+  font-family: "Roboto Slab", serif;
   margin-bottom: .5rem;
   font-weight: 300;
   color: #404040;
@@ -206,7 +206,8 @@ tbody tr:nth-child(odd) th {
  *
  */
 .masthead {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
+  /* hi i wrote this thank you broken automation */
   text-align: center;
   padding-top: 26px;
   padding-bottom: 1rem;
@@ -222,15 +223,15 @@ tbody tr:nth-child(odd) th {
   color: #841212; }
 
 .masthead-title small {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-family: "Roboto Slab", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: .88rem;
   font-weight: 300;
   color: #454545;
   letter-spacing: .05rem;
-  font-family: sans-serif; }
+  font-family: "Roboto Slab", serif; }
 
 h3.masthead-title {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-family: "Roboto Slab", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 1.8rem;
   margin-top: 2px; }
 

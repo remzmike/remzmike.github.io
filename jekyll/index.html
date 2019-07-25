@@ -14,7 +14,7 @@ bars:
 
     - a: 
         href: /simpleui
-        text: simpleui
+        text: simpleui demo
         desc: straightforward immediate mode ui
       img:
         width: 128px
@@ -23,8 +23,8 @@ bars:
 
     - a:
         href: /mash
-        text: screens & snippets
-        desc: programming experiments
+        text: screenshots & snippets
+        desc: programming experiments, side projects
       img:
         width: 128px
         height: 128px
@@ -79,13 +79,6 @@ bars:
         }
     </style>
            
-    <p style='text-align: center; font-variant: small-caps; text-transform: lowercase; line-height: 1rem;'>
-        <span>
-            <!-- kerning on other font not good in small caps -->
-            <a style="font-size: 1.5rem; font-family:'Times New Roman', Times, serif" href="mk-resume.html">resume</a>            
-        </span>
-    </p>
-    
     {% for o in page.bars %}
         <a class="bar-link" href="{{o.a.href}}">
         <div class="flexbar">
@@ -94,7 +87,7 @@ bars:
                 <div style="margin-top: 0.25rem; border-bottom:1px solid #ddd;">
                     {{o.a.text}}<!--<a href="{{o.a.href}}">{{o.a.text}}</a>-->
                 </div>
-                <div style="color:black;">
+                <div style="color:#888; font-size: 16px;">
                     {{o.a.desc}}
                 </div>
             </div>
@@ -112,50 +105,35 @@ bars:
         <a href="https://stackoverflow.com/users/159022/rz-mk">stackoverflow</a>
     </div>-->
 
-    <!-- i cannot be these things anymore since i gave up my craft
-    <div style="display: flex; flex-wrap: wrap; align-items: stretch; margin-top: 1rem;">
-        <span style="flex: 1 1 auto;">
-            <ul style="list-style-position: inside; margin: 0; padding: 0; padding-right: 1rem;">
-                <li>Web development since 1994</li>
-                <li>Linux user since 1996</li>
-                <li>Desktop developer since 1997</li>
-                <li>Java developer 1997-2001+</li>
-                <li>SQL developer since 1999</li>
-                <li>Javascript developer since 1999</li>
-            </ul>
-        </span>
-        <span style="flex: 1 1 auto;">
-            <ul style="list-style-position: inside; margin: 0; padding: 0; padding-right: 0rem;">
-                <li>Windows user since 2000</li>
-                <li>Python developer since 2000</li>                    
-                <li>C# developer since 2001</li>
-                <li>Microsoft web since 2001</li>
-                <li>Python web since 2004</li>
-                <li>Delphi developer until 2005</li>
-            </ul>
-        </span>
-    </div>    
-    -->
 
     <br>
-    {% include schedule-call.html %}
+    <!--% include schedule-call.html %-->
 
-</div>
+    <ul>
+        <li><a href="https://calendly.com/remzmike/meeting/">schedule a phone call</a></li>
+        <li><a href="mk-resume.html">download my resume</a></li>
+    </ul>    
 
-<hr>
+    <ul>
+        <li>
+            Posts:
+            <ul>
+            {% for item in site.texts %}                                    
+                <li><a href="{{ site.baseurl }}{{ item.url }}">
+                    {{ item.date | date: "%Y-%m-%d" }} &ndash; {{ item.title }}
+                </a></li>
+            {% endfor %}
+            </ul>
+        </li>
+    </ul>
 
-<div class="toc">
-    <!--<p style='font-variant: small-caps; text-transform: lowercase;'>
-        <span style='font-weight: bold;'>texts</span>
-    </p>-->
-        
-    {% for item in site.texts %}
-    
-        <a href="{{ site.baseurl }}{{ item.url }}">
-            {{ item.date | date: "%Y-%m-%d" }} &ndash; {{ item.title }}
-        </a><br>
+    <ul>
+        <li>
+            Languages I have used professionally over 20 years:<br>
+            <img src="languages2019.png" width=720 height=432>            
+        </li>
+    <ul>
 
-    {% endfor %}
 </div>
 
 
