@@ -1,7 +1,7 @@
 var _blog_post;
 var _blog_posts = [];
 var _blog_posts_by_title = {};
-_blog_post = {
+/*_blog_post = {
     'content' : `
 <p>
     Ported my simpleui library to plain javascript and made a driver for the html5 canvas.
@@ -13,8 +13,8 @@ _blog_post = {
     'published' : "2016-10-08T11:45:00.002-04:00"
     };
 _blog_posts.push(_blog_post);
-_blog_posts_by_title['simpleui.js'] = _blog_post;
-_blog_post = {
+_blog_posts_by_title['simpleui.js'] = _blog_post;*/
+/*_blog_post = {
     'content' : `
 <p>
     Wrote a python module for creating these svg stock charts.
@@ -32,7 +32,7 @@ _blog_post = {
     'title' : "kports",
     'published' : "2016-03-23T13:59:00.000-04:00"
     };
-_blog_posts.push(_blog_post);
+_blog_posts.push(_blog_post);*/
 _blog_posts_by_title['kports'] = _blog_post;
 _blog_post = {
     'content' : `
