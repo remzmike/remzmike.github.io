@@ -12,6 +12,15 @@ body {
     max-width: 720px;
 }
 
+@media (max-width: 720px) {
+    body {
+        margin: 2em 2em;
+        width: 640px;
+        margin: auto;
+        max-width: 640px;
+    }
+}
+
 a {
     text-decoration: none;    
     color: #48D;    
