@@ -1,8 +1,8 @@
----
+<!---
 layout: post
 title: Self Employment
 date: 2017-01-17
---- 
+--->
 
 <!--
 v01 - 20170117 - Yay, version 1.
@@ -23,7 +23,7 @@ In 2015 I separated these two parts, mostly ending my association with Efflare S
 
 ## Critical Response ##
 
-![now!](/assets/lawyer.gif)
+![now!](lawyer.gif)
 
 > _**"But wait, how can that be true!?"**_<br>
 > _**"I DEMAND TO SEE YOUR CLIENT LIST SIR!"**_<br>
@@ -47,38 +47,38 @@ Please contact me if you would like to be removed from this document.
 
 ## Contracts ##
 
-* Edouard J, Microscript, Belgium<br>
+* Edouard J, Microscript, Belgium  
 PDF API wrapper using official Adobe API
 
-* Amy R, President/CEO, Wedding Window<br>
-Server-side Flash rasterization
+* Amy R, President/CEO, Wedding Window  
+Server-side Flash rasterization  
 
-* Robert D, Web Agency, Inc.<br>
-24-bit Javascript color picker
+* Robert D, Web Agency, Inc.  
+24-bit Javascript color picker  
   
-* Ed O, Webmaster, PING<br>
-Lossless encoding of 32-bit image data into SWF
+* Ed O, Webmaster, PING  
+Lossless encoding of 32-bit image data into SWF  
   
-* Lance M, ProSites, Inc.<br>
-Embedded Lua engine in .NET
+* Lance M, ProSites, Inc.  
+Embedded Lua engine in .NET  
    
-* Alexandre B, EuroTV<br>
-Auto Cropping solution
+* Alexandre B, EuroTV  
+Auto Cropping solution 
 
-* Jeff M, optonline<br>
+* Jeff M, optonline  
 Batch processing AJAX solution
 
-* Chad G, Senior Developer, Carey Color Inc.<br>
+* Chad G, Senior Developer, Carey Color Inc.  
 ICC Color Profile processing
 
-* Bethany S, Project Manager, World Wide Internet Publishing Ltd.<br>
+* Bethany S, Project Manager, World Wide Internet Publishing Ltd.  
 Back-end image generation
 
-* Josen R, Director of Internet Development, Motorsport Marketing, Inc.<br>
+* Josen R, Director of Internet Development, Motorsport Marketing, Inc.  
 Multiple image processing solutions
 
-* Ruben C, President, Sandtex International Corp.<br>
-Python Tcl/Tk UPS desktop tool<br>
+* Ruben C, President, Sandtex International Corp.  
+Python Tcl/Tk UPS desktop tool
 
 ## Testimonials ##
 
@@ -168,4 +168,4 @@ You can additionally read an article detailing NASA's use of my software.
 
 Finally, here is a graph of licensees by geoip resolution.
 
-![licensees](/assets/geo-sales.png)
+![licensees](geo-sales.png)

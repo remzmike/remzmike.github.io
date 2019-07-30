@@ -1,9 +1,0 @@
-bundle exec jekyll build
-bundle exec jekyll serve
-or
-bundle exec jekyll serve --host=0.0.0.0
-
-
-1. https://github.com/minicomp/ed/
-2. https://github.com/hugoferreira/papyrus-theme
-3. https://github.com/artemsheludko/flexible-jekyll

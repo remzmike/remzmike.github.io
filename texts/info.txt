@@ -1,0 +1,4 @@
+cutemarked is currently the best way to generate these for my purposes
+not kramdown commandline, not vscode, not anything else                                
+
+C:\Eval\markdown\cutemarked-0.11.3

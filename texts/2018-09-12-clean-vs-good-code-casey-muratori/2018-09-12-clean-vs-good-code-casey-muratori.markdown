@@ -1,8 +1,8 @@
----
+<!---
 layout: post
 title:  "Clean code vs good code"
 date: 2018-09-12
----
+--->
 
 #### Clean code vs good code.
 
