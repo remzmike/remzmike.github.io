@@ -1,24 +1,23 @@
 /* site-specific css */
 
 html {
-    font-size: 18px;    
     font-family: 'Roboto', sans-serif;
 }
 
 body {
+    font-size: 18px;    
     margin: 0 2em;
     width: 720px;
     margin: auto;
     max-width: 720px;
 }
 
-@media screen and (max-width: 720px) {
-    body {
+@media screen and (max-width: 800px) {
+    body {  
         margin: 2em 2em;
-        width: 600px;
+        width: 660px;
         margin: auto;
-        max-width: 600px;
-        background-color: #fffcf2;
+        max-width: 660px;
     }
 }
 
