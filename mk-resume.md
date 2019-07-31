@@ -1,15 +1,15 @@
-**Mike K. – public resume** ([doc format](mk-resume.doc))
-Acworth, Georgia 30101
+**Mike K. – public resume** ([doc format](mk-resume.doc))  
+Acworth, Georgia 30101  
 gmail: remzmike
 
-Over 20 years of programming freedom. Remote work is my default.
-
 I want to write code and design systems. I like straightforward and iterative.
-I am not a salesman. I am a serious programmer. Show me the code.
+
+My goal is to find a company or person who can appreciate how I work and then
+work with them for a long time. I am not a salesman. I am a serious programmer.
 
 Please review my code and exercises at https://remzmike.github.io/
 
-**March 13, 2019 – Present**
+**March 13, 2019 – Present**  
 Senior Software Developer at Assurance America in Sandy Springs, Georgia
 
 Contracted to help finish porting a large Silverlight application to Angular.
@@ -17,7 +17,7 @@ Contracted to help finish porting a large Silverlight application to Angular.
 * Front-end using Angular 7, Typescript, Angular Redux, RxJS
 * Back-end using C#, .NET, .NET Standard, MSSQL
 
-**March 13, 2017 – March 8, 2019**
+**March 13, 2017 – March 8, 2019**  
 Senior Software Developer at Momentum Telecom in Kennesaw, Georgia
 
 Modifications to legacy ASP&#46;NET Webforms application.
@@ -49,7 +49,7 @@ Identified and provided fixes for performance and security problems.
    
 
 
-**January 6, 2014 – March 12, 2017**
+**January 6, 2014 – March 12, 2017**  
 Self Employed, Acworth, Georgia
 
 * Independent contractor
@@ -68,7 +68,7 @@ Self Employed, Acworth, Georgia
     * Developed robust data upgrade scripts with SqlAlchemy 
     * Developed multiple server-less front-end prototypes using React
 
-**October 26, 2009 – January 6, 2014**
+**October 26, 2009 – January 6, 2014**  
 Senior Software Developer at CCH Small Firm Services of Kennesaw, Georgia
 
 Full-stack Microsoft developer for TaxWiseOnline, a complete web-based tax preparation and e-filing solution used by the IRS.
@@ -87,7 +87,7 @@ Full-stack Microsoft developer for TaxWiseOnline, a complete web-based tax prepa
 * Worked with other teams to integrate their Delphi and .NET components
 * Worked with proprietary tax form scripting language
 
-**July 5, 2005 – August 8, 2008**
+**July 5, 2005 – August 8, 2008**  
 Software Developer at Microbilt Corporation of Kennesaw, Georgia
 
 Full-stack Microsoft developer for CreditCommander, a web-based credit and background screening suite; and hundreds of private labels.
@@ -102,7 +102,7 @@ Full-stack Microsoft developer for CreditCommander, a web-based credit and backg
 * Built numerous reusable software libraries
 * Designed sites for private label customers using Photoshop
 
-**July 4, 2001 – July 4, 2005**
+**July 4, 2001 – July 4, 2005**  
 Self Employed at Efflare Systems, Saint Paul, Minnesota
 
 * Completely created and maintained all software products
