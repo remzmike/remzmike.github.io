@@ -1,0 +1,436 @@
+<html>
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="qrc:/scripts/mermaid/mermaid.css">
+<script src="qrc:/scripts/mermaid/mermaid.full.min.js"></script>
+
+<style>body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    background-color: #dddddd;
+    background-image: linear-gradient(#f1f1f1, #dddddd);
+    background-repeat: repeat-x;
+    border-radius: 2px;
+    border-width: 1px;
+    border-color: #dddddd #cccccc #cccccc #dddddd;
+    border-image: none;
+    border-style: solid;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}</style>
+</head>
+<body>
+<h2 id="How.I.program">How I program</h2>
+
+<p>I hope this will help people better understand my programming style and background.</p>
+
+<p>I learned procedural programming before I learned object-oriented programming.</p>
+
+<p>I wrote <a href="https://en.wikipedia.org/wiki/Telix">Telix SALT</a> scripts, <a href="https://en.wikipedia.org/wiki/RoboWar">RoboTalk</a> bots and feature patches for <a href="https://en.wikipedia.org/wiki/DikuMUD">DikuMUD</a> in C.</p>
+
+<p>Then I learned this new thing called Java at school. I loved it. OO made good sense to me.</p>
+
+<p>I saw OO as a formalization of similar techniques already being used in C.</p>
+
+<p>I also picked up three new languages to fill gaps where Java was not a good fit; Delphi, Python and Lua.</p>
+
+<p>This was around the turn of the century, so I was using Python 1.6 and Lua 4.</p>
+
+<p>Using these other languages I found I was able to be more naturally productive.</p>
+
+<p>I realized my insistence on thinking from a &lsquo;pure&rsquo; OO perspective was holding me back.</p>
+
+<p>So, I started looking for a better path, and that path led me to the old mollyrocket forums.</p>
+
+<p>There I found a group of people who were already well aware of the problem I was experiencing.</p>
+
+<p>Most of these people would become more and more well known for their programming ability.</p>
+
+<p>This is when I started re-learning how to program.</p>
+
+<p>What did I learn?</p>
+
+<p>All of this:</p>
+
+<ul>
+<li><a href="http://the-witness.net/news/2014/05/witness-wednesday-on-how-to-program/">How to Program</a><br/>
+Jonathan Blow&rsquo;s reply in the comments is the highlight:</li>
+</ul>
+
+
+<blockquote><p>The fallacy you are falling into is that it matters how people think about things.</p>
+
+<p>To go to the example in the article, you think about “manager”, “contractor”, “employee” as concrete things too, but that doesn’t mean that some kind of an object hierarchy is the best way to implement them.</p>
+
+<p>The reason object-oriented programming is a seductive idea, and the reason so many believe it, is because “obviously” you can draw these correspondences to categoric distinctions you recognize, so clearly that is how the program “should” be built.</p>
+
+<p>But what we have learned is that no, really, that’s not true. There is a wholly different set of purely-implementation-level concerns that determine how the program should be built. They don’t have a lot to do with what you perceive as different objects. They only have to do with what the code actually needs to do in order to function.</p>
+
+<p>That is what Casey is talking about here: Find out what the code really needs to do in order to function, &ast;then&ast; recognize patterns in that system, &ast;then&ast; build abstractions to simplify those patterns.</p>
+
+<p>This is in contrast to the usual object-oriented way (and many other schools of thought about how to program) in which you a priori decide on abstractions and then fit things into those abstractions. That almost always makes a mess.</p>
+
+<p><strong>What we are saying is that when you first sit down and start typing, you just keep things as simple as you can. Over time you will find patterns. Those patterns may be very different for different programs or systems.</strong></p></blockquote>
+
+<ul>
+<li><p><a href="https://caseymuratori.com/blog_0015">Semantic Compression</a><br/>
+Casey Muratori explains how iterate straight-line code.</p></li>
+<li><p><a href="http://www.opowell.com/post/best-practices-and-the-inverted-u-curve/">&lsquo;Best Practices&rsquo; and the inverted U curve</a><br/>
+Oliver Powell talks about balance and extremes.</p></li>
+<li><p><a href="http://www.opowell.com/post/casey-muratori-on-clean-code/">Casey Muratori on clean code</a><br/>
+Oliver Powell writing about Casey&rsquo;s on-stream comments.</p></li>
+<li><p><a href="https://remzmike.github.io/texts/2018-09-12-clean-vs-good-code-casey-muratori/">Clean code vs good code</a><br/>
+My transcription of the very same on-stream comments from Casey.<br/>
+I learned of Oliver&rsquo;s similar post afterward.</p></li>
+<li><p><a href="http://www.opowell.com/post/software-quality/">Software Quality: A new definition</a> - Oliver Powell</p></li>
+<li><p><a href="http://www.opowell.com/post/trust-yourself/">Trust yourself</a> - Oliver Powell</p></li>
+<li><p><a href="http://etodd.io/2017/03/29/thirteen-years-of-bad-game-code/">Thirteen Years of Bad Game Code</a><br/>
+A programming post by Evan Todd. Not a gamedev post.</p></li>
+<li><p><a href="https://steve-yegge.blogspot.com/2006/03/execution-in-kingdom-of-nouns.html">Execution in the Kingdom of Nouns</a><br/>
+A detailed Java-oriented perspective from 2006 by Steve Yegge.</p></li>
+<li><p><a href="https://medium.com/@webseanhickey/the-evolution-of-a-software-engineer-db854689243">The Evolution of a Software Engineer</a><br/>
+A humorous but still accurate perspective from Sean Hickey.</p></li>
+</ul>
+
+
+<p>By now you might be wondering, &ldquo;<em>Does this methodology have a name?</em>&rdquo;</p>
+
+<p>I don&rsquo;t think so. I keep calling it different things over the years. So do others.</p>
+
+<p>Here are some of the ways I have referred to it in the past:</p>
+
+<ul>
+<li><p>coalescent design<br/>
+Organic and iterative, the design coalesces into less amorphous forms over time.</p></li>
+<li><p>semantic compression<br/>
+Because it&rsquo;s a big part of the idea, but not all of it.</p></li>
+<li><p>objects-come-later oriented programming<br/>
+Because the objects grow out of fluent flow-oriented programming.</p></li>
+<li><p>regular old programming<br/>
+Because people were already writing code this way, decades earlier, even with objects.</p></li>
+<li><p>thinking in data and functions before objects&hellip;?<br/>
+Because some define the problem as a forced coupling of data and functions.</p></li>
+<li><p>data-oriented programming&hellip;?<br/>
+I never called it this, but I think some people did.<br/>
+It shares some ideas, but has a different focus.</p></li>
+<li><p>carving out the angel&hellip;? <br/>
+Not really, but I was reminded of this quote while writing:</p>
+
+<blockquote><p>Every block of stone has a statue inside it and it is the task of the sculptor to discover it. I saw the angel in the marble and carved until I set him free. &mdash; Michelangelo</p></blockquote></li>
+</ul>
+
+
+<p>Maybe you know of a better name. I&rsquo;ve been meaning to ask around.</p>
+
+<p>Whatever you call it, it&rsquo;s something I consider valuable and important.</p>
+
+<p>I believe these are the techniques that have allowed me to write my best code.</p>
+
+<p>I also hope these things will continue their trend of becoming more well known.</p>
+
+<p>&ndash; 20190730 &ndash;</p>
+</body>
+</html>
