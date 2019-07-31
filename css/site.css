@@ -7,17 +7,15 @@ html {
 body {
     font-size: 18px;    
     margin: 0 2em;
-    width: 720px;
     margin: auto;
     max-width: 720px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 720px) {
     body {  
-        margin: 2em 2em;
-        width: 660px;
-        margin: auto;
+        margin: 1em 2em;        
         max-width: 660px;
+        font-size: 14px;
     }
 }
 
