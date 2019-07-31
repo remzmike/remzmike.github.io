@@ -92,16 +92,16 @@ Because the objects grow out of fluent flow-oriented programming.
 * regular old programming  
 Because people were already writing code this way, decades earlier, even with objects.  
 
-* thinking in data and functions before objects...?  
+* thinking in data and functions before objects  
 Because some define the problem as a forced coupling of data and functions.
 
-* data-oriented programming...?  
+* data-oriented programming  
 I never called it this, but I think some people did.  
 It shares some ideas, but has a different focus.
 
-* carving out the angel...?   
-Not really, but I was reminded of this quote while writing:
-> Every block of stone has a statue inside it and it is the task of the sculptor to discover it. I saw the angel in the marble and carved until I set him free. &mdash; Michelangelo
+* pragmatic programming  
+Due to the similarly named book.
+
 
 Maybe you know of a better name. I've been meaning to ask around.
 
@@ -112,3 +112,5 @@ I believe these are the techniques that have allowed me to write my best code.
 I also hope these things will continue their trend of becoming more well known.
 
 -- 20190730 --
+
+> Every block of stone has a statue inside it and it is the task of the sculptor to discover it. I saw the angel in the marble and carved until I set him free. &mdash; Michelangelo
