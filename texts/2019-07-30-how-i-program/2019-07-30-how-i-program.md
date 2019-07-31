@@ -73,12 +73,21 @@ A detailed Java-oriented perspective from 2006 by Steve Yegge.
 * [The Evolution of a Software Engineer](https://medium.com/@webseanhickey/the-evolution-of-a-software-engineer-db854689243)  
 A humorous but still accurate perspective from Sean Hickey.
 
+* [Why bad scientific code beats code following "best practices"](http://yosefk.com/blog/why-bad-scientific-code-beats-code-following-best-practices.html)  
+Basically, overengineered code is worse than dumb code.
+
+* ['best practices' ycombinator thread](https://news.ycombinator.com/item?id=12377385)  
+Community discussion and arguments from all sides for careful consideration.
+
 
 By now you might be wondering, &ldquo;_Does this methodology have a name?_&rdquo;
 
 I don't think so. I keep calling it different things over the years. So do others.
 
 Here are some of the ways I have referred to it in the past:
+
+* regular old programming  
+Because people were already writing code this way, decades earlier, even with objects.  
 
 * coalescent design  
 Organic and iterative, the design coalesces into less amorphous forms over time.
@@ -89,15 +98,11 @@ Because it's a big part of the idea, but not all of it.
 * objects-come-later oriented programming  
 Because the objects grow out of fluent flow-oriented programming.
 
-* regular old programming  
-Because people were already writing code this way, decades earlier, even with objects.  
-
 * thinking in data and functions before objects  
 Because some define the problem as a forced coupling of data and functions.
 
 * data-oriented programming  
-I never called it this, but I think some people did.  
-It shares some ideas, but has a different focus.
+I never called it this, but I think some people did because it shares some ideas.
 
 * pragmatic programming  
 Due to the similarly named book.
