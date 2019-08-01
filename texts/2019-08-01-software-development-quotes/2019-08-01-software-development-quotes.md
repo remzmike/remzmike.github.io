@@ -73,7 +73,7 @@
 Complex rules and regulations give rise to simple, stupid behavior.  
 &mdash; Dee Hock
 
-<!-- -->Programmers spend the first 5 years of their career mastering complexity, and the rest of their lives learning simplicity
+<!-- -->Programmers spend the first 5 years of their career mastering complexity, and the rest of their lives learning simplicity.  
 &mdash; Buzz Andersen
 
 <!-- -->Overload, clutter, and confusion are not attributes of information, they are failures of design.  
