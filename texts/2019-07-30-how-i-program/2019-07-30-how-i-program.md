@@ -16,9 +16,9 @@ This was around the turn of the century, so I was using Python 1.6 and Lua 4.
 
 Using these other languages I found I was able to be more naturally productive.
 
-I an insistence on thinking from a 'pure' OO perspective was holding me and others back.
+I realized an insistence on thinking from a 'pure' OO perspective was holding me back.
 
-So, I started looking for a better path, and that path led me to the old mollyrocket forums.
+So, I started looking for a better path, and that path led me to the old mollyrocket dev forums.
 
 There I found a group of people who were already well aware of the problem I was experiencing.
 
@@ -123,4 +123,4 @@ But the thing is, I think it's just regular programming and we forgot that.
 
 -- 20190730 --
 
-> Every block of stone has a statue inside it and it is the task of the sculptor to discover it. I saw the angel in the marble and carved until I set him free. &mdash; Michelangelo
+See also: [Software Development Quotes](../2019-08-01-software-development-quotes)
