@@ -52,7 +52,9 @@ Oliver Powell writing about Casey's on-stream comments.
 My transcription of the very same on-stream comments from Casey.  
 I learned of Oliver's similar post afterward.
 
-> But, prematurely cleaning it is actually worse than just wasting time. It may lead us down the wrong paths and end up making us have to do gyrations to make stuff work together because we segregated it in a bad way too early on.
+> It’s only based on what the usage looks like and what the debugging process looks like that actually tells you whether a piece of code is clean or not.
+
+> And I really can’t stress that enough.
 
 * [Software Quality: A new definition](http://www.opowell.com/post/software-quality/) - Oliver Powell
 
