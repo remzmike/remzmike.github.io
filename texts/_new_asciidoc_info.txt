@@ -1,0 +1,11 @@
+Use AsciidocFX to write and preview.
+
+Use python script to generate html per-article:
+
+    generate_html.py <article_dir>
+
+eg. 
+
+    generate_html.py 2019-07-30-how-i-program
+    
+Creates 2019-07-30-how-i-program/index.html from 2019-07-30-how-i-program/2019-07-30-how-i-program.ad

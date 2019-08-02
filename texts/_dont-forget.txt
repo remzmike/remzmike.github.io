@@ -1,2 +1,0 @@
-don't forget to add this to the html generated from the markdown
-<meta name="robots" content="noindex, nofollow">
