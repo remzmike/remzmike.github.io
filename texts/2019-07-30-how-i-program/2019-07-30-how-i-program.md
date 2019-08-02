@@ -6,23 +6,9 @@ I learned procedural programming before I learned object-oriented programming.
 
 I wrote [Telix SALT](https://en.wikipedia.org/wiki/Telix) scripts, [RoboTalk](https://en.wikipedia.org/wiki/RoboWar) bots and feature patches for [DikuMUD](https://en.wikipedia.org/wiki/DikuMUD) in C.
 
-Then I learned this new thing called Java at school. I loved it. OO made good sense to me.
+Then I learned this new thing called Java. I loved it. I saw OO as syntax support for similar techniques already being used in C. I quickly learned I couldn't use Java for everything, so I picked up three new languages to fill in the gaps; Delphi, Python and Lua.
 
-I saw OO as a formalization of similar techniques already being used in C.
-
-I also picked up three new languages to fill gaps where Java was not a good fit; Delphi, Python and Lua.
-
-This was around the turn of the century, so I was using Python 1.6 and Lua 4.
-
-Using these other languages I found I was able to be more naturally productive.
-
-I realized an insistence on thinking from a 'pure' OO perspective was holding me back.
-
-So, I started looking for a better path, and that path led me to the old mollyrocket dev forums.
-
-There I found a group of people who were already well aware of the problem I was experiencing.
-
-Most of these people would become more and more well known for their programming ability.
+Using these other languages I found I was able to be more naturally productive, and I felt they were giving me the freedom to learn more about programming fundamentals from different perspectives, not always the OO perspective.
 
 This is when I started re-learning how to program.
 
