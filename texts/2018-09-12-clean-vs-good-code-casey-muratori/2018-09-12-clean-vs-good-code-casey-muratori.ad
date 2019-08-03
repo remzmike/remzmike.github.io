@@ -1,6 +1,5 @@
-// layout: post
-// title:  "Clean code vs good code"
-// date: 2018-09-12
+:docinfo: shared,private
+:docinfodir: ../
 
 ## Clean code vs good code
 
@@ -8,7 +7,7 @@
 
 Here is an on-stream response Casey Muratori gave to complaints about the perception of "messy" code.
 
-#### TL;DR -- "messy code" is not necessarily "bad code"
+### TL;DR -- "messy code" is not necessarily "bad code"
 
 ****
 Somebody was saying on the forums a while back that they felt the code was too messy.

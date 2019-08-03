@@ -435,6 +435,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 
 </style>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+    function reverse(s) {
+      return s.split('').reverse().join('');
+    }
+    function jsec(s) {
+      document.write(reverse(s));
+    }
+    function do_email(e) {
+      e.preventDefault();
+      window.location.href = "mailto:" + reverse('moc.liamg@ekimzmer');
+    }
+</script>
+
+<style>
+    a { text-decoration: none; }
+</style>
 </head>
 <body class="article">
 <div id="header">
@@ -448,22 +467,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>I believe in strong fundamentals, clear definitions, and highly iterative development. I aim to write practical straightforward code. I want my code to be easy to read and use.</p>
 </div>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-a { text-decoration: none; }
-</style>
-<script>
-function reverse(s) {
-  return s.split('').reverse().join('');
-}
-function jsec(s) {
-  document.write(reverse(s));
-}
-function do_email(e) {
-  e.preventDefault();
-  window.location.href = "mailto:" + reverse('moc.liamg@ekimzmer');
-}
-</script>
 <nav>
   <span><a href="mk-resume.html"><i class="fa fa-file-word-o" aria-hidden="true"></i> resume</a></span>
 
