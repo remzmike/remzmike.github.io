@@ -1,0 +1,161 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+  <!--<link rel="manifest" href="site.webmanifest">-->
+  <!--<link rel="apple-touch-icon" href="icon.png">-->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/site.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
+
+  <!-- https://fontawesome.com/v4.7.0/icons/ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <meta name="theme-color" content="#fafafa">
+
+  <script>
+    function reverse(s) {
+      return s.split('').reverse().join('');
+    }
+    function jsec(s) {
+      document.write(reverse(s));
+    }
+    function do_email(e) {      
+      e.preventDefault();
+      window.location.href = "mailto:" + reverse('moc.liamg@ekimzmer');
+    }
+  </script>
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- CONTENT: BEGIN -->
+  <header> 
+     <script>jsec('lseK ekiM');</script>
+     <div>senior software developer in atlanta</div>    
+  </header>
+
+  <section id="bio">    
+      <p>
+        I believe in strong fundamentals, clear definitions, and highly iterative development.
+        I aim to write practical straightforward code. I want my code to be easy to read and use.
+      </p>
+      
+      <nav>    
+          <span><a href="mk-resume.html"><i class="fa fa-file-word-o" aria-hidden="true"></i>&nbsp; resume</a></span>
+          <span><a href="https://github.com/remzmike"><i class="fa fa-github" aria-hidden="true"></i>&nbsp; github</a></span>
+          <span><a onclick="do_email(event)" href="#" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp; email</a></span>
+          <span><a href="https://calendly.com/remzmike/meeting/" target="_blank"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp; phone</a></span>
+      </nav>
+  </section>  
+
+  <section id="languages">      
+      <h2>Languages</h2>
+      <img src="img/languages2019-720x403.png" alt="Languages I have used professionally." width="720" height="403">
+      <p>        
+        I use many languages and follow a mostly similar methodology in all of them.
+        These are the most notable languages I have used professionally, and html/css
+        since you asked.
+      </p>
+  </section> 
+
+  <section id="simpleui">
+      <h2>SimpleUI</h2>
+      <img src="img/thumb-simpleui-2019-720x418.png" alt="An immediate mode ui library in javascript.">
+      
+      <p>SimpleUI is an immediate-mode ui library in javascript on the html5 canvas.</p>
+
+      <p>I wrote it in c# 10 years ago, ported to lua 5 years ago, and then ported to this javascript.</p>
+
+      <p>
+        An 'immediate-mode ui' is designed to integrate with realtime multimedia and games, executing on every frame.        
+        That is why I made it.
+        Some people will now recognize it as similar to react or angular because
+        programming with it gives you a hierarchy of functions which are effectively
+        a hierarchy of up-to-date components.
+      </p>
+
+      <p>
+        This plain javascript version has been optimized for jit compilers.
+      </p>
+
+      <p>          
+        In the future I might make a version that generates dom nodes instead, then executes
+        steps in response to events, and then make it not regenerate dom nodes every step.
+      </p>
+
+      <p><a href="/simpleui/" class="demo"><i class="fa fa-window-maximize" aria-hidden="true"></i>&nbsp;  live demo</a></p>
+  </section>
+  
+  <section id="simpleui-audio">
+      <h2>HTML5 mini audio sequencer</h2>
+      <img src="img/simpleui-v04-trix-2019-720x754.png" alt="An immediate mode ui library in javascript.">
+      
+      <p>I always wanted to make one of these, so that's what I did over the 2018 holidays.</p>
+
+      <p>This is a minimal audio sequencer written in plain javascript using simpleui.</p>
+
+      <p>The audio is provided by the standard html5 audio api.</p>
+
+      <p>It has no other library dependencies.</p>
+
+      <p><a href="/simpleui/?audio" class="demo"><i class="fa fa-window-maximize" aria-hidden="true"></i>&nbsp;  live demo</a></p>
+  </section>
+
+  <section id="mash">
+    <h2>screenshots & snippets</h2>
+    <img src="img/thumb-mash.png" alt="screenshots & snippets">
+    <p>Small programming experiments, side projects, and screenshots.</p>
+    <p><a href="/mash" class="demo"><i class="fa fa-window-maximize" aria-hidden="true"></i>&nbsp;  visit</a></p>
+  </section>
+
+  <section id="posts">
+    <h2>posts</h2>
+    
+    <ul>
+      <li>
+        <a href="/texts/2017-01-17-self-employment/">2017-01-17 &ndash; Self Employment</a>
+      </li>
+      <li>
+        <a href="/texts/2018-09-12-clean-vs-good-code-casey-muratori/">2018-09-12 &ndash; Clean code vs good code</a>
+      </li>
+      <li>
+        <a href="/texts/2019-07-30-how-i-program/">2019-07-30 &ndash; How I program</a>
+      </li>      
+      <li>
+        <a href="/texts/2019-08-01-software-development-quotes">2019-08-01 &ndash; Software Development Quotes</a>
+    </ul>    
+  </section>
+  
+  <footer>
+    <!-- [] -->
+  </footer>
+  <!-- CONTENT: END -->
+
+  <!--
+  <script src="js/vendor/modernizr-3.7.1.min.js"></script>  
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+  -->
+
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-56347821-2', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>

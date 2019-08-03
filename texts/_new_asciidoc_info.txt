@@ -9,3 +9,16 @@ eg.
     generate_html.py 2019-07-30-how-i-program
     
 Creates 2019-07-30-how-i-program/index.html from 2019-07-30-how-i-program/2019-07-30-how-i-program.ad
+
+---
+
+custom stylesheet notes:
+
+color:#7a2518; -> #18527A
+color:#2156a5;
+color:#1d4b8f}
+color:#ba3925; -> #256FBA
+color:#e99b8f; -> #8FCAE9
+
+come up with better colors later, those were quick hacks
+
