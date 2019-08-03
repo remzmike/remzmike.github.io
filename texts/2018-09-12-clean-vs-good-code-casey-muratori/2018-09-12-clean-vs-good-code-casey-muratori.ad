@@ -45,9 +45,9 @@ Instead, think about the problem you are trying to solve. When you are done, and
 
 And what we mean when we say cleanliness of code there is:
 
-* Can I find the bugs in it easily?
-* Is it easy for me to understand?
-* Is it easy for me to re-use in the places that I need to re-use it?
+* **Can I find the bugs in it easily?**
+* **Is it easy for me to understand?**
+* **Is it easy for me to re-use in the places that I need to re-use it?**
 
 Those sorts of things; and NEVER some set of prescribed things that somebody said was clean code, because there is no such thing. There is no set of rules that tells you whether a particular set of code is clean based on what the code looks like.
 
