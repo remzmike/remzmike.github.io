@@ -179,6 +179,11 @@ ____
 Complexity is a fact of the world, whereas simplicity is in the mind.  
 ____ 
 
+[quote, Gene Kim]
+____
+Simplicity enables locality. Locality in code is what keeps systems loosely coupled, enabling delivery of features faster.
+____
+
 [quote, Donald E. Knuth]
 ____
 The designer of a new kind of system must participate fully in the implementation.  
