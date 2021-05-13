@@ -73,6 +73,8 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             initial_desktop = 'demo';
         } else if (qs == '?plasma') {
             initial_desktop = 'plasma';
+        } else if (qs == '?fire') {
+            initial_desktop = 'fire';
         }
 
         const app = {
@@ -83,7 +85,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             panel_layout_padding: 2,
             window_active: 0 | true,
             desktop: initial_desktop, 
-            desktops: ['demo', 'audio', 'plasma'], //'audio2']
+            desktops: ['demo', 'audio', 'plasma', 'fire'], //'audio2']
         };
     </script>
 
@@ -102,6 +104,8 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
                 do_app_audio2();
             } else if (app.desktop == 'plasma') {
                 do_app_plasma();
+            } else if (app.desktop == 'fire') {
+                do_app_fire();
             }
         }
 
