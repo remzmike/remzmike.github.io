@@ -63,22 +63,19 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
         const GetCursorX = ui.driver.GetCursorX;
         const GetCursorY = ui.driver.GetCursorY;
                 
-        let initial_desktop = 'demo';
+        let default_desktop = 'demo';
+        let initial_desktop = default_desktop;
         const qs = window.location.search;
-        if (qs == '?audio') {
-            initial_desktop = 'audio';
-        } else if (qs == '?audio2') {
-            initial_desktop = 'audio2';
-        } else if (qs == '?demo') {
-            initial_desktop = 'demo';
-        } else if (qs == '?plasma') {
-            initial_desktop = 'plasma';
-        } else if (qs == '?fire') {
-            initial_desktop = 'fire';
-        } else if (qs == '?drop') {
-            initial_desktop = 'drop';
-        } else if (qs == '?colorpick') {
-            initial_desktop = 'colorpick';
+
+        const supported_desktops = [
+            'audio', 'audio2', 'demo', 'plasma',
+            'fire', 'drop', 'colorpick', 'bezier'
+        ]
+        for (let i = 0; i < supported_desktops.length; i++) {
+            const s = supported_desktops[i];
+            if (qs == '?' + s) {
+                initial_desktop = s;
+            }
         }
 
         const app = {
@@ -89,7 +86,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             panel_layout_padding: 2,
             window_active: 0 | true,
             desktop: initial_desktop, 
-            desktops: ['demo', 'audio', 'plasma', 'fire', 'drop', 'colorpick'], //'audio2']
+            desktops: ['demo', 'audio', 'plasma', 'fire', 'drop', 'colorpick', 'bezier'], //'audio2']
         };
     </script>
 
@@ -114,6 +111,8 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
                 do_app_drop();
             } else if (app.desktop == 'colorpick') {
                 do_app_colorpick();
+            } else if (app.desktop == 'bezier') {
+                do_app_bezier();
             }
         }
 
