@@ -68,8 +68,8 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
         const qs = window.location.search;
 
         const supported_desktops = [
-            'audio', 'audio2', 'demo', 'plasma',
-            'fire', 'drop', 'colorpick', 'bezier'
+            'audio', 'demo', 'plasma', 'fire', 'drop', 'colorpick', 'bezier', 'wires',
+            'dial', 'audio2'
         ]
         for (let i = 0; i < supported_desktops.length; i++) {
             const s = supported_desktops[i];
@@ -86,7 +86,11 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             panel_layout_padding: 2,
             window_active: 0 | true,
             desktop: initial_desktop, 
-            desktops: ['demo', 'audio', 'plasma', 'fire', 'drop', 'colorpick', 'bezier'], //'audio2']
+            desktops: [
+                'demo', 'audio', 'plasma', 'fire', 'drop',
+                'colorpick', 'bezier', 'wires'
+                //'dial', 'audio2'
+            ],
         };
     </script>
 
@@ -113,6 +117,10 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
                 do_app_colorpick();
             } else if (app.desktop == 'bezier') {
                 do_app_bezier();
+            } else if (app.desktop == 'dial') {
+                do_app_dial();
+            } else if (app.desktop == 'wires') {
+                do_app_wires();
             }
         }
 
