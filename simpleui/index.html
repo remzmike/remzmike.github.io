@@ -66,6 +66,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
         let default_desktop = 'demo';
         let initial_desktop = default_desktop;
         const qs = window.location.search;
+        const hs = window.location.hash;
 
         const supported_desktops = [
             'audio', 'demo', 'plasma', 'fire', 'drop', 'colorpick', 'bezier', 'wires',
@@ -74,6 +75,13 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
         for (let i = 0; i < supported_desktops.length; i++) {
             const s = supported_desktops[i];
             if (qs == '?' + s) {
+                initial_desktop = s;
+            }
+        }
+        // hash override
+        for (let i = 0; i < supported_desktops.length; i++) {
+            const s = supported_desktops[i];
+            if (hs == '?' + s) {
                 initial_desktop = s;
             }
         }
