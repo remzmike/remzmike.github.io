@@ -96,7 +96,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             desktop: initial_desktop, 
             desktops: [
                 'demo', 'audio', 'plasma', 'fire', 'drop',
-                'colorpick', 'bezier', 'wires', 'audio3'
+                'colorpick', 'bezier', 'wires', 'audio2', 'audio3'
             ],
         };
     </script>
@@ -142,7 +142,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             if (app.window_active) {
                 ui.driver.FrameClear();
                 ui.run(do_ui);
-            } else {
+            } else {            
                 // later: "click to enable" indicator here
                 //uidraw.push_fillstyle("rgba(60,60,50,1)");
             }
@@ -156,7 +156,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
         
         window.onload = function () {
             // focus/blur seems to be hardcore junk in both ff and ch
-            window.onfocus = function () {
+            window.onfocus = function () {                
                 app.window_active = true;
                 // todo: implement a pause call in simpleui, invert this logic, then just turn on/off pause directly here...
                 console.log('[window.onfocus]', app.window_active);
