@@ -34,6 +34,12 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             background: #444;
             color: #999;
         }
+        #myCanvas {
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-crisp-edges;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
     </style>
 </head>
 
@@ -70,7 +76,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
 
         const supported_desktops = [
             'audio', 'demo', 'plasma', 'fire', 'drop', 'colorpick', 'bezier', 'wires',
-            'dial', 'audio2', 'audio3'
+            'dial', 'audio2', 'audio3', 'hordewave'
         ]
         for (let i = 0; i < supported_desktops.length; i++) {
             const s = supported_desktops[i];
@@ -87,9 +93,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
         }
 
         const app = {
-            main_loop_time: 0,
             main_proc_time: 0,
-            main_tick: 0,
             canvas_size_hack: 20,
             panel_layout_padding: 2,
             window_active: 0 | true,
@@ -130,6 +134,8 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
                 do_app_wires();
             } else if (app.desktop == 'audio3') {
                 do_app_audio3();
+            } else if (app.desktop == 'hordewave') {
+                do_app_hordewave();
             }
         }
 
@@ -148,10 +154,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             }
 
             const now = performance.now();
-            app.main_proc_time = now - start;           
-            // ?later: ringbuffer.
-            app.main_loop_time = now - app.main_tick;
-            app.main_tick = now;
+            app.main_proc_time = now - start;
         }
         
         window.onload = function () {
@@ -171,7 +174,7 @@ i wrote this in c# first, then ported it to lua, then ported to this javascript
             ui.driver.UpdateSize();
 
             window.requestAnimationFrame(main); // schedule first frame
-            app.main_tick = performance.now();
+            //app.main_tick = performance.now();
         };                
     </script>
 
